@@ -9,7 +9,7 @@ const Navbar = () => {
         <ul className="flex items-center justify-center gap-4">
             <Link to='/home'>home</Link>
             <Link to='/services'>services</Link>
-            <Link to='/contact'>contact</Link>
+            <Link to='/contact'>contact1</Link>
             <ul className='flex gap-4 flex-col'>
               <li>Welcome user</li>
               <Link to='/createServices'>create service</Link>
@@ -20,5 +20,6 @@ const Navbar = () => {
     </div>
   )
 }
+
 
 export default Navbar
