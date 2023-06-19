@@ -21,17 +21,17 @@ function App() {
       ? (<LandingLogin />
       ) : (
         <>
-        <Navbar />
+        <Navbar/>
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path='/allServices/:id' element={<OneService />} />
-          <Route path='/payment' element={<Payment />} />
-          <Route path='/contact' element={<ContactForm />} />
-          <Route path="/allServices" element={<AllServices />} />
-          <Route path='/confirmPay' element={<ConfirmPayment />} />
-          <Route path='/editProfile' element={<EditProfile />} />
-          <Route path='/createServices' element={<CreateServices />} />
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/services" element={<Services/>}/>
+          <Route path='/allServices/:id' element={<OneService/>}/>
+          <Route path='/payment' element={<Payment/>}/>
+          <Route path='/contact' element={<ContactForm/>}/>
+          <Route path="/allServices" element={<AllServices/>}/>
+          <Route path='/confirmPay' element={<ConfirmPayment/>}/>
+          <Route path='/editProfile' element={<EditProfile/>}/>
+          <Route path='/createServices' element={<CreateServices/>}/>
         </Routes>
         </>
       )}
