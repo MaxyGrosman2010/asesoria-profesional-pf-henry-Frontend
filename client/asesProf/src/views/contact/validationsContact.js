@@ -5,8 +5,10 @@ const validationsContact = (form) => {
         errors.name = 'Required'
     }
 
-    if(!form.email){
-        errors.email = 'Required'
+    if (!form.email) {
+        errors.email = 'Required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+        errors.email = 'Invalid email format';
     }
 
     if(!form.message){
