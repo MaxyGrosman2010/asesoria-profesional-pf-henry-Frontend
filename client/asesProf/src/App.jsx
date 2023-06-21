@@ -20,7 +20,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="bg-slate-300 h-screen">
+    <div className="bg-slate-300 h-screen flex flex-col">
       {(location.pathname === '/')
       ? (<LandingLogin />
       ) : (
