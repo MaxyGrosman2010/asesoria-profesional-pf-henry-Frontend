@@ -1,11 +1,9 @@
 import { useState } from "react"
 import validationsContact from "./validationsContact"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
 
 const ContactForm = () => {
 
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: '',
