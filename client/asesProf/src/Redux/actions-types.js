@@ -1,2 +1,2 @@
-export const GET_USER = 'GET_USER';
+export const GET_SERVICES = 'GET_SERVICES';
 export const CREATE_SERVICE = 'CREATE_SERVICE';

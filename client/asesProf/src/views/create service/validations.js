@@ -8,6 +8,10 @@ const validationsService = (service) => {
         errors.description = 'Required'
     }
 
+    if(!service.price){
+        errors.price = 'Required'
+    }
+
     return errors;
 }
 
