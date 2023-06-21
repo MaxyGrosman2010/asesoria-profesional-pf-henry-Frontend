@@ -6,13 +6,11 @@ import Navbar from "./components/Navbar"
 import Payment from "./views/Payment"
 import LandingLogin from "./views/login/LandingLogin"
 import ContactForm from "./views/contact/ContactForm"
-import AllServices from "./views/AllServices"
+import AllServices from "./views/services/AllServices"
 import ConfirmPayment from "./views/ConfirmPayment"
 import EditProfile from "./views/edit profile/EditProfile"
 import CreateServices from "./views/create service/CreateServices"
 import Register from "./views/register/Register"
-import ServiceId from './views/service/serviceId/ServiceId'
-import Price from "./views/service/price/Price"
 
 
 function App() {
@@ -37,8 +35,6 @@ function App() {
           <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/createServices' element={<CreateServices />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/serviceId' element={<ServiceId />} />
-          <Route path='/price' element={<Price />} />
         </Routes>
         </>
       )}

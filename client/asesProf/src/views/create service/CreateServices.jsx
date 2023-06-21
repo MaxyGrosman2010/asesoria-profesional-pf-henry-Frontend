@@ -3,20 +3,24 @@ import validationsService from "./validations"
 import Swal from "sweetalert2"
 import { useDispatch } from "react-redux"
 import { postData } from "../../Redux/actions"
+import { useNavigate } from "react-router-dom"
 
 const CreateServices = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [service, setService] = useState({
     name: '',
     description: '',
-    file: ''
+    price: '',
+    file: '',
   })
 
   const [errors, setErrors] = useState({
     name: '',
     description: '',
+    price: '',
     file:''
   })
 
@@ -42,10 +46,13 @@ const CreateServices = () => {
       })
       return;
     }
+
     dispatch(postData(service))
+    
     setService({
       name: '',
       description: '',
+      price: '',
       file: '',
     })
 
@@ -55,6 +62,7 @@ const CreateServices = () => {
       icon: 'success',
       confirmButtonText: 'OK',
     })
+    navigate('/allServices')
     
   }
 
@@ -71,6 +79,15 @@ const CreateServices = () => {
           onChange={handleChange}
           className="bg-gray-200 border border-gray-300 py-2 pl-2" placeholder="name..." type="text" />
           {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.name}</div>)}
+        </div>
+
+        <div className="w-full flex flex-col h-[40px] mt-10">
+          <input
+          name='price'
+          value={service.price}
+          onChange={handleChange}
+          className="bg-gray-200 border border-gray-300 py-2 pl-2 h-[100px]" type="number" placeholder="price..." />
+          {errors.price && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.price}</div>)}
         </div>
         
         <div className="w-full flex flex-col h-[150px] mt-10">
