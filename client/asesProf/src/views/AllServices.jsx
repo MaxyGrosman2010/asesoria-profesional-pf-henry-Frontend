@@ -12,6 +12,7 @@ const AllServices = () => {
   const dispatch = useDispatch();
   const allActivities = useSelector((state) => state.allActivities)
 
+  console.log(allActivities);
   useEffect(() => {
     dispatch(getData())
   }, [])
