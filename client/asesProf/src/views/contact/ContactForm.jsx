@@ -1,11 +1,9 @@
 import { useState } from "react"
 import validationsContact from "./validationsContact"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
 
 const ContactForm = () => {
 
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: '',
@@ -59,7 +57,7 @@ const ContactForm = () => {
 
   return (
     <>
-    <div className='flex items-center justify-center h-screen'>
+    <div id='contact' className='flex items-center justify-center h-screen'>
       <form onSubmit={handleSubmit} className="w-full bg-white rounded-md rounded-tr-[100px] flex flex-col items-center justify-center gap-4 h-screen">
         <p className="font-bold">Contact us for more information</p>
 

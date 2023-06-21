@@ -22,7 +22,7 @@ const Services = () => {
 
   return (
     <div
-      id="servicesSection"
+      id="services"
       className="grid grid-cols-7 grid-rows-7 h-screen bg-slate-300">
       <div className="div1 col-span-7 row-span-1 flex items-center justify-center">
         <h1 className="font-montserrat font-bold text-5xl leading-10 text-white shadow-lg text-center">
