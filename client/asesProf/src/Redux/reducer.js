@@ -1,20 +1,20 @@
-import { GET_USER, CREATE_SERVICE } from "./actions-types";
+import { GET_SERVICES, CREATE_SERVICE } from "./actions-types";
 
 const initialState = {
-    allUsers: [],
+    allActivities: [],
 }
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
-        case GET_USER:
+        case GET_SERVICES:
             return {
                 ...state,
-                allUsers: action.payload,
+                allActivities: action.payload,
             }
         case CREATE_SERVICE:
             return {
                 ...state,
-                allUsers: [...state.allUsers, action.payload]
+                allActivities: [...state.allActivities, action.payload]
             }
 
 
