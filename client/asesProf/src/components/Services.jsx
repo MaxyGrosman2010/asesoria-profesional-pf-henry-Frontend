@@ -1,28 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 const Services = () => {
 
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === "/services") {
-      const scrollToServices = () => {
-        const servicesSection = document.getElementById("servicesSection");
-        if (servicesSection) {
-          servicesSection.scrollIntoView({ behavior: "smooth", block: "start"});
-        }
-      };
-
-      scrollToServices();
-    }
-  }, [location.pathname]);
-
-
   return (
     <div
-      id="servicesSection"
+      id="services"
       className="grid grid-cols-7 grid-rows-7 h-screen bg-slate-300">
       <div className="div1 col-span-7 row-span-1 flex items-center justify-center">
         <h1 className="font-montserrat font-bold text-5xl leading-10 text-white shadow-lg text-center">
