@@ -1,24 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 const Services = () => {
-
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === "/services") {
-      const scrollToServices = () => {
-        const servicesSection = document.getElementById("servicesSection");
-        if (servicesSection) {
-          servicesSection.scrollIntoView({ behavior: "smooth", block: "start"});
-        }
-      };
-
-      scrollToServices();
-    }
-  }, [location.pathname]);
-
 
   return (
     <div
