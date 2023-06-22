@@ -12,6 +12,10 @@ const validationsService = (service) => {
         errors.price = 'Required'
     }
 
+    if(!service.tipoServ){
+        errors.tipoServ = 'Required'
+    }
+
     return errors;
 }
 

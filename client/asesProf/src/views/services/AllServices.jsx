@@ -3,9 +3,11 @@ import Card from '../card/Card'
 import Pagination from '../../components/pagination/Pagination'
 
 
-const AllServices = () => {
+const AllServices = ({currentData, page, setPage, max}) => {
 
-  const allActivities = useSelector((state) => state.allActivities)
+
+  // const data = useSelector((state) => state.copyState)
+  // console.log(data);
   
 
 
@@ -24,17 +26,19 @@ const AllServices = () => {
           <button className='bg-gray-500 shadow-lg w-[200px] rounded text-white py-2 font-medium'>clear</button>
         </div>
     </div>
-    <div>
 
-    <div className="flex flex-wrap justify-center gap-4 mt-10 w-full max-w-screen-lg mx-auto">
-      {allActivities.slice(0, 6).map((user, idx) => (
-        <div key={idx} className='bg-gray-50 shadow-lg rounded text-gray-900 w-[300px] h-[300px]'>
-          <Card user={user} />
-        </div>
-      ))}
+    <div className='flex flex-wrap items-center justify-center flex-col'>
+      <div className="flex flex-wrap justify-between border border-red-900 w-[800px]">
+        {currentData && currentData.map(user => {
+          return (
+              <Card user={user} />
+          )
+        })}
+      </div>
+      <Pagination currentData={currentData} page={page} setPage={setPage} max={max} />
     </div>
-    </div>
-        <Pagination />
+       
+       
     
     </div>
   )

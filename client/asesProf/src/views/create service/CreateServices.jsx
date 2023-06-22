@@ -15,13 +15,15 @@ const CreateServices = () => {
     description: '',
     price: '',
     file: '',
+    tipoServ: '',
   })
 
   const [errors, setErrors] = useState({
     name: '',
     description: '',
     price: '',
-    file:''
+    file:'',
+    tipoServ: '',
   })
 
   const handleChange = (event) => {
@@ -54,6 +56,7 @@ const CreateServices = () => {
       description: '',
       price: '',
       file: '',
+      tipoServ: '',
     })
 
     Swal.fire({
@@ -67,6 +70,9 @@ const CreateServices = () => {
   }
 
 
+  console.log(service, 'aca servicio crado');
+
+
   return (
     <div className="w-full bg-white h-screen flex flex-col items-center justify-center">
         <span className="font-bold bg-gray-500 text-white w-[200px] pl-3 py-2">create service</span>
@@ -77,8 +83,24 @@ const CreateServices = () => {
           name='name'
           value={service.name}
           onChange={handleChange}
-          className="bg-gray-200 border border-gray-300 py-2 pl-2" placeholder="name..." type="text" />
+          className="bg-gray-200 border border-gray-300 py-2 pl-2" placeholder="service name..." type="text" />
           {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.name}</div>)}
+        </div>
+
+        <div className="w-full flex flex-col h-[100px] mt-10">
+          <select
+          name='tipoServ'
+          onChange={handleChange}
+          className="bg-gray-500 text-white py-2 rounded">
+            <option disabled>TIPO DE SERVICIO</option>
+            <option>Gastronomia</option>
+            <option>Legales</option>
+            <option>Medicina</option>
+            <option>Automotor</option>
+            <option>Construcción</option>
+            <option>Otros</option>
+          </select>
+            {errors.tipoServ && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.tipoServ}</div>)}
         </div>
 
         <div className="w-full flex flex-col h-[40px] mt-10">

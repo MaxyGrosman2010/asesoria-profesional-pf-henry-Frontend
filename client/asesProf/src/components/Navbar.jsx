@@ -49,7 +49,7 @@ const Navbar = () => {
               )}
             </div>
 
-            <div className="bg-white flex items-center border border-green-600 w-[100px]">
+            <div className="bg-white flex items-center w-[100px]">
                 {(item.length > 0) ? <p className="w-[20px] h-[20px] bg-red-600 text-white rounded-full text-center mb-[20px]">{item.length}</p> : null}
               <span className="material-symbols-outlined">shopping_cart</span>
             </div>

@@ -1,47 +1,27 @@
-import { useEffect, useState } from 'react'
-import ReactPaginate from 'react-paginate'
-import { useSelector } from "react-redux"
 
+import { useSelector } from 'react-redux'
 
-const Pagination = () => {
+const Pagination = ({max, page, setPage}) => {
+
+    const data = useSelector((state) => state.copyState)
+    console.log(data, 'desde Pagination');
+
+    const handlePrevPage = () => {
+        if(page < 2) return;
+        setPage(page - 1)
+    }
     
-    const copyState = useSelector((state) => state.copyState)
-
-    const [currentItem, setCurrentItem] = useState(0)
-    const [pageCount, setPageCount] = useState(0)
-    const [itemsOffset, setItemOffset] = useState(0)
-    const itemsPerPage = 6;
-
-    useEffect(() => {
-        const endOffeset = itemsOffset + itemsPerPage 
-        setCurrentItem(copyState.slice(itemsOffset, endOffeset))
-        setPageCount(Math.ceil(copyState.length / itemsPerPage))
-    }, [copyState, itemsOffset, itemsPerPage])
-     
-    const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % copyState.length
-        setItemOffset(newOffset)
+    const handleNextPage = () => {
+        setPage(page + 1)
     }
 
-
-  return (
-    
-        <div className="flex">
-            <ReactPaginate
-            className='flex gap-5 my-10'
-            pageCount={pageCount}
-            breakLabel='...'
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            renderOnZeroPageCount={null}
-            />
-        </div>
-    
+    return (
+    <div className="flex gap-10 mx-auto">
+        <button onClick={handlePrevPage} className="bg-green-300 w-[100px] py-2 my-20">prev</button>
+        <p className="mt-20 py-2 w-[100px] text-center">{page}</p>
+        <button disabled={page >= max} onClick={handleNextPage} className="bg-green-300 w-[100px] py-2 my-20">next</button>
+    </div>
   )
 }
 
 export default Pagination
-
-
-
-
