@@ -13,18 +13,20 @@ import CreateServices from "./views/create service/CreateServices"
 import Register from "./views/register/Register"
 
 
+
 function App() {
 
   const location = useLocation();
 
   return (
-    <div className="bg-slate-300 h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
       {(location.pathname === '/')
-      ? (<LandingLogin />
+      ? (<Home />
       ) : (
         <>
         {location.pathname !== '/register' && <Navbar />}
         <Routes>
+          <Route path='/login' element={<LandingLogin />} />
           <Route path="/home" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path='/allServices/:id' element={<OneService />} />
