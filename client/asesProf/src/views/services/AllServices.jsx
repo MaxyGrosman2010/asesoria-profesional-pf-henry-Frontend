@@ -8,7 +8,7 @@ const AllServices = ({currentData, page, setPage, max}) => {
 
   // const data = useSelector((state) => state.copyState)
   // console.log(data);
-  
+  console.log(currentData,page,setPage,max)
 
 
 
@@ -38,8 +38,6 @@ const AllServices = ({currentData, page, setPage, max}) => {
       <Pagination currentData={currentData} page={page} setPage={setPage} max={max} />
     </div>
        
-       
-    
     </div>
   )
 }

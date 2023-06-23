@@ -172,6 +172,7 @@ const rootReducer = (state = initialState, action) => {
         case CLEAN_FILTER:
             return {
                 ...state,
+                
                 copyState: [...state.allActivities],
             }
 
