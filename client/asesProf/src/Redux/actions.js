@@ -1,4 +1,4 @@
-import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS } from "./actions-types";
+import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS, CLEAR_FILTER } from "./actions-types";
 import axios from 'axios'
 
 export const getData = () => {
@@ -34,4 +34,8 @@ export const filter = (service) => {
 
 export const addToCart = (data) => {
     return {type: ADD_ITEMS, payload: data}
+}
+
+export const clearFilters = (data) =>{
+    return {type : CLEAR_FILTER, payload:data}
 }

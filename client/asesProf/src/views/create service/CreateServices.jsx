@@ -29,7 +29,8 @@ const CreateServices = () => {
   const handleChange = (event) => {
     setService({
       ...service,
-      [event.target.name]: event.target.value,
+     // [event.target.name]: event.target.value,
+       [event.target.name] : event.target.name === 'price' ?  +event.target.value : event.target.value,
     })
     setErrors(validationsService({
       ...service,
