@@ -81,11 +81,5 @@ const AllServices = ({ currentData, page, setPage, max }) => {
   );
 };
 
-
-
-
 export default AllServices;
 
-
-
-//<Pagination currentData={currentData} page={page} setPage={setPage} max={max} />
