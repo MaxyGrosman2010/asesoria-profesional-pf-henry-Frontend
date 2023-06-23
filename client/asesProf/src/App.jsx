@@ -1,5 +1,5 @@
 import { Route, Routes, createBrowserRouter, useLocation } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Home from "./components/Home"
 import Services from "./components/Services"
 import OneService from "./views/service/OneService"
@@ -31,7 +31,9 @@ function App() {
     const currentData = data.slice(idxFirst, idxLast)
     const max = Math.ceil(data.length / perPage)
 
-  
+    useEffect(() => {
+      setPage(1);
+    },[data]);
 
 
   return (
