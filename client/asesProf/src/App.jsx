@@ -14,16 +14,14 @@ import CreateServices from "./views/create service/CreateServices"
 import Register from "./views/register/Register"
 import Pagination from "./components/pagination/Pagination"
 import { useSelector } from "react-redux"
+import Footer from "./components/footer/Footer"
 
 
 
 function App() {
 
-  const location = useLocation();
-
+    const location = useLocation();
     const data = useSelector((state) => state.copyState)
-
-    console.log(data, 'aca data desde app');
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(6);
     const idxLast = page * perPage;

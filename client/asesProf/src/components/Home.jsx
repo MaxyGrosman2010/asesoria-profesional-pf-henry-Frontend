@@ -1,6 +1,7 @@
 import ContactForm from '../views/contact/ContactForm';
 import Hero from './Hero';
 import Services from './Services';
+import Footer from './footer/Footer';
 
 const Home = () => {
   
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero />
       <Services />
       <ContactForm />
+      <Footer />
     </div>
   )
 }

@@ -3,7 +3,6 @@ import validationsEdit from "./validations"
 
 const EditProfile = () => {
 
-
   const [edit, setEdit] = useState({
     name: '',
     password: '',
@@ -22,7 +21,6 @@ const EditProfile = () => {
     picture: '',
   })
 
-
   const handleChange = (event) => {
     setEdit({
       ...edit,
@@ -33,7 +31,6 @@ const EditProfile = () => {
       [event.target.name]: event.target.value,
     }))
   }
-
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
