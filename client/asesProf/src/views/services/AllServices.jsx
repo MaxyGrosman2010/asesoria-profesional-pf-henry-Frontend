@@ -5,10 +5,6 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { filter, clearFilters} from '../../Redux/actions'
 
-const AllServices = ({currentData, page, setPage, max }) => {
-
-  const dispatch = useDispatch()
-  const copyState = useSelector((state) => state.copyState)
   const [orderByName, setOrderByName] = useState('');
   const [orderByPrice, setOrderByPrice] = useState('');
   const [orderByProfession, setOrderByProfession]= useState(''); 
@@ -18,9 +14,16 @@ const AllServices = ({currentData, page, setPage, max }) => {
     let copyFilter = [...copyState];
     
       if (orderByName === 'a-z')  copyFilter = copyFilter.slice().sort((a, b) => a.name.localeCompare(b.name), 'es', { sensitivity: 'base' });
+
       if (orderByName === 'z-a') copyFilter = copyFilter.slice().sort((a, b) => b.name.localeCompare(a.name), 'es', { sensitivity: 'base' });  
       if (orderByPrice === 'asc') copyFilter = copyFilter.sort((a, b) => a.price - b.price);
       if (orderByPrice === 'des') copyFilter = copyFilter.sort((a, b) => b.price - a.price);
+
+      if (orderByName === 'z-a') copyFilter = copyFilter.slice().sort((a, b) => b.name.localeCompare(a.name), 'es', { sensitivity: 'base' });
+      
+      if (orderByPrice === 'asc') copyFilter = copyFilter.sort((a, b) => a.price - b.price);
+      if (orderByPrice === 'des') copyFilter = copyFilter.sort((a, b) => b.price - a.price);
+
       if (orderByProfession ==='gast') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Gastronomia');
       if (orderByProfession ==='leg') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Legales');
       if (orderByProfession ==='med') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Medicina');
@@ -28,6 +31,10 @@ const AllServices = ({currentData, page, setPage, max }) => {
       if (orderByProfession ==='const') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Construcción');
       if (orderByProfession ==='otr') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Otros');
 
+    if(sherchInput!==''){
+      copyFilter = copyFilter.filter((servicio)=> servicio.name.toLowerCase().includes(sherchInput.toLowerCase()));
+    }
+     
     dispatch(filter(copyFilter));
   };
 
@@ -41,7 +48,11 @@ const AllServices = ({currentData, page, setPage, max }) => {
       setOrderByPrice('');
       setShechInput('');
       setOrderByProfession('');
+
       dispatch(clearFilters(event.target.value)); 
+
+      dispatch(clearFilters(event.target.value));
+
  }
 
  const handleShearch = (e)=>{
@@ -52,8 +63,15 @@ const AllServices = ({currentData, page, setPage, max }) => {
     <div className="flex flex-col mx-auto w-full items-center border bg-slate-300">
       <div className='mt-40 flex gap-10'>
         <div className="flex gap-2">
+
           <input className="bg-gray-100 border border-gray-400 pl-2 py-2 rounded w-[600px]"
-            placeholder="search a service..." type="text" value={sherchInput}
+
+          <input
+            className="bg-gray-100 border border-gray-400 pl-2 py-2 rounded w-[600px]"
+            placeholder="search a service...zz"
+            type="text"
+            value={sherchInput}
+
             onChange={handleShearch}
           />
           <button className="bg-gray-500 shadow-lg w-[200px] rounded text-white">search</button>
@@ -68,6 +86,15 @@ const AllServices = ({currentData, page, setPage, max }) => {
             <option value="">select by price</option>
             <option value="asc">Minor-Major</option>
             <option value="des">Major-Minor</option>
+          </select>
+           <select className="bg-slate-300 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByProfession(e.target.value)}>
+            <option value="">select by profession</option>
+           <option value="gast">Gastronomia</option>
+            <option value="leg">Legales</option>
+            <option value="med">Medicina</option>
+            <option value="aut">Automotor</option>
+            <option value="const">Construcción</option>
+            <option value="otr">Otros</option>
           </select>
            <select className="bg-slate-300 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByProfession(e.target.value)}>
             <option value="">select by profession</option>
