@@ -72,13 +72,13 @@ const AllServices = ({currentData, page, setPage, max }) => {
             <option value="z-a">Z-A</option>
           </select>
 
-          <select className="bg-slate-300 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByPrice(e.target.value)}>
+          <select className="bg-slate-100 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByPrice(e.target.value)}>
             <option value="">select by price</option>
             <option value="asc">Minor-Major</option>
             <option value="des">Major-Minor</option>
           </select>
 
-           <select className="bg-slate-300 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByProfession(e.target.value)}>
+           <select className="bg-slate-100 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByProfession(e.target.value)}>
             <option value="">select by profession</option>
             <option value="gast">Gastronomia</option>
             <option value="leg">Legales</option>
