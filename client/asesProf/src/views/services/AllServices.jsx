@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { filter, clearFilters} from '../../Redux/actions'
 
-const AllServices = ({ currentData, page, setPage, max }) => {
+const AllServices = ({currentData, page, setPage, max }) => {
 
   const dispatch = useDispatch()
   const copyState = useSelector((state) => state.copyState)
@@ -18,11 +18,9 @@ const AllServices = ({ currentData, page, setPage, max }) => {
     let copyFilter = [...copyState];
     
       if (orderByName === 'a-z')  copyFilter = copyFilter.slice().sort((a, b) => a.name.localeCompare(b.name), 'es', { sensitivity: 'base' });
-      if (orderByName === 'z-a') copyFilter = copyFilter.slice().sort((a, b) => b.name.localeCompare(a.name), 'es', { sensitivity: 'base' });
-      
+      if (orderByName === 'z-a') copyFilter = copyFilter.slice().sort((a, b) => b.name.localeCompare(a.name), 'es', { sensitivity: 'base' });  
       if (orderByPrice === 'asc') copyFilter = copyFilter.sort((a, b) => a.price - b.price);
       if (orderByPrice === 'des') copyFilter = copyFilter.sort((a, b) => b.price - a.price);
-   
       if (orderByProfession ==='gast') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Gastronomia');
       if (orderByProfession ==='leg') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Legales');
       if (orderByProfession ==='med') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Medicina');
@@ -30,10 +28,6 @@ const AllServices = ({ currentData, page, setPage, max }) => {
       if (orderByProfession ==='const') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Construcción');
       if (orderByProfession ==='otr') copyFilter = copyFilter.filter((prof) => prof.tipoServ==='Otros');
 
-    if(sherchInput!==''){
-      copyFilter = copyFilter.filter((servicio)=> servicio.name.toLowerCase().includes(sherchInput.toLowerCase()));
-    }
-     
     dispatch(filter(copyFilter));
   };
 
@@ -47,8 +41,7 @@ const AllServices = ({ currentData, page, setPage, max }) => {
       setOrderByPrice('');
       setShechInput('');
       setOrderByProfession('');
-      dispatch(clearFilters(event.target.value));
-     
+      dispatch(clearFilters(event.target.value)); 
  }
 
  const handleShearch = (e)=>{
@@ -57,11 +50,11 @@ const AllServices = ({ currentData, page, setPage, max }) => {
 
   return (
     <div className="flex flex-col mx-auto w-full items-center border bg-slate-300">
-      <div className='mt-40 flex gap-40'>
+      <div className='mt-40 flex gap-10'>
         <div className="flex gap-2">
           <input
             className="bg-gray-100 border border-gray-400 pl-2 py-2 rounded w-[600px]"
-            placeholder="search a service...zz"
+            placeholder="search a service..."
             type="text"
             value={sherchInput}
             onChange={handleShearch}
@@ -95,7 +88,7 @@ const AllServices = ({ currentData, page, setPage, max }) => {
 
       <div className='w-full min-h-[800px] pt-20'>
         <div className="flex flex-wrap justify-center gap-4 w-full max-w-screen-lg mx-auto">
-          {currentData.map((user, idx) => (
+          {currentData?.map((user, idx) => (
             <div key={idx} className="bg-gray-50 shadow-lg rounded text-gray-900 w-[300px]">
               <Card user={user} />
             </div>

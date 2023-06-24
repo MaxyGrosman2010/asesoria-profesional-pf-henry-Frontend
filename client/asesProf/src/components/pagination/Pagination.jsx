@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 const Pagination = ({max, page, setPage}) => {
 
     const data = useSelector((state) => state.copyState)
-    console.log(data, 'desde Pagination');
 
     const handlePrevPage = () => {
         if(page < 2) return;

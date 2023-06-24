@@ -87,10 +87,10 @@ const ContactForm = () => {
             value={form.message}
             onChange={handleChange}
             className="bg-gray-200 w-[500px] h-[200px] py-2 pl-2 rounded" placeholder="message..." />
-            {errors.message && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.message}</div>)}
+            {errors.message && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.message}</div>)}
           </div>
           <button type="submit" className="w-[200px] bg-blue-950 shadow-lg text-white rounded py-2 font-bold hover:bg-gray-300 hover:text-blue-950">Send</button>
-          <span class="material-symbols-outlined mt-20">deployed_code</span>
+          <span className="material-symbols-outlined mt-20">deployed_code</span>
         </div>
       </form>
     </div>
