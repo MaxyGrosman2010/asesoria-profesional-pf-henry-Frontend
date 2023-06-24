@@ -12,18 +12,15 @@ import ConfirmPayment from "./views/ConfirmPayment"
 import EditProfile from "./views/edit profile/EditProfile"
 import CreateServices from "./views/create service/CreateServices"
 import Register from "./views/register/Register"
-import Pagination from "./components/pagination/Pagination"
 import { useSelector } from "react-redux"
 
 
 
 function App() {
 
-  const location = useLocation();
-
+    const location = useLocation();
     const data = useSelector((state) => state.copyState)
-
-    console.log(data, 'aca data desde app');
+    console.log(data);
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(6);
     const idxLast = page * perPage;
@@ -50,7 +47,7 @@ function App() {
           <Route path='/allServices/:id' element={<OneService />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/contact' element={<ContactForm />} />
-          <Route path="/allServices" element={<AllServices currentData={currentData} page={page} setPage={setPage} max={max} />} />
+          <Route path="/allServices" element={<AllServices currentData={currentData} perPage={perPage} page={page} setPage={setPage} max={max} />} />
           <Route path='/confirmPay' element={<ConfirmPayment />} />
           <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/createServices' element={<CreateServices />} />

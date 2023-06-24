@@ -32,9 +32,13 @@ const AllServices = ({currentData, page, setPage, max }) => {
   };
 
 
+
   useEffect(() => {
     filters();
   }, [orderByName, orderByPrice,sherchInput,orderByProfession]);
+
+
+
 
  const handlerResetFilter = (event) => {
       setOrderByName('');
@@ -49,6 +53,8 @@ const AllServices = ({currentData, page, setPage, max }) => {
  }
 
   return (
+ 
+
     <div className="flex flex-col mx-auto w-full items-center border bg-slate-300">
       <div className='mt-40 flex gap-10'>
         <div className="flex gap-2">
@@ -58,6 +64,7 @@ const AllServices = ({currentData, page, setPage, max }) => {
           />
           <button className="bg-gray-500 shadow-lg w-[200px] rounded text-white">search</button>
         </div>
+     
         <div className="flex rounded items-center justify-center gap-10 text-slate-900">
           <select className="bg-slate-100 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByName(e.target.value)}>
             <option value="">select by name</option>
@@ -65,6 +72,7 @@ const AllServices = ({currentData, page, setPage, max }) => {
             <option value="z-a">Z-A</option>
           </select>
           <select className="bg-slate-100 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByPrice(e.target.value)}>
+
             <option value="">select by price</option>
             <option value="asc">Minor-Major</option>
             <option value="des">Major-Minor</option>
@@ -78,10 +86,18 @@ const AllServices = ({currentData, page, setPage, max }) => {
             <option value="const">Construcción</option>
             <option value="otr">Otros</option>
           </select>
+           <select className="bg-slate-300 rounded w-[200px] text-center py-2 mx-2" onChange={(e) => setOrderByProfession(e.target.value)}>
+            <option value="">select by profession</option>
+           <option value="gast">Gastronomia</option>
+            <option value="leg">Legales</option>
+            <option value="med">Medicina</option>
+            <option value="aut">Automotor</option>
+            <option value="const">Construcción</option>
+            <option value="otr">Otros</option>
+          </select>
           <button className="bg-gray-500 shadow-lg w-[200px] rounded text-white py-2 font-medium" onClick={handlerResetFilter}>clear</button>
         </div>
       </div>
-
 
       <div className='w-full min-h-[800px] pt-20'>
         <div className="flex flex-wrap justify-center gap-4 w-full max-w-screen-lg mx-auto">

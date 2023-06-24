@@ -24,9 +24,9 @@ const Services = () => {
 
       <div className="div2 col-span-7 row-span-1 flex items-center justify-center mt-10">
             <Link to="/allServices"
-            className="text-blue-950 font-bold mb-20 bg-white rounded-md py-4 w-[200px] flex justify-center items-center shadow-lg">
+            className="text-blue-950 font-bold mb-20 bg-white rounded-md py-4 w-[200px] flex justify-center items-center shadow-lg hover:transition-all hover:bg-blue-950 hover:text-white">
              Go to Services
-          </Link>
+          </Link>      
       </div>
 
     </div>

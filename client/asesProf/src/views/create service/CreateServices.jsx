@@ -29,7 +29,6 @@ const CreateServices = () => {
   const handleChange = (event) => {
     setService({
       ...service,
-     // [event.target.name]: event.target.value,
        [event.target.name] : event.target.name === 'price' ?  +event.target.value : event.target.value,
     })
     setErrors(validationsService({
@@ -69,10 +68,6 @@ const CreateServices = () => {
     navigate('/allServices')
     
   }
-
-
-  console.log(service, 'aca servicio crado');
-
 
   return (
     <div className="w-full bg-white h-screen flex flex-col items-center justify-center">
