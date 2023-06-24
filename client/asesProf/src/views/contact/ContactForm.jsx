@@ -57,38 +57,41 @@ const ContactForm = () => {
 
   return (
     <>
-    <div id='contact' className='flex items-center justify-center h-screen'>
-      <form onSubmit={handleSubmit} className="w-full bg-white rounded-md rounded-tr-[100px] flex flex-col items-center justify-center gap-4 h-screen">
-        <p className="font-bold">Contact us for more information</p>
+    <div id='contact' className='flex flex-col items-center justify-center h-screen p-10'>
+      <div className="flex flex-col items-center justify-center mt-10">
+            <p className="font-medium">Contact us for more information</p>
+      </div>
+      <form onSubmit={handleSubmit} className="bg-white rounded-md rounded-tr-[100px] flex flex-col w-3/4 items-center justify-center h-screen">
+        <div className="items-center flex flex-col w-1/2 py-10">
+          <div className="flex flex-col w-[500px] h-20">
+            <input
+            name='name'
+            value={form.name}
+            onChange={handleChange}
+            className="bg-gray-200 w-[500px] py-2 pl-2 rounded" placeholder="name..." type="text" />
+            {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.name}</div>)}
+          </div>
 
-        <div className="flex flex-col w-[500px] h-20">
-          <input
-          name='name'
-          value={form.name}
-          onChange={handleChange}
-          className="bg-gray-200 w-[500px] py-2 pl-2 rounded" placeholder="name..." type="text" />
-          {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.name}</div>)}
-        </div>
+          <div className="flex flex-col w-[500px] h-20">
+            <input
+            name='email'
+            value={form.email}
+            onChange={handleChange}
+            className="bg-gray-200 w-[500px] py-2 pl-2 rounded" placeholder="email..." type="email" />
+            {errors.email && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.email}</div>)}
+          </div>
 
-        <div className="flex flex-col w-[500px] h-20">
-          <input
-          name='email'
-          value={form.email}
-          onChange={handleChange}
-          className="bg-gray-200 w-[500px] py-2 pl-2 rounded" placeholder="email..." type="email" />
-          {errors.email && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.email}</div>)}
+          <div className="flex flex-col w-[500px] h-[250px]">
+            <textarea
+            name='message'
+            value={form.message}
+            onChange={handleChange}
+            className="bg-gray-200 w-[500px] h-[200px] py-2 pl-2 rounded" placeholder="message..." />
+            {errors.message && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.message}</div>)}
+          </div>
+          <button type="submit" className="w-[200px] bg-blue-950 shadow-lg text-white rounded py-2 font-bold hover:bg-gray-300 hover:text-blue-950">Send</button>
+          <span className="material-symbols-outlined mt-20">deployed_code</span>
         </div>
-
-        <div className="flex flex-col w-[500px] h-[250px]">
-          <textarea
-          name='message'
-          value={form.message}
-          onChange={handleChange}
-          className="bg-gray-200 w-[500px] h-[200px] py-2 pl-2 rounded" placeholder="message..." />
-          {errors.message && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.message}</div>)}
-        </div>
-        <button type="submit" className="w-[200px] bg-gray-600 shadow-lg text-white rounded py-2 uppercase font-bold">Send</button>
-      <p className="uppercase font-bold mt-10">logo</p>
       </form>
     </div>
     </>

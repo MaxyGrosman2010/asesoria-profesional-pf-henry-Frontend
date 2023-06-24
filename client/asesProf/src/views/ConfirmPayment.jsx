@@ -16,11 +16,6 @@ const ConfirmPayment = () => {
         navigate('/home')
     }
 
-
-
-  
-
-
   return (
     <div>
         <p>proceed to pay</p>

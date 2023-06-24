@@ -1,13 +1,17 @@
-import messi from '../../assets/messi.png'
+import profile from '../../assets/bgcard.jpg'
 import { NavLink } from 'react-router-dom'
 
-const Card = ({user}) => {
+const Card = ({serv}) => {
 
   return (
-    <div className='flex flex-col items-center justify-center border border-gray-300 rounded w-[300px]'>
-        <img className='rounded-full w-[30%]' src={messi} />
-        <p className="text-2xl font-bold tracking-wide">{user.name}</p>
-        <NavLink to='/allServices/:id' className='bg-gray-500 text-white uppercase w-[150px] py-2 mt-2 text-center shadow-lg rounded hover:bg-gray-600 cursor-pointer'>more</NavLink>
+    <div className='flex items-end rounded h-[400px]' style={{ backgroundImage: `url(${profile})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className='bg-slate-600 w-full h-1/2 flex items-center justify-center flex-col hover:h-full hover:transition-all duration-500'>
+          <p className='font-bold uppercase text-white'>{serv.name}</p>
+          <div>
+            <p className='text-white'>${serv.price}</p>
+          </div>
+          <NavLink to='/allServices/:id' className='bg-slate-100 text-slate-950 uppercase w-[150px] py-2 mt-2 text-center shadow-lg rounded hover:bg-slate-300 cursor-pointer'>more</NavLink>
+        </div>
     </div>
   )
 }
