@@ -31,12 +31,15 @@ const AllServices = () => {
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
   }
-
+  
+  const updateFilterSelect = (filteredData) => {
+     setFilteredCopy(filteredData);
+  }
   return (
 
     <div className="flex flex-col mx-auto w-full items-center border bg-slate-300 py-20">
         <SearchBar copyState={copyState} updateFilter={updateFilter} />
-        <Filters  />
+        <Filters  copyState ={copyState} updateFilterSelect={updateFilterSelect}/>
         <div className="flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto">
         {currentData && currentData.map((serv, idx) => (
           <div key={idx} className= "rounded text-gray-900 w-[300px]">
@@ -50,4 +53,7 @@ const AllServices = () => {
 };
 
 export default AllServices;
+
+
+
 
