@@ -4,6 +4,7 @@ import { useState } from "react"
 import Swal from "sweetalert2"
 import { addToCart } from "../../Redux/actions"
 import doc from '../../assets/doc.jpg'
+import Reviews from "../../components/reviews/Reviews"
 
 const OneService = () => {
 
@@ -57,10 +58,16 @@ const OneService = () => {
           </div>
           <div className="flex mx-auto gap-4">
             <button onClick={addCart} className="bg-green-600 rounded w-[150px] py-2 text-white hover:bg-green-700">Add to cart</button>
-            <NavLink to='/allServices'>
-              <button className="bg-slate-800 rounded w-[150px] py-2 text-white hover:bg-slate-900">more services</button>
-            </NavLink>
           </div>
+        <div className="flex gap-10 mx-auto mt-4">
+          <Reviews />
+          <Reviews />
+        </div>
+        <div className="mx-auto mt-4">
+            <NavLink to='/allServices'>
+              <button className="bg-slate-800 rounded w-[150px] py-2 text-white hover:bg-slate-900 ">more services</button>
+            </NavLink>
+        </div>
         </div>
         </div>
       </div>
