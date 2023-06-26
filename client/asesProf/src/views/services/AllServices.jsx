@@ -4,14 +4,14 @@ import SearchBar from '../../components/searchBar/SearchBar'
 import Filters from '../filters/Filters'
 import Pagination from '../../components/pagination/Pagination';
 import Card from '../card/Card';
+import { getData } from '../../Redux/actions';
 
 const AllServices = () => {
-
 
   const copyState = useSelector((state) => state.copyState)
   const [filteredCopy, setFilteredCopy] = useState(copyState)
   
-  console.log(filteredCopy, 'FREDDY USA ESTE ESTADO PARA LOS FILTROS');
+  const dispatch = useDispatch()
 
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
@@ -25,8 +25,8 @@ const AllServices = () => {
   },[filteredCopy]);
 
   useEffect(() => {
-    setFilteredCopy(copyState)
-  }, [copyState])
+    dispatch(getData())
+  }, [])
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
