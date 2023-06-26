@@ -9,8 +9,9 @@ export const getData = () => {
 }
 
 export const postData = (payload) => {
-    return dispatch => {
-        dispatch({type:CREATE_SERVICE, payload})
+    return async (dispatch) => {
+        const response = await axios.post('http://localhost:3000/createServices', payload)
+        return dispatch({type:CREATE_SERVICE, payload: response.data})
     }
 }
 
