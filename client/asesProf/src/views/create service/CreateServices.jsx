@@ -14,7 +14,7 @@ const CreateServices = () => {
     name: '',
     description: '',
     price: '',
-    file: '',
+    file: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxb8wHWLqnYARq5TPsrdQjLg-EA-NaXBF0kjCggk-SdA&s',
     typeService: '',
   })
 

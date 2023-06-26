@@ -33,9 +33,9 @@ const SearchBar = ({copyState, updateFilter}) => {
   }
 
   return (
-    <div className="mt-10">
+    <div className="my-10">
       <form onSubmit={handleSearch} className="flex gap-2 items-center justify-center h-[40px]">
-        <input value={searchValue} onChange={eventChange} className="w-[600px] bg-transparent bg-slate-200 py-1 px-2 placeholder-slate-500" placeholder="search a service..." />
+        <input value={searchValue} onChange={eventChange} className="w-[600px] bg-slate-100 py-1 px-2 placeholder-slate-500" placeholder="search a service..." />
         <button type="submit" className="bg-slate-900 text-white w-[60px] rounded">
           <div className="h-[30px] flex items-center justify-center">
             <span className="material-symbols-outlined">search</span>
