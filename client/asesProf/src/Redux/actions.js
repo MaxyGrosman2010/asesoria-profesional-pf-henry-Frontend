@@ -3,14 +3,14 @@ import axios from 'axios'
 
 export const getData = () => {
     return async (dispatch) => {
-        const response = (await axios.get('http://localhost:3001/service'));
+        const response = (await axios.get('http://localhost:3001/allService'));
         return dispatch({type: GET_SERVICES, payload: response.data})
     }
 }
 
 export const postData = (payload) => {
     return async (dispatch) => {
-        const response = await axios.post('http://localhost:3001/allService', payload)
+        const response = await axios.post('http://localhost:3001/service', payload)
         return dispatch({type:CREATE_SERVICE, payload: response.data})
     }
 }
