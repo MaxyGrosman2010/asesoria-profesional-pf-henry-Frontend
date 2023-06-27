@@ -1,12 +1,12 @@
-import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS, CLEAR_FILTER } from "./actions-types";
+import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS, CLEAR_FILTER, GET_TYPE_SERVICES } from "./actions-types";
 import axios from 'axios'
 
 export const getData = () => {
     return async (dispatch) => {
-        const response = (await axios.get());
+        const response = (await axios.get('http://localhost:3001/allService'));
         return dispatch({type: GET_SERVICES, payload: response.data})
     }
-} // servicios del form name, descripcion , precio , foto, y type de servicio: ENUM ----
+}
 
 export const postData = (payload) => {
     return async (dispatch) => {
@@ -17,15 +17,22 @@ export const postData = (payload) => {
 
 export const getService = (id) => {
     return async (dispatch) => {
-        const response = (await axios.get(`http://${id}`))
+        const response = (await axios.get(`http://localhost:3001/serviceById/${id}`))
         return dispatch({type: GET_SERVICE, payload: response.data})
     }
 }
 
 export const getServiceName = (name) => {
     return async (dispatch) => {
-        const response = (await axios.get(`http://${name}`))
+        const response = (await axios.get(`http://localhost:3001/nameService/?name=${name}`))
         return dispatch({type: GET_SERVICE_NAME, payload: response.data})
+    }
+}
+
+export const getTypeServices = () => {
+    return async (dispatch) => {
+        const response = await axios.get('http://localhost:3001/allTypeService/')
+        return dispatch({type: GET_TYPE_SERVICES, payload: response.data})
     }
 }
 
