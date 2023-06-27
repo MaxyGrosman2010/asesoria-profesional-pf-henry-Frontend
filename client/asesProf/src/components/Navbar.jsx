@@ -21,8 +21,6 @@ const Navbar = () => {
     setCartOpen(false)
   }
 
-  console.log(cartOpen);
-
   useEffect(() => {
     const handleClickOustside = (e) => {
         if(pageWrapper.current && !pageWrapper.current.contains(e.target)){
