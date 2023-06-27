@@ -1,6 +1,6 @@
 import { useState,useEffect} from "react"
 
-const Filters = ({copyState,updateFilterSelect}) => {
+const Filters = ({copyState, updateFilterSelect}) => {
   
   const [filterBy,setFilterBy] = useState('');
   

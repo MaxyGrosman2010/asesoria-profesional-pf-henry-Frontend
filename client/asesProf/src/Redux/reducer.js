@@ -4,9 +4,9 @@ const initialState = {
     allActivities: [],
     copyState: [],
     oneActivity: [],
+    typeServices: [],
     items: [],
     hoursPerWork: 0,
-    typeServices: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -53,7 +53,7 @@ const rootReducer = (state = initialState, action) => {
         case ADD_ITEMS:
             return {
                 ...state,
-                items: [...state.items, ...action.payload]
+                items: [...state.items, action.payload]
             }
 
         case GET_TYPE_SERVICES:
