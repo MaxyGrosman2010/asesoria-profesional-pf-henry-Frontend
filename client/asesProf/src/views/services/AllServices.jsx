@@ -27,7 +27,7 @@ const AllServices = () => {
 
   useEffect(() => {
     dispatch(getData())
-  }, [])
+  }, [dispatch])
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)

@@ -31,7 +31,7 @@ export const getServiceName = (name) => {
 
 export const getTypeServices = () => {
     return async (dispatch) => {
-        const response = await axios.get('http://localhost:3001/allTypeService/')
+        const response = await axios.get('http://localhost:3001/allTypeService')
         return dispatch({type: GET_TYPE_SERVICES, payload: response.data})
     }
 }
