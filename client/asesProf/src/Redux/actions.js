@@ -6,7 +6,7 @@ export const getData = () => {
         const response = (await axios.get());
         return dispatch({type: GET_SERVICES, payload: response.data})
     }
-}
+} // servicios del form name, descripcion , precio , foto, y type de servicio: ENUM ----
 
 export const postData = (payload) => {
     return async (dispatch) => {

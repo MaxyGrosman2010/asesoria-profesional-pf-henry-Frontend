@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Cart from "./cart/Cart";
 
 
 const Navbar = () => {
@@ -9,6 +10,18 @@ const Navbar = () => {
   const item = useSelector((state) => state.items)
   const [menuOpen, setMenuOpen] = useState(false);
   const pageWrapper = useRef(null);
+
+  const [cartOpen, setCartOpen] = useState(false)
+
+  const handleOpenCart = () => {
+    setCartOpen(true);
+  }
+
+  const handleCloseCart = () => {
+    setCartOpen(false)
+  }
+
+  console.log(cartOpen);
 
   useEffect(() => {
     const handleClickOustside = (e) => {
@@ -62,9 +75,12 @@ const Navbar = () => {
           )}
 
             <div className="bg-white flex items-center w-[100px]">
-                {(item.length > 0) ? <p className="w-[10px] h-[10px] bg-red-600 text-white rounded-full text-center mb-[20px] animate-bounce"></p> : null}
-              <span className="material-symbols-outlined">shopping_cart</span>
+              {(item.length > 0) ? <p className="w-[10px] h-[10px] bg-red-600 text-white rounded-full text-center mb-[20px] animate-bounce"></p> : null}
+              <button onClick={handleOpenCart}>
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
             </div>
+                {cartOpen ? <Cart handleCloseCart={handleCloseCart} /> : null}
 
 
         </div>

@@ -20,6 +20,7 @@ const AllServices = () => {
   const currentData = filteredCopy.slice(idxFirst, idxLast)
   const max = Math.ceil(filteredCopy.length / perPage)
 
+
   useEffect(() => {
     setPage(1);
   },[filteredCopy]);
