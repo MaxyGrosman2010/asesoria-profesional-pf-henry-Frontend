@@ -4,22 +4,24 @@ import SearchBar from '../../components/searchBar/SearchBar'
 import Filters from '../filters/Filters'
 import Pagination from '../../components/pagination/Pagination';
 import Card from '../card/Card';
-import { getData } from '../../Redux/actions';
+import { filter, getData } from '../../Redux/actions';
 
 const AllServices = () => {
 
   const dispatch = useDispatch()
   const copyState = useSelector((state) => state.copyState)
-
+  
   useEffect(() => {
     dispatch(getData())
   }, [dispatch])
+  
+  const [filteredCopy, setFilteredCopy] = useState(copyState)
   
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
   const idxLast = page * perPage;
   const idxFirst = idxLast - perPage;
-  const currentData = copyState.slice(idxFirst, idxLast)
+  const currentData = filteredCopy.slice(idxFirst, idxLast)
   const max = Math.ceil(copyState.length / perPage)
  
   useEffect(() => {

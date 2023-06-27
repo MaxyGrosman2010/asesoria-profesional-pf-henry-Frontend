@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
-import { addToCart } from "../../Redux/actions"
+import { addToCart, getService } from "../../Redux/actions"
 import doc from '../../assets/doc.jpg'
 import Reviews from "../../components/reviews/Reviews"
 
@@ -10,6 +10,12 @@ const OneService = () => {
 
   const dispatch = useDispatch()
   const data = useSelector((state) => state.allActivities)
+  console.log(data, 'asdaads');
+
+
+  useEffect(() => {
+    getService()
+  }, [])
 
   const [cart, setCart] = useState(0)
 
