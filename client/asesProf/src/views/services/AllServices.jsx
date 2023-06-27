@@ -10,7 +10,6 @@ const AllServices = () => {
 
   const dispatch = useDispatch()
   const copyState = useSelector((state) => state.copyState)
-  const [filteredCopy, setFilteredCopy] = useState(copyState)
 
   useEffect(() => {
     dispatch(getData())
