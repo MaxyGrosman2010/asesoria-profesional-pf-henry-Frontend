@@ -26,7 +26,7 @@ const AllServices = () => {
   useEffect(() => {
     setPage(1);
     setFilteredCopy(copyState)
-  },[copyState])
+  },[filteredCopy])
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
