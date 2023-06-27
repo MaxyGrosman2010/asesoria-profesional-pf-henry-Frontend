@@ -8,26 +8,24 @@ import { getData } from '../../Redux/actions';
 
 const AllServices = () => {
 
+  const dispatch = useDispatch()
   const copyState = useSelector((state) => state.copyState)
   const [filteredCopy, setFilteredCopy] = useState(copyState)
-  
-  const dispatch = useDispatch()
-
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(6);
-  const idxLast = page * perPage;
-  const idxFirst = idxLast - perPage;
-  const currentData = filteredCopy.slice(idxFirst, idxLast)
-  const max = Math.ceil(filteredCopy.length / perPage)
-
-
-  useEffect(() => {
-    setPage(1);
-  },[filteredCopy]);
 
   useEffect(() => {
     dispatch(getData())
   }, [dispatch])
+  
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(6);
+  const idxLast = page * perPage;
+  const idxFirst = idxLast - perPage;
+  const currentData = copyState.slice(idxFirst, idxLast)
+  const max = Math.ceil(copyState.length / perPage)
+ 
+  useEffect(() => {
+    setPage(1);
+  },[filteredCopy]);
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
