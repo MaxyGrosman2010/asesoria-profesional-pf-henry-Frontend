@@ -1,7 +1,9 @@
 import profile from '../../assets/bgcard.jpg'
-import { NavLink } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const Card = ({serv}) => {
+
+  
 
   return (
     <div className='flex items-end rounded h-[400px]' style={{ backgroundImage: `url(${profile})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -10,7 +12,7 @@ const Card = ({serv}) => {
           <div>
             <p className='text-white'>${serv.price}</p>
           </div>
-          <NavLink to='/allServices/:id' className='bg-slate-100 text-slate-950 uppercase w-[150px] py-2 mt-2 text-center shadow-lg rounded hover:bg-slate-300 cursor-pointer'>more</NavLink>
+          <Link to={`/allServices/${serv.id}`} className='bg-slate-100 text-slate-950 uppercase w-[150px] py-2 mt-2 text-center shadow-lg rounded hover:bg-slate-300 cursor-pointer'>more</Link>
         </div>
     </div>
   )

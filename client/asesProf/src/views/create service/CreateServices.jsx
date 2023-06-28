@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import validationsService from "./validations"
 import Swal from "sweetalert2"
-import { useDispatch } from "react-redux"
-import { postData } from "../../Redux/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { postData, getTypeServices } from "../../Redux/actions"
 import { useNavigate } from "react-router-dom"
 
 const CreateServices = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const typeServices = useSelector((state) => state.typeServices)
+  
 
   const [service, setService] = useState({
     name: '',
@@ -25,6 +28,12 @@ const CreateServices = () => {
     file:'',
     typeService: '',
   })
+
+
+  useEffect(() => {
+    dispatch(getTypeServices())
+  }, [])
+
 
   const handleChange = (event) => {
     setService({
@@ -69,6 +78,9 @@ const CreateServices = () => {
     
   }
 
+
+  console.log(service, 'aca servicio creado');
+
   return (
     <div className="w-full bg-white h-screen flex flex-col items-center justify-center mt-20">
 
@@ -82,14 +94,9 @@ const CreateServices = () => {
         <div className="w-full flex flex-col h-[100px] mt-10">
           <select name='typeService' onChange={handleChange} className="bg-slate-900 text-white py-2 rounded">
             <option>Select a Service type</option>
-            <option>Gastronomia</option>
-            <option>Legales</option>
-            <option>Medicina</option>
-            <option>Automotor</option>
-            <option>Construcción</option>
-            <option>Enseñanza</option>
-            <option>Tech</option>
-            <option>Otros</option>
+            {typeServices?.map(type => (
+              <option>{type.type}</option>
+            ))}
           </select>
             {errors.typeService && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.typeService}</div>)}
         </div>

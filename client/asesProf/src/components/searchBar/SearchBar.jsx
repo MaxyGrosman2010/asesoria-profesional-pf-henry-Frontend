@@ -1,15 +1,26 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import Swal from "sweetalert2"
+
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useEffect,useState } from "react";
+import {useDispatch} from 'react-redux';
+import  {getServiceName} from '../../Redux/actions';
+
 
 const SearchBar = ({copyState, updateFilter}) => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [searchValue, setSearchValue] = useState('')
 
   const eventChange = (event) => {
     setSearchValue(event.target.value)
   }
+
+
+  useEffect(() => {
+     dispatch(getServiceName(searchValue));
+  },[dispatch,searchValue]);
   
   const handleSearch = (event) => {
     event.preventDefault()
@@ -47,4 +58,4 @@ const SearchBar = ({copyState, updateFilter}) => {
   )
 }
 
-export default SearchBar
+export default SearchBar;

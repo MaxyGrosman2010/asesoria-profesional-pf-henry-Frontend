@@ -1,9 +1,10 @@
-import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, CLEAR_FILTER, ADD_ITEMS } from "./actions-types";
+import { GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, CLEAR_FILTER, ADD_ITEMS, GET_TYPE_SERVICES } from "./actions-types";
 
 const initialState = {
     allActivities: [],
     copyState: [],
     oneActivity: [],
+    typeServices: [],
     items: [],
     hoursPerWork: 0,
 }
@@ -52,7 +53,13 @@ const rootReducer = (state = initialState, action) => {
         case ADD_ITEMS:
             return {
                 ...state,
-                items: [...state.items, ...action.payload]
+                items: [...state.items, action.payload]
+            }
+
+        case GET_TYPE_SERVICES:
+            return {
+                ...state,
+                typeServices: action.payload
             }
 
         default:
