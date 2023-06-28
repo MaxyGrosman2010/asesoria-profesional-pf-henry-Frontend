@@ -34,7 +34,7 @@ const AllServices = () => {
   }
   
   const updateFilterSelect = (filteredData) => {
-     setFilteredCopy(filteredData);
+    setFilteredCopy(filteredData);
   }
   return (
 
