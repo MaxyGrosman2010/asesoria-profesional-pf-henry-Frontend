@@ -1,10 +1,15 @@
 import { useState,useEffect} from "react";
 import { useSelector } from "react-redux";
+
+
+
 const Filters = ({copyState, updateFilterSelect}) => {
   
   const [filterBy,setFilterBy] = useState('');
   const [filterByProf,setFilterByProf] = useState('');
   const typeServices = useSelector((state) => state.typeServices);
+
+
  
   
   useEffect(() => {
