@@ -9,24 +9,26 @@ import { getData } from '../../Redux/actions';
 const AllServices = () => {
   
   const dispatch = useDispatch()
-  const copyState = useSelector((state) => state.copyState) 
-  const [filteredCopy, setFilteredCopy] = useState(copyState)
-  
+
+  const copyState = useSelector((state) => state.copyState)
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
+  const [filteredCopy, setFilteredCopy] = useState(copyState)
+
+
   const idxLast = page * perPage;
   const idxFirst = idxLast - perPage;
   const currentData = filteredCopy.slice(idxFirst, idxLast)
   const max = Math.ceil(copyState.length / perPage)
-  
+
   useEffect(() => {
     dispatch(getData())
-  }, [dispatch])
-  
+  }, [])
+
   useEffect(() => {
-    setPage(1);
-    setFilteredCopy(copyState)
-  },[filteredCopy])
+    setPage(1)
+  }, [])
+
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
@@ -36,9 +38,6 @@ const AllServices = () => {
      setFilteredCopy(filteredData);
   }
 
-
-
-
   return (
 
     <div className="flex flex-col mx-auto w-full items-center border bg-slate-300 py-20">
@@ -47,7 +46,7 @@ const AllServices = () => {
         <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect}/>
       </div>
         <div className="flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto">
-        {currentData && currentData.map((serv, idx) => (
+        {currentData && currentData?.map((serv, idx) => (
           <div key={idx} className= "rounded text-gray-900 w-[300px]">
             <Card serv={serv} />
           </div>
