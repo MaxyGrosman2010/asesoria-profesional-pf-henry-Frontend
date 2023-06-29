@@ -1,5 +1,5 @@
-import { Route, Routes, createBrowserRouter, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
+
 import Home from "./components/Home"
 import Services from "./components/Services"
 import OneService from "./views/service/OneService"
