@@ -17,7 +17,6 @@ const initialState = {
     oneActivity: [],
     typeServices: [],
     items: [],
-    hoursPerWork: 0,
 }
 
 const rootReducer = (state = initialState, action) => {

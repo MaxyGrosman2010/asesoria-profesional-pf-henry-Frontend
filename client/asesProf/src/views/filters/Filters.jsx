@@ -9,9 +9,6 @@ const Filters = ({copyState, updateFilterSelect}) => {
   const [filterByProf,setFilterByProf] = useState('');
   const typeServices = useSelector((state) => state.typeServices);
 
-
- 
-  
   useEffect(() => {
     filterSelect();
     filterSelectProf();

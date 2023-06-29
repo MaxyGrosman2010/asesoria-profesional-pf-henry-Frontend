@@ -48,16 +48,16 @@ const Payment = () => {
             </div>
           ))}
         </div>            
-        <div className="flex flex-row justify-between pt-2">
-          <p className="font-bold mr-80">Total:</p>
+        <div className="flex w-1/2 mx-auto items-center justify-center py-2 my-10">
+          <p className="font-medium mr-80">Total to pay:</p>
           <div className="flex gap-4">
             <span class="material-symbols-outlined">paid</span>
             <p>{totalPrice}</p>
           </div>
         </div>
-          <div className="flex w-full border items-center justify-center">
-            <NavLink to="/confirmPay" className="bg-green-700 px-4 py-2 rounded text-white">Pay</NavLink>
-            <NavLink onClick={handleChange} className="bg-red-700 px-4 py-2 rounded text-white">Cancel</NavLink>
+          <div className="flex items-center justify-center w-1/2 mx-auto gap-4">
+            <NavLink to="/confirmPay" className="bg-green-700 px-4 py-2 rounded text-white w-[120px] text-center">Pay</NavLink>
+            <NavLink onClick={handleChange} className="bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center">Cancel</NavLink>
           </div>
         </div>
 
