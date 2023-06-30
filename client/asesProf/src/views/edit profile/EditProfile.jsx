@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
+import { useDispatch } from "react-redux"
+import axios from "axios";
 
 const EditProfile = () => {
+
+  const dispatch = useDispatch();
 
   const [edit, setEdit] = useState({
     name: '',
@@ -21,6 +25,9 @@ const EditProfile = () => {
     picture: '',
   })
 
+  useEffect(() => {
+  }, []);
+
   const handleChange = (event) => {
     setEdit({
       ...edit,
@@ -31,6 +38,37 @@ const EditProfile = () => {
       [event.target.name]: event.target.value,
     }))
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formErrors = validationsEdit(edit);
+
+    if(Object.keys(formErrors).length > 0){
+      Swal.fire({
+        title: 'empty fields',
+        icon: 'error',
+        confirm: 'acept'
+      })
+      return;
+    };
+
+    let formData = new FormData();
+
+    formData.append('method', 'put');
+    formData.append('name', edit.name);
+    formData.append('email', edit.email);
+    formData.append('password', edit.password);
+    formData.append('cellPhone', "" + edit.cellphone);
+    formData.append('profilePict', edit.picture);
+
+    Swal.fire({
+      title: 'Success',
+      text: 'El Perfil fue editado!',
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
+
+  };
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
