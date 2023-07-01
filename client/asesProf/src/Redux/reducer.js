@@ -9,8 +9,10 @@ import {
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE,
     DEL_ALL,
-    PAYMENT_MP,
-    INITIATE_PAYMENT,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    CLEAN_USER,
+
 } from "./actions-types";
 
 const initialState = {
@@ -19,8 +21,7 @@ const initialState = {
     oneActivity: [],
     typeServices: [],
     items: [],
-    isPaymentInitiated: false,
-    paymentResult: null,
+    userData :[],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -88,20 +89,34 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 items: [],
             }
-        
-        case INITIATE_PAYMENT:
-            return {
-                ...state,
-                isPaymentInitiated: true,
-            }
-        
-        case PAYMENT_MP:
-            return {
-                ...state,
-                isPaymentInitiated: false,
-                paymentResult: action.payload,
-            }
 
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                userData: [
+                  {
+                    id: action.payload.id,
+                    name: action.payload.name,
+                    email: action.payload.email,
+                    profilePict: action.payload.profilePict,
+                    },
+                  ],
+                error: null,
+              };
+
+        case LOGIN_FAILURE :
+            return {
+                ...state,
+                userData :[],
+                errror :action.payload,
+            }
+        case CLEAN_USER:
+            return {
+                ...state,
+                userData: [],
+            }
+        
+    
         default:
             return state;
     }
