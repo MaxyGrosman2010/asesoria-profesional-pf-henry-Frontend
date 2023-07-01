@@ -12,6 +12,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     CLEAN_USER,
+
 } from "./actions-types";
 
 const initialState = {
@@ -21,7 +22,6 @@ const initialState = {
     typeServices: [],
     items: [],
     userData :[],
-    
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -113,10 +113,10 @@ const rootReducer = (state = initialState, action) => {
         case CLEAN_USER:
             return {
                 ...state,
-                userData: action.paylo
+                userData: [],
             }
-
-
+        
+    
         default:
             return state;
     }

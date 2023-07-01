@@ -11,6 +11,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     CLEAN_USER,
+
 } from "./actions-types";
 
 import axios from 'axios'
@@ -70,7 +71,6 @@ export const removeAll = (payload) => {
     return {type: DEL_ALL, payload}
 }
 
-
 //LOGIN GOOGLE
 export const handleLogIn = () => {
   return (dispatch) => {
@@ -80,7 +80,6 @@ export const handleLogIn = () => {
       'Login',
       'width=500,height=500'
     );
-
     // Escuchar el evento de mensaje desde la ventana emergente
     window.addEventListener('message', (event) => {
       // Verificar el origen del mensaje
@@ -116,6 +115,5 @@ export const loginFailure = (error) => {
 export const cleanUser = (payload) => {
   return {type: CLEAN_USER, payload}
 }
-
 
 

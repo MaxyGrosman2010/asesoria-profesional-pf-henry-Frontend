@@ -1,41 +1,38 @@
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import Swal from "sweetalert2"
+import { useEffect } from "react"
 import { addToCart, getService } from "../../Redux/actions"
+import Swal from "sweetalert2"
 import doc from '../../assets/doc.jpg'
-import Reviews from "../../components/reviews/Reviews"
 
 const OneService = () => {
 
   const {id} = useParams()
   const dispatch = useDispatch()
   const copyState = useSelector((state) => state.oneActivity)
-  console.log(copyState, 'adsasd');
+  const items = useSelector((state) => state.items)
 
   useEffect(() => {
     dispatch(getService(id))
   }, [])
 
-  const [cart, setCart] = useState(0)
-
-  const addItem = () => {
-    setCart(cart + 1)
-  }
-
-  const delItem = () =>{
-    if(cart < 1){
-      return;
-    }
-    setCart(cart - 1)
-  }
-
   const addCart = () => {
-    dispatch(addToCart(copyState))
-    Swal.fire({
-      title:'producto agregado',
-      icon: 'success',
-    })
+    const isItemExist = items.find(item => item.id === copyState.id)
+    console.log(isItemExist, 'asdasd');
+      if(isItemExist){
+        Swal.fire({
+          title: 'El producto ya se encuentra en el carrito',
+          icon: 'warning'
+        })
+      } else {
+        dispatch(addToCart(copyState))
+        Swal.fire({
+          title:'Item agregado',
+          icon: 'success',
+        })
+      }
+    
+
   }
 
   

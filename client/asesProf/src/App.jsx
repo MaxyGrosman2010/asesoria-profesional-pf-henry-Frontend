@@ -1,10 +1,10 @@
-import { Route, Routes, createBrowserRouter, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
+
 import Home from "./components/Home"
 import Services from "./components/Services"
 import OneService from "./views/service/OneService"
 import Navbar from "./components/Navbar"
-import Payment from "./views/Payment"
+import Payment from "./views/payment/Payment"
 import LandingLogin from "./views/login/LandingLogin"
 import ContactForm from "./views/contact/ContactForm"
 import AllServices from "./views/services/AllServices"
