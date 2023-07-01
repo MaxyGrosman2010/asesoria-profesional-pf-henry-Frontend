@@ -9,7 +9,8 @@ import {
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE,
     DEL_ALL,
-    EDIT_USER
+    PAYMENT_MP,
+    INITIATE_PAYMENT,
 } from "./actions-types";
 
 const initialState = {
@@ -18,6 +19,8 @@ const initialState = {
     oneActivity: [],
     typeServices: [],
     items: [],
+    isPaymentInitiated: false,
+    paymentResult: null,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -84,6 +87,19 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: [],
+            }
+        
+        case INITIATE_PAYMENT:
+            return {
+                ...state,
+                isPaymentInitiated: true,
+            }
+        
+        case PAYMENT_MP:
+            return {
+                ...state,
+                isPaymentInitiated: false,
+                paymentResult: action.payload,
             }
 
         default:
