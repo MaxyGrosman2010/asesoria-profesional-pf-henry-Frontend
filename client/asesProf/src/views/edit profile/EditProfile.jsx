@@ -39,6 +39,13 @@ const EditProfile = () => {
     }))
   }
 
+  const handleFile = (event) => {
+    setEdit({
+      ...edit,
+      picture: event.target.files[0]
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validationsEdit(edit);
@@ -55,6 +62,7 @@ const EditProfile = () => {
     let formData = new FormData();
 
     formData.append('method', 'put');
+    formData.append('id', 1);
     formData.append('name', edit.name);
     formData.append('email', edit.email);
     formData.append('password', edit.password);
@@ -68,11 +76,17 @@ const EditProfile = () => {
       confirmButtonText: 'OK',
     });
 
+    setEdit({
+      ...edit,
+      password: '',
+      repeatPassword: ''
+    })
+
   };
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
-      <form  className="flex flex-col items-center justify-center w-1/2">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-1/2">
         
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>name</label>

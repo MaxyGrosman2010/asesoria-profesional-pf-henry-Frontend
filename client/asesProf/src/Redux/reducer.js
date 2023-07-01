@@ -8,7 +8,8 @@ import {
     ADD_ITEMS, 
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE,
-    DEL_ALL
+    DEL_ALL,
+    EDIT_USER
 } from "./actions-types";
 
 const initialState = {

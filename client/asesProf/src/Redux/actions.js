@@ -7,7 +7,7 @@ import {
     CLEAR_FILTER,     
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE, 
-    DEL_ALL
+    DEL_ALL,
 } from "./actions-types";
 
 import axios from 'axios'

@@ -8,3 +8,4 @@ export const ADD_ITEMS = 'ADD_ITEMS';
 export const GET_TYPE_SERVICES = 'GET_TYPE_SERVICES';
 export const DEL_ONE_SERVICE = 'DEL_ONE_SERVICE';
 export const DEL_ALL = 'DEL_ALL';
+export const EDIT_USER = 'EDIT_USER';

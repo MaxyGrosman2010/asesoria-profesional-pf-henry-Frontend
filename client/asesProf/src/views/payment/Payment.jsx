@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
-import bgi from "../assets/background.jpg";
-import mercadoLogo from "../assets/Logo-MercadoPago.png";
+import bgi from "../../assets/background.jpg";
+import mercadoLogo from "../../assets/Logo-MercadoPago.png";
 import { useSelector } from "react-redux";
 
 const Payment = () => {
