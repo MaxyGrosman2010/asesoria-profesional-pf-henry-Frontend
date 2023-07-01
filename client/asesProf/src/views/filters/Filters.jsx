@@ -8,6 +8,7 @@ const Filters = ({setPage}) => {
  
   const dispatch = useDispatch()
   const copyState = useSelector((state) => state.copyState)
+  const allActivities = useSelector((state) => state.allActivities)
 
 
   useEffect(() => {
@@ -21,10 +22,6 @@ const Filters = ({setPage}) => {
   const [originalServices, setOriginalServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
 
-  useEffect(() => {
-    setOriginalServices(copyState);
-  }, [copyState]);
-
   const handleOrder = () => {
     let services = [...copyState]
     if(order === 'asc') services = services.sort((a, b) => a.name.localeCompare(b.name))
@@ -36,13 +33,12 @@ const Filters = ({setPage}) => {
 
   const selectTypeService = (event) => {
     const selectedType = event.target.value;
-    let services = [...originalServices];
     setFilterByType(selectedType);
   
     if (selectedType === "all") {
       dispatch(getData())
     } else {
-      const filteredServices = services.filter(
+      const filteredServices = allActivities.filter(
         (srv) => srv.typeService === selectedType
       );
       setFilteredServices(filteredServices);

@@ -29,7 +29,6 @@ const AllServices = () => {
     setPage(1)
   }, [])
 
-
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData)
   }

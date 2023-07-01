@@ -1,15 +1,53 @@
-import React, { useState } from "react";
-import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
+import mercadoLogo from "../../assets/Logo-MercadoPago.png"; 
 import bgi from "../../assets/background.jpg";
-import mercadoLogo from "../../assets/Logo-MercadoPago.png";
+import Swal from "sweetalert2";
+import axios from 'axios'
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import bgi from "../assets/background.jpg";
+import mercadoLogo from "../assets/Logo-MercadoPago.png";
 import { useSelector } from "react-redux";
 
 const Payment = () => {
- 
+  
   const items = useSelector((state) => state.items)
-
   const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
+  
+  // const [preferenceId, setPreferenceId] = useState(null)
+  const [initPoint, setInitPoint] = useState(null)
+
+  const itemsMapped = items.map((item) => ({
+    name: item.name,
+    price: item.price,
+    description: item.description,
+    quantity: 1,
+  }))
+
+  console.log(itemsMapped, 'MAPEO DATA');
+
+  const handleClick = () => {
+    console.log('se');
+    axios
+      .post('http://localhost:3001/orderMP', itemsMapped, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        return response.data.id})
+      .then((preference) => {
+        // setInitPoint(preference)
+        // setPreferenceId(preference.id);
+        window.open(preference)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+
+// console.log(preferenceId, 'PREFERNCE_ID');
 
   const handleChange = () => {
     Swal.fire({
@@ -22,8 +60,6 @@ const Payment = () => {
       showCloseButton: true
     });
   };
-
-
 
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center" style={{ backgroundImage: `url(${bgi})` }}>
@@ -56,14 +92,20 @@ const Payment = () => {
           </div>
         </div>
           <div className="flex items-center justify-center w-1/2 mx-auto gap-4">
-            <NavLink to="/confirmPay" className="bg-green-700 px-4 py-2 rounded text-white w-[120px] text-center">Pay</NavLink>
-            <NavLink onClick={handleChange} className="bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center">Cancel</NavLink>
+          <button className="bg-red-600 w-[120px] rounded py-2 text-white" onClick={handleClick}>button</button>
           </div>
+            <NavLink onClick={handleChange} className="bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center">Cancel</NavLink>
         </div>
 
           <div className="flex items-start mb-20 ml-40">
             <span className="material-symbols-outlined text-6xl">deployed_code</span>
           </div>
+          {initPoint && <div className="absolute"><iframe id="inlineFrameExample"
+              title="Inline Frame Example"
+              width="700px"
+              height="700px"
+              src={initPoint}>
+            </iframe></div>}
         </div>
    
   );

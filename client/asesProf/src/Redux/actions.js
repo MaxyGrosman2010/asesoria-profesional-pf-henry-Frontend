@@ -7,7 +7,9 @@ import {
     CLEAR_FILTER,     
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE, 
-    DEL_ALL
+    DEL_ALL,
+    PAYMENT_MP,
+    INITIATE_PAYMENT
 } from "./actions-types";
 
 import axios from 'axios'
@@ -69,6 +71,8 @@ export const getTypeServices = () => {
         return dispatch({type: GET_TYPE_SERVICES, payload: response.data})
     }
 }
+
+
 
 export const filter = (service) => {
     return {type:FILTER, payload: service }
