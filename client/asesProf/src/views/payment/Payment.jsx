@@ -4,9 +4,11 @@ import Swal from "sweetalert2";
 import axios from 'axios'
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import bgi from "../assets/background.jpg";
-import mercadoLogo from "../assets/Logo-MercadoPago.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
+
+initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
 
 const Payment = () => {
   
