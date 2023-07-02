@@ -11,13 +11,15 @@ const CreateServices = () => {
   const navigate = useNavigate();
 
   const typeServices = useSelector((state) => state.typeServices)
+
+  // const [file, setFile] = useState(null)
   
 
   const [service, setService] = useState({
     name: '',
     description: '',
     price: '',
-    file: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxb8wHWLqnYARq5TPsrdQjLg-EA-NaXBF0kjCggk-SdA&s',
+    file: null,
     typeService: '',
   })
 
@@ -25,9 +27,11 @@ const CreateServices = () => {
     name: '',
     description: '',
     price: '',
-    file:'',
+    file:null,
     typeService: '',
   })
+
+  
 
 
   useEffect(() => {
@@ -38,13 +42,25 @@ const CreateServices = () => {
   const handleChange = (event) => {
     setService({
       ...service,
-       [event.target.name] : event.target.name === 'price' ?  +event.target.value : event.target.value,
+      [event.target.name] : event.target.name === 'price' ?  +event.target.value : event.target.value,
     })
     setErrors(validationsService({
       ...service,
       [event.target.name]: event.target.value,
     }))
   }
+  
+
+  const handleFile = (e) => {
+    const filed = e.target.files[0]
+    console.log(e.target.files, "agua");
+    console.log(filed, "$$$$");
+    setService({
+      ...service,
+      file: filed
+    })
+  }
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -64,7 +80,7 @@ const CreateServices = () => {
       name: '',
       description: '',
       price: '',
-      file: '',
+      file: null,
       typeService: '',
     })
 
@@ -84,7 +100,7 @@ const CreateServices = () => {
   return (
     <div className="w-full bg-white h-screen flex flex-col items-center justify-center mt-20">
 
-      <form onSubmit={handleSubmit} className="flex flex-col mx-auto px-10 shadow-lg p-10 w-3/4">
+      <form onSubmit={handleSubmit}  className="flex flex-col mx-auto px-10 shadow-lg p-10 w-3/4">
         <span className="font-bold text-slate-950 w-[200px] pl-3 py-2 uppercase">Create service</span>
         <div className="w-full flex flex-col h-[80px] mt-10">
           <input name='name' value={service.name} onChange={handleChange} className="bg-gray-200 border border-gray-300 py-2 pl-2" placeholder="service name..." type="text" />
@@ -111,7 +127,7 @@ const CreateServices = () => {
           {errors.description && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.description}</div>)}
         </div>
           <div className="w-full flex flex-col h-[150px] mt-10">
-            <input name='file' className="mb-2" type="file" />
+            <input name='file' className="mb-2" type="file" onChange={handleFile} />
             {errors.file && (<div className="flex ml-1 gap-1 text-red-600"><span className="material-symbols-outlined">error</span>{errors.file}</div>)}
           </div>
         <div className="flex">

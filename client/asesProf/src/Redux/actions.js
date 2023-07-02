@@ -23,12 +23,35 @@ export const getData = () => {
     }
 }
 
+// export const postData = (payload) => {  ------ANTERIOR POSTDATA------
+//     return async (dispatch) => {
+//         const response = await axios.post({
+//             method: "post",
+//             url: "http://localhost:3001/service",
+//             data: payload,
+//         });
+//         return dispatch({type:CREATE_SERVICE, payload: response.data})
+//     }
+// }
+
 export const postData = (payload) => {
     return async (dispatch) => {
-        const response = await axios.post('http://localhost:3001/service', payload)
-        return dispatch({type:CREATE_SERVICE, payload: response.data})
+    try {
+        const formData = new FormData();
+        formData.append('files', payload.file); // Assuming 'file' is the key for the file data in the payload.
+        formData.append('name', payload.name); 
+        formData.append('typeService', payload.typeService); 
+        formData.append('price', payload.price); 
+        formData.append('description', payload.description); 
+
+        const response = await axios.post("http://localhost:3001/service", formData);
+        return dispatch({ type: CREATE_SERVICE, payload: response.data });
+    } catch (error) {
+        // Handle errors if necessary.
+        console.error("Error posting data:", error);
     }
-}
+    };
+};
 
 export const getService = (id) => {
     return async (dispatch) => {
