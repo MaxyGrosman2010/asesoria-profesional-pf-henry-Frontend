@@ -12,9 +12,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
-  REGISTER_USER,
-  SIGN_IN,
-  SIGN_UP,
 } from './actions-types';
 
 import axios from 'axios';
@@ -156,11 +153,4 @@ export const loginFailure = (error) => {
 
 export const cleanUser = (payload) => {
   return { type: CLEAN_USER, payload };
-};
-
-export const signUp = (payload) => {
-  return async (dispatch) => {
-    const response = await axios.post('http://localhost:3001/singUp', payload);
-    return dispatch({ type: SIGN_UP, payload: response.data });
-  };
 };
