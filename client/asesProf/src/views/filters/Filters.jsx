@@ -48,6 +48,13 @@ const Filters = ({setPage}) => {
     setPage(1);
   };
 
+  const reset = () => {
+    setOrder('');
+    setFilterByType('');
+    dispatch(getData());
+    setPage(1);
+  };
+
   useEffect(() => {
     handleOrder()
     setPage(1)
@@ -68,8 +75,7 @@ const Filters = ({setPage}) => {
         <select
         value={filterByType}
         className="bg-salte-300 rounded w-[200px] text-center py-2 mx-2"
-        onChange={selectTypeService}
-      >
+        onChange={selectTypeService}>
         <option value="all">Select a Service type</option>
         {
           allTypeServices?.map(
@@ -88,6 +94,14 @@ const Filters = ({setPage}) => {
         <option value="Tech">Tech</option>
         <option value="Otros">Otros</option> */}
       </select>
+
+      <button 
+        className='bg-slate-900 text-white w-[60px] rounded' 
+        onClick={reset}>
+          <div className='h-[30px] flex items-center justify-center'>
+            <span >Reset</span>
+          </div>
+        </button>
 
 
     </div>
