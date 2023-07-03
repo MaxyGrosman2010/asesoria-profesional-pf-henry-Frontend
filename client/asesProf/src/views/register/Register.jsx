@@ -60,7 +60,11 @@ const Register = () => {
       return;
     }
 
-    dispatch(signUp(register))
+    dispatch(signUp({
+        name: register.name, 
+        email: register.email, 
+        password: register.password
+      }))
       .then(() => {
         Swal.fire({
           title: 'You have been registered!',
