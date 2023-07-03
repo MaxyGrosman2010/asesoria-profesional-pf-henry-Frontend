@@ -34,7 +34,7 @@ const AllServices = () => {
   }
   
   const updateFilterSelect = (filteredData) => {
-     setFilteredCopy(filteredData);
+    setFilteredCopy(filteredData);
   }
 
   return (
@@ -43,9 +43,13 @@ const AllServices = () => {
       <div className='flex gap-3'>
         <SearchBar copyState={copyState} updateFilter={updateFilter} />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
 =======
         <Filters setPage={setPage} copyState ={copyState} updateFilterSelect={updateFilterSelect}/>
+>>>>>>> develop
+=======
+        <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
 >>>>>>> develop
       </div>
         <div className="flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto">

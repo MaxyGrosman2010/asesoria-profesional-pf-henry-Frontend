@@ -8,8 +8,10 @@ import {
     GET_TYPE_SERVICES, 
     DEL_ONE_SERVICE, 
     DEL_ALL,
-    PAYMENT_MP,
-    INITIATE_PAYMENT
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    CLEAN_USER,
+
 } from "./actions-types";
 
 import axios from 'axios'
@@ -21,12 +23,35 @@ export const getData = () => {
     }
 }
 
+// export const postData = (payload) => {  ------ANTERIOR POSTDATA------
+//     return async (dispatch) => {
+//         const response = await axios.post({
+//             method: "post",
+//             url: "http://localhost:3001/service",
+//             data: payload,
+//         });
+//         return dispatch({type:CREATE_SERVICE, payload: response.data})
+//     }
+// }
+
 export const postData = (payload) => {
     return async (dispatch) => {
-        const response = await axios.post('http://localhost:3001/service', payload)
-        return dispatch({type:CREATE_SERVICE, payload: response.data})
+    try {
+        const formData = new FormData();
+        formData.append('files', payload.file); // Assuming 'file' is the key for the file data in the payload.
+        formData.append('name', payload.name); 
+        formData.append('typeService', payload.typeService); 
+        formData.append('price', payload.price); 
+        formData.append('description', payload.description); 
+
+        const response = await axios.post("http://localhost:3001/service", formData);
+        return dispatch({ type: CREATE_SERVICE, payload: response.data });
+    } catch (error) {
+        // Handle errors if necessary.
+        console.error("Error posting data:", error);
     }
-}
+    };
+};
 
 export const getService = (id) => {
     return async (dispatch) => {
@@ -49,8 +74,6 @@ export const getTypeServices = () => {
     }
 }
 
-
-
 export const filter = (service) => {
     return {type:FILTER, payload: service }
 }
@@ -70,3 +93,50 @@ export const removeFromCart = (itemId) => {
 export const removeAll = (payload) => {
     return {type: DEL_ALL, payload}
 }
+
+//LOGIN GOOGLE
+export const handleLogIn = () => {
+  return (dispatch) => {
+    // Abrir una nueva ventana para el inicio de sesión de Google
+    const popup = window.open(
+      'http://localhost:3001/auth',
+      'Login',
+      'width=500,height=500'
+    );
+    // Escuchar el evento de mensaje desde la ventana emergente
+    window.addEventListener('message', (event) => {
+      // Verificar el origen del mensaje
+      if (event.origin === 'http://localhost:3001') {
+        // Obtener los datos del usuario del mensaje
+        const { id,name,email,profilePict} = event.data;
+
+        // Actualizar el estado de Redux con los datos del usuario
+        dispatch(loginSuccess({ id, name, email, profilePict }));
+        // Cerrar la ventana emergente
+        popup.close();
+  
+      }
+    });
+  };
+};
+
+export const loginSuccess = (user) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload: user,
+  };
+};
+
+export const loginFailure = (error) => {
+  return {
+    type: LOGIN_FAILURE,
+    payload: error,
+  };
+};
+// END LOGIN GOOGLE
+
+export const cleanUser = (payload) => {
+  return {type: CLEAN_USER, payload}
+}
+
+
