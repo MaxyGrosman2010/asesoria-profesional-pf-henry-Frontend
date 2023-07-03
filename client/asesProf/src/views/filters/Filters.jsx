@@ -6,30 +6,31 @@ import { filter, getData, getTypeServices } from "../../Redux/actions"
 
 const Filters = ({setPage}) => {
  
-  const dispatch = useDispatch()
-  const copyState = useSelector((state) => state.copyState)
-  const allActivities = useSelector((state) => state.allActivities)
+  const dispatch = useDispatch();
+  const copyState = useSelector((state) => state.copyState);
+  const allActivities = useSelector((state) => state.allActivities);
+  const allTypeServices = useSelector((state) => state.typeServices);
 
 
   useEffect(() => {
-    dispatch(getTypeServices())
-  }, [])
+    dispatch(getTypeServices());
+  }, []);
   
 
-  const [order, setOrder] = useState('')
-  const [orderService, setOrderService] = useState('')
-  const [filterByType, setFilterByType] = useState('')
+  const [order, setOrder] = useState('');
+  const [orderService, setOrderService] = useState('');
+  const [filterByType, setFilterByType] = useState('');
   const [originalServices, setOriginalServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
 
   const handleOrder = () => {
-    let services = [...copyState]
-    if(order === 'asc') services = services.sort((a, b) => a.name.localeCompare(b.name))
-    if(order === 'des') services = services.sort((a, b) => b.name.localeCompare(a.name))
-    if(order === 'high') services = services.sort((a, b) => b.price - a.price)
-    if(order === 'low') services = services.sort((a, b) => a.price - b.price)
-    dispatch(filter(services))
-  }
+    let services = [...copyState];
+    if(order === 'asc') services = services.sort((a, b) => a.name.localeCompare(b.name));
+    if(order === 'des') services = services.sort((a, b) => b.name.localeCompare(a.name));
+    if(order === 'high') services = services.sort((a, b) => b.price - a.price);
+    if(order === 'low') services = services.sort((a, b) => a.price - b.price);
+    dispatch(filter(services));
+  };
 
   const selectTypeService = (event) => {
     const selectedType = event.target.value;
@@ -43,14 +44,14 @@ const Filters = ({setPage}) => {
       );
       setFilteredServices(filteredServices);
       dispatch(filter(filteredServices));
-    }
-    setPage(1)
+    };
+    setPage(1);
   };
 
   useEffect(() => {
     handleOrder()
     setPage(1)
-  }, [order])
+  }, [order]);
   
 
   return (
@@ -70,6 +71,14 @@ const Filters = ({setPage}) => {
         onChange={selectTypeService}
       >
         <option value="all">Select a Service type</option>
+        {
+          allTypeServices?.map(
+            (typeService) => <option 
+                              key={typeService.id} 
+                              value={typeService.type}>
+                                {typeService.type}
+                              </option>)}
+        {/* <option value="all">Select a Service type</option>
         <option value="Gastronomia">Gastronomia</option>
         <option value="Legal">Legal</option>
         <option value="Medicina">Medicina</option>
@@ -77,13 +86,12 @@ const Filters = ({setPage}) => {
         <option value="Construcción">Construcción</option>
         <option value="Educación">Educación</option>
         <option value="Tech">Tech</option>
-        <option value="Otros">Otros</option>
+        <option value="Otros">Otros</option> */}
       </select>
 
 
     </div>
-  )
-}
-
+  );
+};
 
 export default Filters;
