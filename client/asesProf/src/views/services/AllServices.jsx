@@ -39,11 +39,7 @@ const AllServices = () => {
     <div className='flex flex-col mx-auto w-full items-center border bg-slate-300 py-20'>
       <div className='flex gap-3'>
         <SearchBar copyState={copyState} updateFilter={updateFilter} />
-        <Filters
-          setPage={setPage}
-          copyState={copyState}
-          updateFilterSelect={updateFilterSelect}
-        />
+        <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
       </div>
       <div className='flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto'>
         {currentData &&

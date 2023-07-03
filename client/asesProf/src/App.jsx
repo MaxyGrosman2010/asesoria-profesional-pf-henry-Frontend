@@ -14,7 +14,6 @@ import CreateServices from "./views/create service/CreateServices"
 import Register from "./views/register/Register"
 
 
-
 function App() {
 
   const location = useLocation();
