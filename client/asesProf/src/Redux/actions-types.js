@@ -11,6 +11,6 @@ export const DEL_ALL = 'DEL_ALL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const CLEAN_USER = 'CLEAN_USER';
-export const SIGN_IN = 'SIGN_IN'; 
+export const REGISTER_USER = 'REGISTER_USER';
+export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
-
