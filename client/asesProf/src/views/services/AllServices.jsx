@@ -33,17 +33,25 @@ const AllServices = () => {
 
   const updateFilterSelect = (filteredData) => {
     setFilteredCopy(filteredData);
+<<<<<<< HEAD
   };
+=======
+  }
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
 
   return (
     <div className='flex flex-col mx-auto w-full items-center border bg-slate-300 py-20'>
       <div className='flex gap-3'>
         <SearchBar copyState={copyState} updateFilter={updateFilter} />
+<<<<<<< HEAD
         <Filters
           setPage={setPage}
           copyState={copyState}
           updateFilterSelect={updateFilterSelect}
         />
+=======
+        <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
       </div>
       <div className='flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto'>
         {currentData &&

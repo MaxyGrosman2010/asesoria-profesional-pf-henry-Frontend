@@ -9,13 +9,20 @@ const CreateServices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   const typeServices = useSelector((state) => state.typeServices);
+=======
+  const typeServices = useSelector((state) => state.typeServices)
+
+  // const [file, setFile] = useState(null)
+  
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
 
   const [service, setService] = useState({
     name: '',
     description: '',
     price: '',
-    file: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxb8wHWLqnYARq5TPsrdQjLg-EA-NaXBF0kjCggk-SdA&s',
+    file: null,
     typeService: '',
   });
 
@@ -23,9 +30,18 @@ const CreateServices = () => {
     name: '',
     description: '',
     price: '',
+<<<<<<< HEAD
     file: '',
     typeService: '',
   });
+=======
+    file:null,
+    typeService: '',
+  })
+
+  
+
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
 
   useEffect(() => {
     dispatch(getTypeServices());
@@ -34,6 +50,7 @@ const CreateServices = () => {
   const handleChange = (event) => {
     setService({
       ...service,
+<<<<<<< HEAD
       [event.target.name]:
         event.target.name === 'price'
           ? +event.target.value
@@ -46,6 +63,27 @@ const CreateServices = () => {
       })
     );
   };
+=======
+      [event.target.name] : event.target.name === 'price' ?  +event.target.value : event.target.value,
+    })
+    setErrors(validationsService({
+      ...service,
+      [event.target.name]: event.target.value,
+    }))
+  }
+  
+
+  const handleFile = (e) => {
+    const filed = e.target.files[0]
+    console.log(e.target.files, "agua");
+    console.log(filed, "$$$$");
+    setService({
+      ...service,
+      file: filed
+    })
+  }
+  
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -65,7 +103,7 @@ const CreateServices = () => {
       name: '',
       description: '',
       price: '',
-      file: '',
+      file: null,
       typeService: '',
     });
 
@@ -79,6 +117,7 @@ const CreateServices = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className='w-full bg-white h-screen flex flex-col items-center justify-center mt-20'>
       <form
         onSubmit={handleSubmit}
@@ -102,6 +141,15 @@ const CreateServices = () => {
               {errors.name}
             </div>
           )}
+=======
+    <div className="w-full bg-white h-screen flex flex-col items-center justify-center mt-20">
+
+      <form onSubmit={handleSubmit}  className="flex flex-col mx-auto px-10 shadow-lg p-10 w-3/4">
+        <span className="font-bold text-slate-950 w-[200px] pl-3 py-2 uppercase">Create service</span>
+        <div className="w-full flex flex-col h-[80px] mt-10">
+          <input name='name' value={service.name} onChange={handleChange} className="bg-gray-200 border border-gray-300 py-2 pl-2" placeholder="service name..." type="text" />
+          {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span className="material-symbols-outlined">error</span>{errors.name}</div>)}
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
         </div>
 
         <div className='w-full flex flex-col h-[100px] mt-10'>
@@ -155,6 +203,7 @@ const CreateServices = () => {
             </div>
           )}
         </div>
+<<<<<<< HEAD
         <div className='w-full flex flex-col h-[150px] mt-10'>
           <input name='file' className='mb-2' type='file' />
           {errors.file && (
@@ -171,6 +220,14 @@ const CreateServices = () => {
           >
             create service
           </button>
+=======
+          <div className="w-full flex flex-col h-[150px] mt-10">
+            <input name='file' className="mb-2" type="file" onChange={handleFile} />
+            {errors.file && (<div className="flex ml-1 gap-1 text-red-600"><span className="material-symbols-outlined">error</span>{errors.file}</div>)}
+          </div>
+        <div className="flex">
+          <button type="submit" className="shadow-lg bg-slate-900 w-[180px] h-[40px] py-1 rounded uppercase text-white font-bold mx-auto mt-10 hover:bg-gray-800">create service</button>
+>>>>>>> 5a2f606d53f4f6c857ec2edbeff521ab11a09f26
         </div>
       </form>
     </div>
