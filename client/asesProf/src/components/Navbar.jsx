@@ -8,7 +8,7 @@ import { cleanUser } from "../Redux/actions";
 
 const Navbar = () => {
   const userData =  useSelector((state) => state.userData);
-  console.log(userData, 'ACA DATA DESDE NAVBAR');
+  console.log(userData, '..................................................................2233');
   
   const dispatch = useDispatch()
   const item = useSelector((state) => state.items)
@@ -65,9 +65,9 @@ const Navbar = () => {
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
             
-            {Object.values(userData).map((u) => {
+            {Object.values(userData).map((u,i) => {
               return (
-              <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
+              <div key={i} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
                 <button onClick={toggleMenu} className="ml-2">{u.name}</button>
                 <img src={u.profilePict.value} className="w-[30px] w-[30px] rounded-full" /> 
               </div>
