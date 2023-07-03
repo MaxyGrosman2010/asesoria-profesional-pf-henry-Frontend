@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
 import { useDispatch } from "react-redux"
-import axios from "axios";
 
 const EditProfile = () => {
 
@@ -13,7 +12,7 @@ const EditProfile = () => {
     repeatPassword: '',
     cellphone: '',
     email: '',
-    picture: '',
+    picture: null,
   })
 
   const [errors, setErrors] = useState({
@@ -22,7 +21,7 @@ const EditProfile = () => {
     repeatPassword: '',
     cellphone: '',
     email: '',
-    picture: '',
+    picture: null,
   })
 
   useEffect(() => {
@@ -59,15 +58,16 @@ const EditProfile = () => {
       return;
     };
 
-    let formData = new FormData();
+    //Mover al reducer
+    // let formData = new FormData();
 
-    formData.append('method', 'put');
-    formData.append('id', 1);
-    formData.append('name', edit.name);
-    formData.append('email', edit.email);
-    formData.append('password', edit.password);
-    formData.append('cellPhone', "" + edit.cellphone);
-    formData.append('profilePict', edit.picture);
+    // formData.append('method', 'put');
+    // formData.append('id', 1);
+    // formData.append('name', edit.name);
+    // formData.append('email', edit.email);
+    // formData.append('password', edit.password);
+    // formData.append('cellPhone', "" + edit.cellphone);
+    // formData.append('profilePict', edit.picture);
 
     Swal.fire({
       title: 'Success',
