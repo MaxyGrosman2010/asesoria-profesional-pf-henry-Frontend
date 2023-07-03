@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import bgd from '../../assets/background.jpg';
 import goog from '../../assets/iconGoogle.png';
 import Swal from 'sweetalert2';
-import { useNavigate, useDispatch } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import validationsRegister from './validationsRegister';
 import { signUp } from '../../Redux/actions';
 
