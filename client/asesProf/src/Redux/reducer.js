@@ -12,6 +12,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
+  REGISTER_USER,
+  SIGN_IN,
+  SIGN_UP,
 } from './actions-types';
 
 const initialState = {
@@ -21,6 +24,7 @@ const initialState = {
   typeServices: [],
   items: [],
   userData: [],
+  user: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -115,6 +119,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: [],
+      };
+
+    case SIGN_IN:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case SIGN_UP:
+      return {
+        ...state,
+        user: action.payload,
       };
 
     default:

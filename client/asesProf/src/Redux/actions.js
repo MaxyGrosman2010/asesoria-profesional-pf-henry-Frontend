@@ -12,6 +12,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
+  REGISTER_USER,
+  SIGN_IN,
+  SIGN_UP,
 } from './actions-types';
 
 import axios from 'axios';
@@ -49,7 +52,7 @@ export const postData = (payload) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-      formData.append('files', payload.file); // Assuming 'file' is the key for the file data in the payload.
+      formData.append('files', payload.file);
       formData.append('name', payload.name);
       formData.append('typeService', payload.typeService);
       formData.append('price', payload.price);
@@ -61,7 +64,6 @@ export const postData = (payload) => {
       );
       return dispatch({ type: CREATE_SERVICE, payload: response.data });
     } catch (error) {
-      // Handle errors if necessary.
       console.error('Error posting data:', error);
     }
   };
@@ -154,4 +156,11 @@ export const loginFailure = (error) => {
 
 export const cleanUser = (payload) => {
   return { type: CLEAN_USER, payload };
+};
+
+export const signUp = (payload) => {
+  return async (dispatch) => {
+    const response = await axios.post('http://localhost:3001/singUp', payload);
+    return dispatch({ type: SIGN_UP, payload: response.data });
+  };
 };

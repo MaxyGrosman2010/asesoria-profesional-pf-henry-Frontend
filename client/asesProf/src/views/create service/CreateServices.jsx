@@ -47,6 +47,16 @@ const CreateServices = () => {
     );
   };
 
+  const handleFile = (e) => {
+    const filed = e.target.files[0];
+    console.log(e.target.files, 'agua');
+    console.log(filed, '$$$$');
+    setService({
+      ...service,
+      file: filed,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validationsService(service);
@@ -156,7 +166,12 @@ const CreateServices = () => {
           )}
         </div>
         <div className='w-full flex flex-col h-[150px] mt-10'>
-          <input name='file' className='mb-2' type='file' />
+          <input
+            name='file'
+            className='mb-2'
+            type='file'
+            onChange={handleFile}
+          />
           {errors.file && (
             <div className='flex ml-1 gap-1 text-red-600'>
               <span className='material-symbols-outlined'>error</span>
