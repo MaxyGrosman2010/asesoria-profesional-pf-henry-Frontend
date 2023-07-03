@@ -17,38 +17,31 @@ import {
   SIGN_UP,
 } from './actions-types';
 
-import axios from 'axios';
-
 export const getData = () => {
   return async (dispatch) => {
     const response = await axios.get('http://localhost:3001/allService');
     return dispatch({ type: GET_SERVICES, payload: response.data });
-  };
-};
-
-// export const postData = (payload) => {  ------ANTERIOR POSTDATA------
-//     return async (dispatch) => {
-//         const response = await axios.post({
-//             method: "post",
-//             url: "http://localhost:3001/service",
-//             data: payload,
-//         });
-//         return dispatch({type:CREATE_SERVICE, payload: response.data})
-//     }
-// }
-
-// export const postData = (payload) => {  ------ANTERIOR POSTDATA------
-//     return async (dispatch) => {
-//         const response = await axios.post({
-//             method: "post",
-//             url: "http://localhost:3001/service",
-//             data: payload,
-//         });
-//         return dispatch({type:CREATE_SERVICE, payload: response.data})
-//     }
-// }
+  } 
+}
 
 export const postData = (payload) => {
+    return async (dispatch) => {
+    try {
+        const formData = new FormData();
+        formData.append('files', payload.file);
+        formData.append('name', payload.name); 
+        formData.append('typeService', payload.typeService); 
+        formData.append('price', payload.price); 
+        formData.append('description', payload.description); 
+
+        const response = await axios.post("http://localhost:3001/service", formData);
+        return dispatch({ type: CREATE_SERVICE, payload: response.data });
+    } catch (error) {
+        // Handle errors if necessary.
+        console.error("Error posting data:", error);
+    }
+    }
+
   return async (dispatch) => {
     try {
       const formData = new FormData();
@@ -117,21 +110,19 @@ export const removeAll = (payload) => {
 export const handleLogIn = () => {
   return (dispatch) => {
     // Abrir una nueva ventana para el inicio de sesión de Google
+
     const popup = window.open(
       'http://localhost:3001/auth',
       'Login',
       'width=500,height=500'
     );
-    // Escuchar el evento de mensaje desde la ventana emergente
-    window.addEventListener('message', (event) => {
-      // Verificar el origen del mensaje
-      if (event.origin === 'http://localhost:3001') {
-        // Obtener los datos del usuario del mensaje
-        const { User_id, idGoogle, name, email, profilePict } = event.data;
 
-        // Actualizar el estado de Redux con los datos del usuario
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'http://localhost:3001') {
+        const { id,name,email,profilePict,token} = event.data;
+        localStorage.setItem("token",token);
+        const { User_id, idGoogle, name, email, profilePict } = event.data;
         dispatch(loginSuccess({ User_id, idGoogle, name, email, profilePict }));
-        // Cerrar la ventana emergente
         popup.close();
       }
     });
@@ -158,9 +149,42 @@ export const cleanUser = (payload) => {
   return { type: CLEAN_USER, payload };
 };
 
+
+export const signIn = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3001/singIn', payload);
+      const token = response.data.token;
+      const name = response.data.name;
+      localStorage.setItem('token', token);
+      const data = { 
+         id:0,
+         name : name,
+         email : "zapatamorato@gmail.com",
+         profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c",
+      }
+      console.log('Token almacenado en el local storage:', token);
+      return dispatch({
+        type: LOGIN_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+    }
+  };
+};
+
+export const signUp = (payload) => {
+  return async (dispatch) => {
+      const response = await axios.post('http://localhost:3001/singUp', payload)
+      return dispatch({type: SIGN_UP, payload: response.data})
+  }
+}
+
 export const signUp = (payload) => {
   return async (dispatch) => {
     const response = await axios.post('http://localhost:3001/singUp', payload);
     return dispatch({ type: SIGN_UP, payload: response.data });
   };
 };
+

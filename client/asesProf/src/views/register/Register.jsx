@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import bgd from '../../assets/background.jpg';
 import goog from '../../assets/iconGoogle.png';
@@ -37,20 +38,44 @@ const Register = () => {
     });
   };
 
-  console.log(register);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validationsRegister(register);
     setErrors(formErrors);
     if (Object.keys(formErrors).length > 0) {
       Swal.fire({
-        title: 'must to be all complete',
+        title: 'Must complete all fields',
         icon: 'error',
+        confirm: 'Accept',
+      });
+      return;
+    }
+
+    dispatch(signUp(register))
+      .then(() => {
+        Swal.fire({
+          title: 'You have been registered!',
+          icon: 'success',
+          confirmButtonText: 'Accept',
+          customClass: {
+            confirmButton: 'bg-red-500 text-white',
+          },
+        }).then(() => {
+          navigate('/');
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.response?.data?.error || 'An error occurred during registration.',
+          icon: 'error',
+          confirmButtonText: 'Accept',
+        });
+      });
+  };
         confirm: 'acept',
       });
-      dispatch(signUp(register));
-      //return;
+      dispatch(signUp(register))
     }
     Swal.fire({
       title: 'you have been registered!',
