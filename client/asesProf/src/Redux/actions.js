@@ -12,10 +12,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
-  REGISTER_USER,
   SIGN_IN,
   SIGN_UP,
 } from './actions-types';
+
+import axios from 'axios';
+
 
 export const getData = () => {
   return async (dispatch) => {
@@ -42,25 +44,9 @@ export const postData = (payload) => {
     }
     }
 
-  return async (dispatch) => {
-    try {
-      const formData = new FormData();
-      formData.append('files', payload.file);
-      formData.append('name', payload.name);
-      formData.append('typeService', payload.typeService);
-      formData.append('price', payload.price);
-      formData.append('description', payload.description);
+  }
 
-      const response = await axios.post(
-        'http://localhost:3001/service',
-        formData
-      );
-      return dispatch({ type: CREATE_SERVICE, payload: response.data });
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }
-  };
-};
+ 
 
 export const getService = (id) => {
   return async (dispatch) => {
@@ -119,9 +105,8 @@ export const handleLogIn = () => {
 
     window.addEventListener('message', (event) => {
       if (event.origin === 'http://localhost:3001') {
-        const { id,name,email,profilePict,token} = event.data;
-        localStorage.setItem("token",token);
         const { User_id, idGoogle, name, email, profilePict } = event.data;
+        console.log(User_id,idGoogle," ................................................user id idGoogle.........");
         dispatch(loginSuccess({ User_id, idGoogle, name, email, profilePict }));
         popup.close();
       }
@@ -181,10 +166,5 @@ export const signUp = (payload) => {
   }
 }
 
-export const signUp = (payload) => {
-  return async (dispatch) => {
-    const response = await axios.post('http://localhost:3001/singUp', payload);
-    return dispatch({ type: SIGN_UP, payload: response.data });
-  };
-};
 
+      
