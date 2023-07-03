@@ -4,6 +4,8 @@ import goog from '../../assets/iconGoogle.png'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import validationsRegister from './validationsRegister'
+import { useDispatch } from 'react-redux'
+import { signUp } from '../../Redux/actions'
 
 
 
@@ -11,6 +13,7 @@ import validationsRegister from './validationsRegister'
 const Register = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [register, setRegister] = useState({
     name: '',
@@ -42,29 +45,67 @@ const Register = () => {
 
   console.log(register);
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formErrors = validationsRegister(register);
+  //   setErrors(formErrors);
+  //   if(Object.keys(formErrors).length > 0){
+  //     Swal.fire({
+  //       title: 'must to be all complete',
+  //       icon: 'error',
+  //       confirm: 'acept'
+  //     })
+  //     return;
+  //   }
+  //   Swal.fire({
+  //     title: 'you have been registered!',
+  //     icon: 'success',
+  //     confirmButtonText: 'Accept',
+  //     customClass: {
+  //       confirmButton: 'bg-red-500 text-white'
+  //     }
+  //   }).then(() => {
+  //     navigate('/')
+  //   })
+  // }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validationsRegister(register);
     setErrors(formErrors);
-    if(Object.keys(formErrors).length > 0){
+
+    if (Object.keys(formErrors).length > 0) {
       Swal.fire({
-        title: 'must to be all complete',
+        title: 'Must complete all fields',
         icon: 'error',
-        confirm: 'acept'
-      })
+        confirm: 'Accept',
+      });
       return;
     }
-    Swal.fire({
-      title: 'you have been registered!',
-      icon: 'success',
-      confirmButtonText: 'Accept',
-      customClass: {
-        confirmButton: 'bg-red-500 text-white'
-      }
-    }).then(() => {
-      navigate('/')
-    })
-  }
+
+    dispatch(signUp(register))
+      .then(() => {
+        Swal.fire({
+          title: 'You have been registered!',
+          icon: 'success',
+          confirmButtonText: 'Accept',
+          customClass: {
+            confirmButton: 'bg-red-500 text-white',
+          },
+        }).then(() => {
+          navigate('/');
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.response?.data?.error || 'An error occurred during registration.',
+          icon: 'error',
+          confirmButtonText: 'Accept',
+        });
+      });
+  };
 
   
 
