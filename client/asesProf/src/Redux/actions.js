@@ -25,6 +25,7 @@ export const getData = () => {
 };
 
 export const postData = (payload) => {
+  console.log(payload);
   return async (dispatch) => {
     try {
       const formData = new FormData();
@@ -33,6 +34,7 @@ export const postData = (payload) => {
       formData.append('typeService', payload.typeService);
       formData.append('price', payload.price);
       formData.append('description', payload.description);
+      formData.append('user_id', payload.User_id);
 
       const response = await axios.post(
         'http://localhost:3001/service',
@@ -134,6 +136,34 @@ export const loginFailure = (error) => {
 
 export const cleanUser = (payload) => {
   return { type: CLEAN_USER, payload };
+};
+
+export const signIn = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/singIn',
+        payload
+      );
+      const token = response.data.token;
+      const name = response.data.name;
+      localStorage.setItem('token', token);
+      const data = {
+        id: 0,
+        name: name,
+        email: 'zapatamorato@gmail.com',
+        profilePict:
+          'https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c',
+      };
+      console.log('Token almacenado en el local storage:', token);
+      return dispatch({
+        type: LOGIN_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      console.error('Error al iniciar sesión', error);
+    }
+  };
 };
 
 export const signUp = (payload) => {
