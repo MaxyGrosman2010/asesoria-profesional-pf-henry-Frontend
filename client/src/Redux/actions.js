@@ -14,6 +14,7 @@ import {
   CLEAN_USER,
   SIGN_IN,
   SIGN_UP,
+  EDIT_USER
 } from './actions-types';
 import axios from 'axios';
 
@@ -21,9 +22,11 @@ export const getData = () => {
   return async (dispatch) => {
     try{
       const response = await axios.get('http://localhost:3001/allService');
+
       return dispatch({ type: GET_SERVICES, payload: response.data });
+
     }catch(error){
-    console.log(error);
+      console.log(error);
     };
   };
 };
@@ -66,6 +69,7 @@ export const getServiceName = (name) => {
       const response = await axios.get(
         `http://localhost:3001/nameService/?name=${name}`
       );
+
       return dispatch({ type: GET_SERVICE_NAME, payload: response.data });
     }catch(error){
       console.log(error);
@@ -119,10 +123,12 @@ export const handleLogIn = () => {
     );
 
     window.addEventListener('message', (event) => {
+
       if (event.origin === 'http://localhost:3001') {
         const { User_id, idGoogle, name, email, profilePict } = event.data;
-        console.log(User_id,idGoogle," ................................................user id idGoogle.........");
+
         dispatch(loginSuccess({ User_id, idGoogle, name, email, profilePict }));
+
         popup.close();
       };
     });
@@ -130,7 +136,7 @@ export const handleLogIn = () => {
 };
 
 export const loginSuccess = (user) => {
-  console.log('user:', user);
+  
   return {
     type: LOGIN_SUCCESS,
     payload: user,
@@ -154,29 +160,56 @@ export const signIn = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/singIn', payload);
+
       const token = response.data.token;
       const name = response.data.name;
       localStorage.setItem('token', token);
+
       const data = { 
          id:0,
          name : name,
          email : "zapatamorato@gmail.com",
          profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c",
       };
-      console.log('Token almacenado en el local storage:', token);
+
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: data,
       });
+
     } catch (error) {
+
       console.error('Error al iniciar sesión', error);
+
     };
   };
 };
 
 export const signUp = (payload) => {
   return async (dispatch) => {
-      const response = await axios.post('http://localhost:3001/singUp', payload)
-      return dispatch({type: SIGN_UP, payload: response.data})
+      const response = await axios.post('http://localhost:3001/singUp', payload);
+
+      return dispatch({type: SIGN_UP, payload: response.data});
   };
+};
+
+export const editUser = (payload) => {
+  return (dispatch) => {
+    try{let formData = new FormData();
+
+      formData.append('method', 'put');
+      formData.append('id', 1);
+      formData.append('name', edit.name);
+      formData.append('email', edit.email);
+      formData.append('password', edit.password);
+      formData.append('cellPhone', "" + edit.cellphone);
+      formData.append('profilePict', edit.picture);
+
+      const response = axios.put('http://localhost:3001/editUser', formData)
+    }catch(error){
+
+      console.log(error);
+
+    };
+  }
 };
