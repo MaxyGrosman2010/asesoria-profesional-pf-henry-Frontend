@@ -8,15 +8,17 @@ import { useNavigate } from 'react-router-dom';
 const CreateServices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const userData = useSelector((state) => state.userData);
   const typeServices = useSelector((state) => state.typeServices);
-
+  const userId = userData[0].User_id;
+  const typeServices = useSelector((state) => state.typeServices);
   const [service, setService] = useState({
     name: '',
     description: '',
     price: '',
     file: null,
     typeService: '',
+    User_id: '',
   });
 
   const [errors, setErrors] = useState({
@@ -25,6 +27,7 @@ const CreateServices = () => {
     price: '',
     file: null,
     typeService: '',
+    User_id: '',
   });
 
   useEffect(() => {
@@ -38,6 +41,7 @@ const CreateServices = () => {
         event.target.name === 'price'
           ? +event.target.value
           : event.target.value,
+      User_id: userId,
     });
     setErrors(
       validationsService({
@@ -49,8 +53,6 @@ const CreateServices = () => {
 
   const handleFile = (e) => {
     const filed = e.target.files[0];
-    console.log(e.target.files, 'agua');
-    console.log(filed, '$$$$');
     setService({
       ...service,
       file: filed,
@@ -77,6 +79,7 @@ const CreateServices = () => {
       price: '',
       file: null,
       typeService: '',
+      User_id: '',
     });
 
     Swal.fire({

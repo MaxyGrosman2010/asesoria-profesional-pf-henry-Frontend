@@ -17,21 +17,23 @@ import {
 } from './actions-types';
 
 const initialState = {
-    allActivities: [],
-    copyState: [],
-    oneActivity: [],
-    typeServices: [],
-    items: [],
-    userData: [],
-    isPaymentInitiated: false,
-    paymentResult: null,
-    users: [{id:1, name:'Camionero', email: 'karl@mail.com', services: 5},
-    {id:2, name:'Carpintero', email: 'car@mail.com', services: 10},
-    {id:3, name:'Contador', email: 'cont@mail.com', services: 1},
-    {id:4, name:'Pintor', email: 'pin@mail.com', services: 2},
-    {id:5, name:'Abogado', email: 'abog@mail.com', services: 3},],
-    isAdmin: false,
-}
+  allActivities: [],
+  copyState: [],
+  oneActivity: [],
+  typeServices: [],
+  items: [],
+  userData: [],
+  isPaymentInitiated: false,
+  paymentResult: null,
+  users: [
+    { id: 1, name: 'carlos', email: 'karl@mail.com', services: 5 },
+    { id: 2, name: 'pedro', email: 'car@mail.com', services: 10 },
+    { id: 3, name: 'ricarda', email: 'cont@mail.com', services: 1 },
+    { id: 4, name: 'antonia', email: 'pin@mail.com', services: 2 },
+    { id: 5, name: 'adrian', email: 'abog@mail.com', services: 3 },
+  ],
+  isAdmin: false,
+};
 
 
 const rootReducer = (state = initialState, action) => {
@@ -127,7 +129,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userData: [],
       };
-
 
     default:
       return state;

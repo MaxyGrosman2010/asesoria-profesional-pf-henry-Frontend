@@ -51,9 +51,12 @@ const Navbar = () => {
         <div className="flex items-center w-full justify-around">
           <ul className="flex gap-[100px] mr-4">
               <NavLink to='/home'>Home</NavLink>
+              <NavLink to='services'>Services</NavLink>
+              <NavLink to='contact'>Contact</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
               <NavLink to='/login'>Login</NavLink>
+
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
