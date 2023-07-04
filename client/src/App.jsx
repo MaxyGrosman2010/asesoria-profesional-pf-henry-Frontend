@@ -14,7 +14,9 @@ import AdminLogin from "./views/admin/login/AdminLogin"
 import AdminHome from "./views/admin/AdminHome"
 import AdminNav from "./views/admin/login/AdminNav"
 import AdminUsers from "./views/admin/login/AdminUsers"
+
 import MiServices from "./views/miServices/MiServices"
+
 
 
 function App() {
@@ -41,7 +43,9 @@ function App() {
           <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/createServices' element={<CreateServices />} />
           <Route path='/register' element={<Register />} />
+
           <Route path='/miServices' element={<MiServices />} />
+
         </Routes>
         <Routes>
           <Route path='/adminLogin' index element={<AdminLogin />} />
