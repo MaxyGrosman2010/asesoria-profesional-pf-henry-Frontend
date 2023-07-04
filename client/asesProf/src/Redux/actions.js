@@ -49,8 +49,6 @@ export const getTypeServices = () => {
     }
 }
 
-
-
 export const filter = (service) => {
     return {type:FILTER, payload: service }
 }
