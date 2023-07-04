@@ -8,8 +8,6 @@ import { cleanUser } from "../Redux/actions";
 
 const Navbar = () => {
   const userData =  useSelector((state) => state.userData);
-  console.log(userData, '..................................................................2233');
-  
   const dispatch = useDispatch()
   const item = useSelector((state) => state.items)
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,11 +26,11 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOustside = (e) => {
         if(pageWrapper.current && !pageWrapper.current.contains(e.target)){
-           setMenuOpen(false);
+          setMenuOpen(false);
         }
-     }
+    }
     document.addEventListener('mousedown',handleClickOustside);
-     return () => {
+    return () => {
     document.removeEventListener('mousedown',handleClickOustside);
     }
     },[pageWrapper]);
@@ -45,8 +43,6 @@ const Navbar = () => {
     dispatch(cleanUser())
   }
 
-
-
   return (
       <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
         <div className="flex items-center ml-[300px]">
@@ -55,12 +51,9 @@ const Navbar = () => {
         <div className="flex items-center w-full justify-around">
           <ul className="flex gap-[100px] mr-4">
               <NavLink to='/home'>Home</NavLink>
-              {location.pathname !== '/allServices' && (
-                <>
-                  <Link to='services' spy={true} smooth={true} offset={50} duration={500}>Services</Link>
-                  <Link to='contact' spy={true} smooth={true} offset={50} duration={500}>Contact</Link>
-                </>
-              )}
+              <NavLink to='/allServices'>Services</NavLink>
+              <NavLink to='/contact'>Contact</NavLink>
+              <NavLink to='/login'>Login</NavLink>
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
@@ -70,6 +63,7 @@ const Navbar = () => {
               <div key={i} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
                 <button onClick={toggleMenu} className="ml-2">{u.name}</button>
                 <img src={u.profilePict.value} className="w-[30px] rounded-full" /> 
+                <img src={u.profilePict.value} className=" w-[30px] rounded-full" /> 
               </div>
               )
             })}
