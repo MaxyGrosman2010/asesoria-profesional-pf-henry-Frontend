@@ -65,12 +65,19 @@ export const getServiceName = (name) => {
 };
 
 export const getTypeServices = () => {
+    return async (dispatch) => {
+        const response = await axios.get('http://localhost:3001/allTypeService')
+        return dispatch({type: GET_TYPE_SERVICES, payload: response.data})
+    }
+}
+
   console.log('response');
   return async (dispatch) => {
     const response = await axios.get('http://localhost:3001/allTypeService');
     return dispatch({ type: GET_TYPE_SERVICES, payload: response.data });
   };
 };
+
 
 export const filter = (service) => {
   return { type: FILTER, payload: service };
