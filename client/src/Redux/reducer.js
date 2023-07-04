@@ -22,6 +22,7 @@ const initialState = {
     oneActivity: [],
     typeServices: [],
     items: [],
+    userData: [],
     isPaymentInitiated: false,
     paymentResult: null,
     users: [{id:1, name:'Camionero', email: 'karl@mail.com', services: 5},
@@ -31,13 +32,7 @@ const initialState = {
     {id:5, name:'Abogado', email: 'abog@mail.com', services: 3},],
     isAdmin: false,
 }
-  allActivities: [],
-  copyState: [],
-  oneActivity: [],
-  typeServices: [],
-  items: [],
-  userData: [],
-};
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
