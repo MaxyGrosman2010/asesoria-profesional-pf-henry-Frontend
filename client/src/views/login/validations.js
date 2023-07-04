@@ -1,18 +1,20 @@
 const validations = (data) => {
-    let errors = {};
+
+
+  let errors = {};
+
+  if (!data.email) {
+    errors.email = 'Email is required';
+  } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+    errors.email = 'Invalid email format';
+  }
+
+  if (!data.password) {
+    errors.password = 'Password required';
+  }
+  return errors;
   
-    if (!data.name) {
-      errors.name = 'Name is required';
-    } else if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]*$/.test(data.name)) {
-      errors.name = 'Invalid name';
-    }
-  
-    if (!data.password) {
-      errors.password = 'Password required';
-    }
-  
-    return errors;
-  };
-  
-  export default validations;
+};
+
+export default validations;
   

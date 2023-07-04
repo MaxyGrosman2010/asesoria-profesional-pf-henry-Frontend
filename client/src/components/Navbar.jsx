@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Cart from "./cart/Cart";
+import { cleanUser } from "../Redux/actions";
 
 
 const Navbar = () => {
- 
+  const userData =  useSelector((state) => state.userData);
+  console.log(userData, '..................................................................2233');
+  
+  const dispatch = useDispatch()
   const item = useSelector((state) => state.items)
   const [menuOpen, setMenuOpen] = useState(false);
   const pageWrapper = useRef(null);
@@ -37,6 +41,12 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   }
 
+  const close = () => {
+    dispatch(cleanUser())
+  }
+
+
+
   return (
       <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
         <div className="flex items-center ml-[300px]">
@@ -53,11 +63,17 @@ const Navbar = () => {
               )}
           </ul>
           {location.pathname !== '/login' && (
-          <div className="flex border rounded">
-            <div className="flex items-center w-48 justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
-              <button onClick={toggleMenu} className="ml-2">User</button>
-              <span className="material-symbols-outlined" onClick={toggleMenu}>account_circle</span>
-            </div>
+          <div className="flex shadow-md rounded">
+            
+            {Object.values(userData).map((u,i) => {
+              return (
+              <div key={i} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
+                <button onClick={toggleMenu} className="ml-2">{u.name}</button>
+                <img src={u.profilePict.value} className="w-[30px] w-[30px] rounded-full" /> 
+              </div>
+              )
+            })}
+
 
               {menuOpen && (
                 <div className="absolute mt-10 w-48  bg-white rounded-md shadow-lg" ref={pageWrapper}>
@@ -65,7 +81,7 @@ const Navbar = () => {
                       <NavLink to="/editProfile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Edit Profile</NavLink>
                       <div className="flex items-center justify-between px-8 py-2 text-sm text-gray-700 gap-4 hover:bg-gray-300">
                         <span className="material-symbols-outlined">logout</span>
-                      <NavLink to='/'>Logout</NavLink>
+                      <NavLink onClick={close} to='/'>Logout</NavLink>
                     </div>
                 </div>
               )}
@@ -79,8 +95,6 @@ const Navbar = () => {
               </button>
             </div>
                 {cartOpen ? <Cart handleCloseCart={handleCloseCart} /> : null}
-
-
         </div>
       </div>
   );
