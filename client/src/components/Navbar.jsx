@@ -69,7 +69,7 @@ const Navbar = () => {
               return (
               <div key={i} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
                 <button onClick={toggleMenu} className="ml-2">{u.name}</button>
-                <img src={u.profilePict.value} className="w-[30px] w-[30px] rounded-full" /> 
+                <img src={u.profilePict.value} className="w-[30px] rounded-full" /> 
               </div>
               )
             })}
