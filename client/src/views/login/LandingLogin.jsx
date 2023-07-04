@@ -56,7 +56,6 @@ const LandingLogin = () => {
       })
       return;
     }
-    console.log(data,"soy la dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     dispatch(signIn(data));
     navigate('/home');
   }
@@ -64,6 +63,7 @@ const LandingLogin = () => {
 
   const handleClickLogin = () => {
     dispatch(handleLogIn());
+    navigate('/home');
   }
 
 
@@ -124,7 +124,6 @@ const LandingLogin = () => {
         <button onClick={handleClickLogin}>
           <span className="font-bold uppercase mt-4">logo</span>
         </button>
-        {users.length > 0 ? navigate('/home') : null}
       </div>
 
 
