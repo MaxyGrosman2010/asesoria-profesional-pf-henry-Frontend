@@ -18,13 +18,13 @@ import {
 import axios from 'axios';
 
 export const getData = () => {
-  try{
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try{
       const response = await axios.get('http://localhost:3001/allService');
       return dispatch({ type: GET_SERVICES, payload: response.data });
-    };
-  }catch(error){
+    }catch(error){
     console.log(error);
+    };
   };
 };
 
@@ -49,27 +49,40 @@ export const postData = (payload) => {
 
 export const getService = (id) => {
   return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/serviceById/${id}`);
-    return dispatch({ type: GET_SERVICE, payload: response.data });
+    try{
+      
+      const response = await axios.get(`http://localhost:3001/serviceById/${id}`);
+      return dispatch({ type: GET_SERVICE, payload: response.data });
+
+    }catch(error){
+      console.log(error);
+    };
   };
 };
 
 export const getServiceName = (name) => {
   return async (dispatch) => {
-    const response = await axios.get(
-      `http://localhost:3001/nameService/?name=${name}`
-    );
-    return dispatch({ type: GET_SERVICE_NAME, payload: response.data });
+    try{
+      const response = await axios.get(
+        `http://localhost:3001/nameService/?name=${name}`
+      );
+      return dispatch({ type: GET_SERVICE_NAME, payload: response.data });
+    }catch(error){
+      console.log(error);
+    };
   };
 };
 
 export const getTypeServices = () => {
 
   return async (dispatch) => {
+    try{
+      const response = await axios.get('http://localhost:3001/allTypeService/');
 
-    const response = await axios.get('http://localhost:3001/allTypeService/');
-
-    return dispatch({ type: GET_TYPE_SERVICES, payload: response.data });
+      return dispatch({ type: GET_TYPE_SERVICES, payload: response.data });
+    }catch(error){
+      console.log(error);
+    };
   };
 };
 
