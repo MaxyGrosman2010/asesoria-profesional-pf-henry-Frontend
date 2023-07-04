@@ -1,63 +1,57 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import SearchBar from '../../components/searchBar/SearchBar'
-import Filters from '../filters/Filters'
+import SearchBar from '../../components/searchBar/SearchBar';
+import Filters from '../filters/Filters';
 import Pagination from '../../components/pagination/Pagination';
 import Card from '../card/Card';
 import { getData } from '../../Redux/actions';
 
 const AllServices = () => {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const copyState = useSelector((state) => state.copyState)
+  const copyState = useSelector((state) => state.copyState);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
-  const [filteredCopy, setFilteredCopy] = useState(copyState)
-
+  const [filteredCopy, setFilteredCopy] = useState(copyState);
 
   const idxLast = page * perPage;
   const idxFirst = idxLast - perPage;
-  const currentData = copyState.slice(idxFirst, idxLast)
-  const max = Math.ceil(copyState.length / perPage)
+  const currentData = copyState.slice(idxFirst, idxLast);
+  const max = Math.ceil(copyState.length / perPage);
 
   useEffect(() => {
-    dispatch(getData())
-  }, [])
+    dispatch(getData());
+  }, []);
 
   useEffect(() => {
-    setPage(1)
-  }, [])
+    setPage(1);
+  }, []);
 
   const updateFilter = (filteredData) => {
-    setFilteredCopy(filteredData)
-  }
-  
+    setFilteredCopy(filteredData);
+  };
+
   const updateFilterSelect = (filteredData) => {
-     setFilteredCopy(filteredData);
-  }
+    setFilteredCopy(filteredData);
+  };
 
   return (
-
-    <div className="flex flex-col mx-auto w-full items-center border bg-slate-300 py-20">
+    <div className='flex flex-col mx-auto w-full items-center border bg-slate-300 py-20'>
       <div className='flex gap-3'>
         <SearchBar copyState={copyState} updateFilter={updateFilter} />
-        <Filters setPage={setPage} copyState ={copyState} updateFilterSelect={updateFilterSelect}/>
+        <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
       </div>
-        <div className="flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto">
-        {currentData && currentData?.map((serv, idx) => (
-          <div key={idx} className= "rounded text-gray-900 w-[300px]">
-            <Card serv={serv} />
-          </div>
-        ))}
-        </div>
-        <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
+      <div className='flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto'>
+        {currentData &&
+          currentData?.map((serv, idx) => (
+            <div key={idx} className='rounded text-gray-900 w-[300px]'>
+              <Card serv={serv} />
+            </div>
+          ))}
+      </div>
+      <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
     </div>
   );
 };
 
 export default AllServices;
-
-
-
-

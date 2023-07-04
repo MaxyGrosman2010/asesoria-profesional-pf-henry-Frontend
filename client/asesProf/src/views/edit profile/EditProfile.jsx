@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
+import { useDispatch } from "react-redux"
 
 const EditProfile = () => {
+
+  const dispatch = useDispatch();
 
   const [edit, setEdit] = useState({
     name: '',
@@ -9,7 +12,7 @@ const EditProfile = () => {
     repeatPassword: '',
     cellphone: '',
     email: '',
-    picture: '',
+    picture: null,
   })
 
   const [errors, setErrors] = useState({
@@ -18,8 +21,11 @@ const EditProfile = () => {
     repeatPassword: '',
     cellphone: '',
     email: '',
-    picture: '',
+    picture: null,
   })
+
+  useEffect(() => {
+  }, []);
 
   const handleChange = (event) => {
     setEdit({
@@ -32,9 +38,55 @@ const EditProfile = () => {
     }))
   }
 
+  const handleFile = (event) => {
+    setEdit({
+      ...edit,
+      picture: event.target.files[0]
+    })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formErrors = validationsEdit(edit);
+
+    if(Object.keys(formErrors).length > 0){
+      Swal.fire({
+        title: 'empty fields',
+        icon: 'error',
+        confirm: 'acept'
+      })
+      return;
+    };
+
+    //Mover al reducer
+    // let formData = new FormData();
+
+    // formData.append('method', 'put');
+    // formData.append('id', 1);
+    // formData.append('name', edit.name);
+    // formData.append('email', edit.email);
+    // formData.append('password', edit.password);
+    // formData.append('cellPhone', "" + edit.cellphone);
+    // formData.append('profilePict', edit.picture);
+
+    Swal.fire({
+      title: 'Success',
+      text: 'El Perfil fue editado!',
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
+
+    setEdit({
+      ...edit,
+      password: '',
+      repeatPassword: ''
+    })
+
+  };
+
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
-      <form  className="flex flex-col items-center justify-center w-1/2">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-1/2">
         
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>name</label>
