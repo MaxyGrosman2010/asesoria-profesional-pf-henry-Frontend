@@ -17,17 +17,15 @@ import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
 
 
-function App() {
 
+function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin')
   const isLoginAdmin = location.pathname === '/adminLogin'
 
   return (
     <div className="h-screen flex flex-col">
-      {(location.pathname === '/')
-      ? (<Home />
-      ) : (
+      {(location.pathname === '/') ? (<Home />) : (
         <>
         {!isLoginAdmin && (isAdminRoute ? <AdminNav /> : <Navbar />)}
         <Routes>

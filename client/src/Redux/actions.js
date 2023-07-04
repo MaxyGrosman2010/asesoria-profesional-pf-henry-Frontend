@@ -195,24 +195,21 @@ export const signUp = (payload) => {
 
 export const editUser = (payload) => {
   return async(dispatch) => {
-    try{let formData = new FormData();
+    try{
+      let formData = new FormData();
 
       formData.append('method', 'put');
-      formData.append('id', 1);
-      formData.append('name', edit.name);
-      formData.append('email', edit.email);
-      formData.append('password', edit.password);
-      formData.append('cellPhone', "" + edit.cellphone);
-      formData.append('profilePict', edit.picture);
+      formData.append('id', );
+      formData.append('name', payload.name);
+      formData.append('email', payload.email);
+      formData.append('password', payload.password);
+      formData.append('cellPhone', payload.cellphone);
+      formData.append('profilePict', payload.picture);
 
       const response = await axios.put('http://localhost:3001/editUser', formData);
-      return dispatch({
-
-      });
+      return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
-
       console.log(error);
-
     };
-  }
+  };
 };
