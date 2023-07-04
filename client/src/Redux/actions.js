@@ -194,7 +194,7 @@ export const signUp = (payload) => {
 };
 
 export const editUser = (payload) => {
-  return (dispatch) => {
+  return async(dispatch) => {
     try{let formData = new FormData();
 
       formData.append('method', 'put');
@@ -205,7 +205,10 @@ export const editUser = (payload) => {
       formData.append('cellPhone', "" + edit.cellphone);
       formData.append('profilePict', edit.picture);
 
-      const response = axios.put('http://localhost:3001/editUser', formData)
+      const response = await axios.put('http://localhost:3001/editUser', formData);
+      return dispatch({
+
+      });
     }catch(error){
 
       console.log(error);
