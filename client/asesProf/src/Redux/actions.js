@@ -15,16 +15,14 @@ import {
   SIGN_IN,
   SIGN_UP,
 } from './actions-types';
-
 import axios from 'axios';
-
 
 export const getData = () => {
   return async (dispatch) => {
     const response = await axios.get('http://localhost:3001/allService');
     return dispatch({ type: GET_SERVICES, payload: response.data });
-  } 
-}
+  }; 
+};
 
 export const postData = (payload) => {
     return async (dispatch) => {
@@ -41,12 +39,9 @@ export const postData = (payload) => {
     } catch (error) {
         // Handle errors if necessary.
         console.error("Error posting data:", error);
-    }
-    }
-
-  }
-
- 
+    };
+    };
+};
 
 export const getService = (id) => {
   return async (dispatch) => {
@@ -65,15 +60,11 @@ export const getServiceName = (name) => {
 };
 
 export const getTypeServices = () => {
-    return async (dispatch) => {
-        const response = await axios.get('http://localhost:3001/allTypeService')
-        return dispatch({type: GET_TYPE_SERVICES, payload: response.data})
-    }
-}
 
-  console.log('response');
   return async (dispatch) => {
-    const response = await axios.get('http://localhost:3001/allTypeService');
+
+    const response = await axios.get('http://localhost:3001/allTypeService/');
+
     return dispatch({ type: GET_TYPE_SERVICES, payload: response.data });
   };
 };
@@ -116,7 +107,7 @@ export const handleLogIn = () => {
         console.log(User_id,idGoogle," ................................................user id idGoogle.........");
         dispatch(loginSuccess({ User_id, idGoogle, name, email, profilePict }));
         popup.close();
-      }
+      };
     });
   };
 };
@@ -154,7 +145,7 @@ export const signIn = (payload) => {
          name : name,
          email : "zapatamorato@gmail.com",
          profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c",
-      }
+      };
       console.log('Token almacenado en el local storage:', token);
       return dispatch({
         type: LOGIN_SUCCESS,
@@ -162,7 +153,7 @@ export const signIn = (payload) => {
       });
     } catch (error) {
       console.error('Error al iniciar sesión', error);
-    }
+    };
   };
 };
 
@@ -170,8 +161,5 @@ export const signUp = (payload) => {
   return async (dispatch) => {
       const response = await axios.post('http://localhost:3001/singUp', payload)
       return dispatch({type: SIGN_UP, payload: response.data})
-  }
-}
-
-
-      
+  };
+};
