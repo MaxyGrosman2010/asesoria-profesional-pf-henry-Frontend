@@ -18,10 +18,14 @@ import {
 import axios from 'axios';
 
 export const getData = () => {
-  return async (dispatch) => {
-    const response = await axios.get('http://localhost:3001/allService');
-    return dispatch({ type: GET_SERVICES, payload: response.data });
-  }; 
+  try{
+    return async (dispatch) => {
+      const response = await axios.get('http://localhost:3001/allService');
+      return dispatch({ type: GET_SERVICES, payload: response.data });
+    };
+  }catch(error){
+    console.log(error);
+  };
 };
 
 export const postData = (payload) => {
