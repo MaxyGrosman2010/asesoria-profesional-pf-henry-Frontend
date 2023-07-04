@@ -25,7 +25,8 @@ const initialState = {
     {id:2, name:'Carpintero', email: 'car@mail.com', services: 10},
     {id:3, name:'Contador', email: 'cont@mail.com', services: 1},
     {id:4, name:'Pintor', email: 'pin@mail.com', services: 2},
-    {id:5, name:'Abogado', email: 'abog@mail.com', services: 3},]
+    {id:5, name:'Abogado', email: 'abog@mail.com', services: 3},],
+    isAdmin: false,
 }
 
 const rootReducer = (state = initialState, action) => {

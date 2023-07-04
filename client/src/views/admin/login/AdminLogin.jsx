@@ -31,16 +31,26 @@ const AdminLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if(admin.email === '' || admin.password === ''){
+      Swal.fire({
+        title: 'Error',   
+        text: 'Please fill in all fields',
+        icon: 'error'
+      })
+      return
+    }
+
     const validationsError = validationsAdmin(admin)
     setErrors(validationsError)
+
     if(Object.keys(validationsError).length === 0){
       Swal.fire({
         title:'Welcome!',
         icon: 'success'
+      }).then(() => {
+        navigate('/adminHome')
       })
     }
-    navigate('/adminHome')
-    //aca debe despachar la data a la db para que conecte
     console.log(admin);
   }
 
@@ -71,7 +81,7 @@ const AdminLogin = () => {
               type="password" className="px-2 my-2 py-2 rounded bg-white w-full" />
               {errors.password && <span className="text-red-600">{errors.password}</span>}
           </div>
-          <button className="bg-slate-300 w-[130px] py-2 rounded uppercase hover:bg-slate-200">login</button>
+          <button className="bg-slate-900 w-[180px] text-white py-2 rounded uppercase hover:bg-slate-800">login</button>
         </form>
     </div>
   )
