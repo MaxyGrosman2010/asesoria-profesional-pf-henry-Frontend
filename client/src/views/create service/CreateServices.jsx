@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 const CreateServices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const userData = useSelector((state) => state.userData);
   const typeServices = useSelector((state) => state.typeServices);
   const userId = userData[0].User_id;
+  const typeServices = useSelector((state) => state.typeServices);
   const [service, setService] = useState({
     name: '',
     description: '',
@@ -53,8 +53,6 @@ const CreateServices = () => {
 
   const handleFile = (e) => {
     const filed = e.target.files[0];
-    // console.log(e.target.files, 'agua');
-    // console.log(filed, '$$$$');
     setService({
       ...service,
       file: filed,
@@ -72,7 +70,6 @@ const CreateServices = () => {
       });
       return;
     }
-    //console.log('serviceToDispatch', service);
 
     dispatch(postData(service));
 
