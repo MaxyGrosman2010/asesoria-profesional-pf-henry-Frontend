@@ -26,13 +26,13 @@ function App() {
   const isAdminRoute = location.pathname.startsWith('/admin')
   const isLoginAdmin = location.pathname === '/adminLogin'
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
 
-      dispatch(signIn({ token }));
-    }
-  }, [dispatch]);
+  //     dispatch(signIn({ token }));
+  //   }
+  // }, [dispatch]);
 
 
 

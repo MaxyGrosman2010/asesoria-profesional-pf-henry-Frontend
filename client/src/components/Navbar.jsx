@@ -14,6 +14,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pageWrapper = useRef(null);
   const [cartOpen, setCartOpen] = useState(false)
+  const token = localStorage.getItem('token');
 
   const handleOpenCart = () => {
     setCartOpen(true);
@@ -42,8 +43,7 @@ const Navbar = () => {
   const close = () => {
     dispatch(cleanUser())
   }
-
-  console.log(register);
+  token && console.log(token);
 
   return (
     <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
@@ -55,7 +55,7 @@ const Navbar = () => {
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
-              <NavLink to='/login'>Login</NavLink>
+              {!userData && <NavLink to="/login">Login</NavLink>}
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
@@ -63,7 +63,7 @@ const Navbar = () => {
   
             <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
               <button onClick={toggleMenu} className="ml-2">{userData.name}</button>
-              <img src={userData.profilePict?.value} className="w-[30px] rounded-full" />
+              <img src={userData.profilePict} className="w-[30px] rounded-full" />
             </div>
 
               {menuOpen && (
