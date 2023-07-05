@@ -1,6 +1,21 @@
-import {GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS, CLEAR_FILTER,
-  GET_TYPE_SERVICES, DEL_ONE_SERVICE, DEL_ALL, LOGIN_SUCCESS, LOGIN_FAILURE, CLEAN_USER, SIGN_IN, SIGN_UP,
-  EDIT_USER} from './actions-types';
+import {
+  GET_SERVICES, 
+  CREATE_SERVICE, 
+  GET_SERVICE, 
+  GET_SERVICE_NAME, 
+  FILTER, 
+  ADD_ITEMS, 
+  CLEAR_FILTER,
+  GET_TYPE_SERVICES, 
+  DEL_ONE_SERVICE, 
+  DEL_ALL, 
+  LOGIN_SUCCESS, 
+  LOGIN_FAILURE, 
+  CLEAN_USER, 
+  SIGN_IN, 
+  SIGN_UP,
+  EDIT_USER
+} from './actions-types';
 import axios from 'axios';
 
 
@@ -157,7 +172,6 @@ export const signIn = (payload) => {
       const profilePict = response.data.profilePict;
       localStorage.setItem('token', token);
       const data = {name : name, profilePict: profilePict};
-      console.log(data);
       return dispatch({type: LOGIN_SUCCESS, payload: data});
     } catch (error) {
       console.error('Error al iniciar sesión', error);
@@ -189,7 +203,11 @@ export const editUser = (payload) => {
       formData.append('cellPhone', payload.cellphone);
       formData.append('profilePict', payload.picture);
 
-      const response = await axios.put('http://localhost:3001/editUser', formData);
+      const token = localStorage.getItem('token');
+      const config = {headers : {Authorization : ` Bearer ${token}`}};
+
+      const response = await axios.put('http://localhost:3001/editUser', formData, config);
+
       return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
       console.log(error);
