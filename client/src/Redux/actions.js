@@ -157,7 +157,6 @@ export const signIn = (payload) => {
       const profilePict = response.data.profilePict;
       localStorage.setItem('token', token);
       const data = {name : name, profilePict: profilePict};
-      console.log(data);
       return dispatch({type: LOGIN_SUCCESS, payload: data});
     } catch (error) {
       console.error('Error al iniciar sesión', error);
@@ -189,7 +188,11 @@ export const editUser = (payload) => {
       formData.append('cellPhone', payload.cellphone);
       formData.append('profilePict', payload.picture);
 
-      const response = await axios.put('http://localhost:3001/editUser', formData);
+      const token = localStorage.getItem('token');
+      const config = {headers : {Authorization : ` Bearer ${token}`}};
+
+      const response = await axios.put('http://localhost:3001/editUser', formData, config);
+
       return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
       console.log(error);
