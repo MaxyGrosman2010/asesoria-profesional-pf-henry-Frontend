@@ -14,7 +14,8 @@ import {
   CLEAN_USER, 
   SIGN_IN, 
   SIGN_UP,
-  EDIT_USER
+  EDIT_USER,
+  PERSONAL_USER_DATA
 } from './actions-types';
 import axios from 'axios';
 
@@ -186,6 +187,21 @@ export const signUp = (payload) => {
   return async (dispatch) => {
       const response = await axios.post('http://localhost:3001/singUp', payload);
       return dispatch({type: SIGN_UP, payload: response.data});
+  };
+};
+
+
+
+export const personalUserData = () => {
+  return async (dispatch) => {
+    try{
+
+      const response = await axios.get('http://localhost:3001/getUserById/');
+
+      return dispatch({type: PERSONAL_USER_DATA, payload: response.data});
+    }catch(error){
+      console.log(error);
+    };
   };
 };
 

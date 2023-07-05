@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { personalUserData } from "../../Redux/actions"
 
 const EditProfile = () => {
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userData);
 
   const [edit, setEdit] = useState({
     name: '',
@@ -12,7 +14,7 @@ const EditProfile = () => {
     repeatPassword: '',
     cellphone: '',
     email: '',
-    picture: null,
+    picture: null
   })
 
   const [errors, setErrors] = useState({
@@ -54,8 +56,6 @@ const EditProfile = () => {
       })
       return;
     };
-
-    //Mover al reducer
     
 
     Swal.fire({
@@ -72,6 +72,17 @@ const EditProfile = () => {
     })
 
   };
+
+  useEffect(() => {
+    dispatch(personalUserData);
+
+    setEdit({
+      ...edit,
+      name: user.name,
+      cellphone: user.cellphone,
+      email: user.email
+    })
+  }, []);
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
