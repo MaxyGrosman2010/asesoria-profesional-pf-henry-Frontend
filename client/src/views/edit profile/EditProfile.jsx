@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
 import { useDispatch, useSelector } from "react-redux"
-import { personalUserData } from "../../Redux/actions"
+import { personalUserData, editUser } from "../../Redux/actions"
 
 const EditProfile = () => {
 
@@ -12,8 +12,6 @@ const EditProfile = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    cellphone: '',
-    email: '',
     picture: null
   })
 
@@ -21,10 +19,16 @@ const EditProfile = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    cellphone: '',
-    email: '',
     picture: null,
   });
+
+  useEffect(() => {
+    dispatch(personalUserData());
+    setEdit({
+      ...edit,
+      name: user.name,
+    });
+  }, []);
 
   const handleChange = (event) => {
     setEdit({
@@ -56,7 +60,8 @@ const EditProfile = () => {
       })
       return;
     };
-    
+
+    dispatch(editUser(edit));
 
     Swal.fire({
       title: 'Success',
@@ -73,16 +78,7 @@ const EditProfile = () => {
 
   };
 
-  useEffect(() => {
-    dispatch(personalUserData);
 
-    setEdit({
-      ...edit,
-      name: user.name,
-      cellphone: user.cellphone,
-      email: user.email
-    })
-  }, []);
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
@@ -116,26 +112,6 @@ const EditProfile = () => {
           value={edit.repeatPassword}
           className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="repeat password..." type='password' />
            {errors.repeatPassword && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.repeatPassword}</div>)}
-        </div>
-
-        <div className="flex flex-col items-left w-1/2 h-[110px]">
-          <label>cellphone</label>
-          <input
-          name='cellphone'
-          value={edit.cellphone}
-          onChange={handleChange}
-          className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="cellphone..." type='text' />
-           {errors.cellphone && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.cellphone}</div>)}
-        </div>
-
-        <div className="flex flex-col items-left w-1/2 h-[110px]">
-          <label>email</label>
-          <input
-          name='email'
-          value={edit.email}
-          onChange={handleChange}
-          className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="email..." type='email' />
-           {errors.email && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.email}</div>)}
         </div>
 
         <div className="flex flex-col items-left w-1/2 h-[110px]">

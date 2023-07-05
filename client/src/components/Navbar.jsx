@@ -43,7 +43,6 @@ const Navbar = () => {
   const close = () => {
     dispatch(cleanUser())
   }
-  token && console.log(token);
 
   return (
     <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
