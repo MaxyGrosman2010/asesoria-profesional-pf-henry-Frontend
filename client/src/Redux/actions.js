@@ -1,22 +1,9 @@
-import {
-  GET_SERVICES,
-  CREATE_SERVICE,
-  GET_SERVICE,
-  GET_SERVICE_NAME,
-  FILTER,
-  ADD_ITEMS,
-  CLEAR_FILTER,
-  GET_TYPE_SERVICES,
-  DEL_ONE_SERVICE,
-  DEL_ALL,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  CLEAN_USER,
-  SIGN_IN,
-  SIGN_UP,
-  EDIT_USER
-} from './actions-types';
+import {GET_SERVICES, CREATE_SERVICE, GET_SERVICE, GET_SERVICE_NAME, FILTER, ADD_ITEMS, CLEAR_FILTER,
+  GET_TYPE_SERVICES, DEL_ONE_SERVICE, DEL_ALL, LOGIN_SUCCESS, LOGIN_FAILURE, CLEAN_USER, SIGN_IN, SIGN_UP,
+  EDIT_USER} from './actions-types';
 import axios from 'axios';
+
+
 
 export const getData = () => {
   return async (dispatch) => {
@@ -40,8 +27,13 @@ export const postData = (payload) => {
       formData.append('typeService', payload.typeService);
       formData.append('price', payload.price);
       formData.append('description', payload.description);
-      formData.append('user_id', payload.User_id);
-      const response = await axios.post('http://localhost:3001/service',formData);
+      const token = localStorage.getItem('token');
+      const config = {
+        headers : {
+          Authorization : ` Bearer ${token}`, //aqui agrego el token al encabezado "Authorization"
+        }
+     }
+      const response = await axios.post('http://localhost:3001/service',formData, config);
       return dispatch({ type: CREATE_SERVICE, payload: response.data });
     } catch (error) {
       console.error('Error posting data:', error);
@@ -138,19 +130,13 @@ export const handleLogIn = () => {
 
 
 export const loginSuccess = (user) => {
-  return {
-    type: LOGIN_SUCCESS,
-    payload: user,
-  };
+  return {type: LOGIN_SUCCESS, payload: user};
 };
 
 
 
 export const loginFailure = (error) => {
-  return {
-    type: LOGIN_FAILURE,
-    payload: error,
-  };
+  return {type: LOGIN_FAILURE, payload: error};
 };
 // END LOGIN GOOGLE
 
@@ -168,8 +154,10 @@ export const signIn = (payload) => {
       const response = await axios.post('http://localhost:3001/singIn', payload);
       const token = response.data.token;
       const name = response.data.name;
+      const profilePict = response.data.profilePict;
       localStorage.setItem('token', token);
-      const data = { id:0, name : name, email : "zapatamorato@gmail.com", profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c"};
+      const data = {name : name, profilePict: profilePict};
+      console.log(data);
       return dispatch({type: LOGIN_SUCCESS, payload: data});
     } catch (error) {
       console.error('Error al iniciar sesión', error);
@@ -190,18 +178,21 @@ export const signUp = (payload) => {
 
 export const editUser = (payload) => {
   return async(dispatch) => {
-    try{let formData = new FormData();
+    try{
+      let formData = new FormData();
+
       formData.append('method', 'put');
-      formData.append('id', 1);
-      formData.append('name', edit.name);
-      formData.append('email', edit.email);
-      formData.append('password', edit.password);
-      formData.append('cellPhone', "" + edit.cellphone);
-      formData.append('profilePict', edit.picture);
+      formData.append('id', );
+      formData.append('name', payload.name);
+      formData.append('email', payload.email);
+      formData.append('password', payload.password);
+      formData.append('cellPhone', payload.cellphone);
+      formData.append('profilePict', payload.picture);
+
       const response = await axios.put('http://localhost:3001/editUser', formData);
-      return dispatch({});
+      return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
       console.log(error);
     };
-  }
+  };
 };

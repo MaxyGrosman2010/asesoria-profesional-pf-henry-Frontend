@@ -11,7 +11,6 @@ const CreateServices = () => {
   const userData = useSelector((state) => state.userData);
   const typeServices = useSelector((state) => state.typeServices);
   const userId = userData[0].User_id;
-  const typeServices = useSelector((state) => state.typeServices);
   const [service, setService] = useState({
     name: '',
     description: '',
@@ -20,7 +19,6 @@ const CreateServices = () => {
     typeService: '',
     User_id: '',
   });
-
   const [errors, setErrors] = useState({
     name: '',
     description: '',
