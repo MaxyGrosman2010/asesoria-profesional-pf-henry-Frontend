@@ -13,7 +13,7 @@ const LandingLogin = () => {
 
 
   const users = useSelector((state) => state.userData)
- 
+
 
 
   const navigate = useNavigate();
@@ -114,19 +114,14 @@ const LandingLogin = () => {
             <span className="ml-1 font-bold cursor-pointer underline">Register</span>
           </Link>
         </div>
-
+        <div className='flex flex-col items-center justify-center mx-auto mt-2'>
+          <p className='py-4'>or Login with</p>
+          <img className="w-[40px]" src={goog} />
+          <button onClick={handleClickLogin}>
+            <span className="font-bold uppercase mt-4">logo</span>
+          </button>
+        </div>
       </form>
-
-
-      <div className='flex flex-col items-center justify-center mx-auto mt-2'>
-        <p className='py-4'>or Login with</p>
-        <img className="w-[40px]" src={goog} />
-        <button onClick={handleClickLogin}>
-          <span className="font-bold uppercase mt-4">logo</span>
-        </button>
-      </div>
-
-
     </div>
   )
 }
