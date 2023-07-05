@@ -15,13 +15,26 @@ import AdminHome from "./views/admin/AdminHome"
 import AdminNav from "./views/admin/login/AdminNav"
 import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
-
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { signIn } from "./Redux/actions"
 
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const isAdminRoute = location.pathname.startsWith('/admin')
   const isLoginAdmin = location.pathname === '/adminLogin'
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+
+      dispatch(signIn({ token }));
+    }
+  }, [dispatch]);
+
+
 
   return (
     <div className="h-screen flex flex-col">
