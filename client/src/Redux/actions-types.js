@@ -17,3 +17,4 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const EDIT_USER = 'EDIT_USER';
+export const PERSONAL_USER_DATA = 'PERSONAL_USER_DATA';

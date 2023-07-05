@@ -12,6 +12,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
+  PERSONAL_USER_DATA,
+  EDIT_USER
 } from './actions-types';
 
 const initialState = {
@@ -110,6 +112,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userData: {},
       };
+
+    case PERSONAL_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload
+      };
+
+      case EDIT_USER:
+        return {
+          ...state,
+          userData: action.payload
+        };
 
     default:
       return state;

@@ -14,7 +14,8 @@ import {
   CLEAN_USER, 
   SIGN_IN, 
   SIGN_UP,
-  EDIT_USER
+  EDIT_USER,
+  PERSONAL_USER_DATA
 } from './actions-types';
 import axios from 'axios';
 
@@ -145,6 +146,7 @@ export const handleLogIn = () => {
 
 
 export const loginSuccess = (user) => {
+  localStorage.setItem('token',document.cookie.split('token=').pop().trim());
   return {type: LOGIN_SUCCESS, payload: user};
 };
 
@@ -191,6 +193,21 @@ export const signUp = (payload) => {
 
 
 
+export const personalUserData = () => {
+  return async (dispatch) => {
+    try{
+      const token = localStorage.getItem('token');
+      const config = {headers : {Authorization : ` Bearer ${token}`}}
+      const response = await axios('http://localhost:3001/getUserById/', config);
+      return dispatch({type: PERSONAL_USER_DATA, payload: response.data});
+    }catch(error){
+      console.log(error);
+    };
+  };
+};
+
+
+
 export const editUser = (payload) => {
   return async(dispatch) => {
     try{
@@ -207,7 +224,7 @@ export const editUser = (payload) => {
       const token = localStorage.getItem('token');
       const config = {headers : {Authorization : ` Bearer ${token}`}};
 
-      const response = await axios.put('http://localhost:3001/editUser', formData, config);
+      const response = await axios.put('http://localhost:3001/editUser/', formData, config);
 
       return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
