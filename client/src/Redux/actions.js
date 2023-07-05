@@ -134,8 +134,8 @@ export const handleLogIn = () => {
     const popup = window.open('http://localhost:3001/auth','Login','width=500,height=500');
     window.addEventListener('message', (event) => {
       if (event.origin === 'http://localhost:3001') {
-        const { User_id, idGoogle, name, email, profilePict } = event.data;
-        dispatch(loginSuccess({ User_id, idGoogle, name, email, profilePict }));
+        const { name, email, profilePict } = event.data;
+        dispatch(loginSuccess({ name, email, profilePict }));
         popup.close();
       };
     });
@@ -167,6 +167,7 @@ export const signIn = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/singIn', payload);
+      console.log(response.data);
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;

@@ -10,14 +10,12 @@ const CreateServices = () => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
   const typeServices = useSelector((state) => state.typeServices);
-  const userId = userData[0].User_id;
   const [service, setService] = useState({
     name: '',
     description: '',
     price: '',
     file: null,
     typeService: '',
-    User_id: '',
   });
   const [errors, setErrors] = useState({
     name: '',
@@ -25,7 +23,6 @@ const CreateServices = () => {
     price: '',
     file: null,
     typeService: '',
-    User_id: '',
   });
 
   useEffect(() => {
@@ -39,7 +36,6 @@ const CreateServices = () => {
         event.target.name === 'price'
           ? +event.target.value
           : event.target.value,
-      User_id: userId,
     });
     setErrors(
       validationsService({
@@ -77,7 +73,6 @@ const CreateServices = () => {
       price: '',
       file: null,
       typeService: '',
-      User_id: '',
     });
 
     Swal.fire({
@@ -85,8 +80,10 @@ const CreateServices = () => {
       text: 'servicio creado!',
       icon: 'success',
       confirmButtonText: 'OK',
+    }).then(() => {
+      navigate('/allServices');
     });
-    navigate('/allServices');
+    
   };
 
   return (
