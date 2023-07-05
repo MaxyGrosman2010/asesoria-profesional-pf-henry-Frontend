@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { addToCart, getService } from '../../Redux/actions';
 import Swal from 'sweetalert2';
 import doc from '../../assets/doc.jpg';
+import Comment from '../comments/comment/Comment';
 
 const OneService = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const OneService = () => {
       <div className='flex items-center px-4 h-screen bg-slate-300 w-full'>
         <div className='bg-white shadow-lg w-3/4 h-3/4 mx-auto rounded flex'>
           <div className='bg-slate-800 w-[30%] h-full flex flex-col items-center justify-between gap-4'>
-            <img src={copyState.files} />
+            <img className='py-4' src={copyState.files} />
             <div className='flex flex-col items-center mb-20 h-1/2 w-full text-center justify-center'>
               <p className='text-white text-2xl font-bold'>
                 Mr. {copyState.name}
@@ -66,6 +67,10 @@ const OneService = () => {
                   >
                     Add to cart
                   </button>
+                </div>
+                <div className='flex flex-row px-4 '>
+                  <Comment></Comment>
+                  <Comment></Comment>
                 </div>
                 <div className='flex gap-10 mx-auto mt-4'></div>
                 <div className='mx-auto mt-4'>

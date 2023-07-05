@@ -36,9 +36,9 @@ export const postData = (payload) => {
       const response = await axios.post('http://localhost:3001/service',formData, config);
       return dispatch({ type: CREATE_SERVICE, payload: response.data });
     } catch (error) {
-      console.error('Error posting data:', error);
-    }
-  }
+        console.error("Error posting data:", error);
+    };
+    };
 };
 
 
