@@ -12,26 +12,19 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   CLEAN_USER,
-  SIGN_IN,
-  SIGN_UP,
 } from './actions-types';
 
 const initialState = {
-    allActivities: [],
-    copyState: [],
-    oneActivity: [],
-    typeServices: [],
-    items: [],
-    userData: [],
-    isPaymentInitiated: false,
-    paymentResult: null,
-    users: [{id:1, name:'Camionero', email: 'karl@mail.com', services: 5},
-    {id:2, name:'Carpintero', email: 'car@mail.com', services: 10},
-    {id:3, name:'Contador', email: 'cont@mail.com', services: 1},
-    {id:4, name:'Pintor', email: 'pin@mail.com', services: 2},
-    {id:5, name:'Abogado', email: 'abog@mail.com', services: 3},],
-    isAdmin: false,
-}
+  allActivities: [],
+  copyState: [],
+  oneActivity: [],
+  typeServices: [],
+  items: [],
+  userData: {},
+  isPaymentInitiated: false,
+  paymentResult: null,
+  isAdmin: false,
+};
 
 
 const rootReducer = (state = initialState, action) => {
@@ -104,30 +97,19 @@ const rootReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        userData: [
-          {
-            User_id: action.payload.User_id,
-            idGoogle: action.payload.idGoogle,
-            name: action.payload.name,
-            email: action.payload.email,
-            profilePict: action.payload.profilePict,
-          },
-        ],
-        error: null,
+        userData: action.payload
       };
 
     case LOGIN_FAILURE:
       return {
         ...state,
-        userData: [],
-        errror: action.payload,
+        userData: {},
       };
     case CLEAN_USER:
       return {
         ...state,
-        userData: [],
+        userData: {},
       };
-
 
     default:
       return state;

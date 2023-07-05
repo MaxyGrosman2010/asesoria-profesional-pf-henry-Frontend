@@ -9,7 +9,6 @@ import { signUp } from '../../Redux/actions'
 
 
 
-
 const Register = () => {
 
   const navigate = useNavigate();
@@ -20,13 +19,14 @@ const Register = () => {
     email: '',
     password: '',
     repeatPassword: '',
+    profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c"
   })
 
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     password: '',
-    repeatPassword: '',
+    repeatPassword: ''
   })
 
   const handleChange = (event) => {
@@ -43,8 +43,6 @@ const Register = () => {
   }
 
 
-  console.log(register);
-
  
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,12 +58,8 @@ const Register = () => {
       return;
     }
 
-    dispatch(signUp({
-        name: register.name, 
-        email: register.email, 
-        password: register.password
-      }))
-      .then(() => {
+    dispatch(signUp(register))
+    .then(() => {
         Swal.fire({
           title: 'You have been registered!',
           icon: 'success',

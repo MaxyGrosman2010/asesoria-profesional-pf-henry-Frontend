@@ -22,10 +22,7 @@ const EditProfile = () => {
     cellphone: '',
     email: '',
     picture: null,
-  })
-
-  useEffect(() => {
-  }, []);
+  });
 
   const handleChange = (event) => {
     setEdit({
@@ -59,15 +56,7 @@ const EditProfile = () => {
     };
 
     //Mover al reducer
-    // let formData = new FormData();
-
-    // formData.append('method', 'put');
-    // formData.append('id', 1);
-    // formData.append('name', edit.name);
-    // formData.append('email', edit.email);
-    // formData.append('password', edit.password);
-    // formData.append('cellPhone', "" + edit.cellphone);
-    // formData.append('profilePict', edit.picture);
+    
 
     Swal.fire({
       title: 'Success',
@@ -143,7 +132,7 @@ const EditProfile = () => {
           <input
           name='picture'
           value={edit.picture}
-          onChange={handleChange}
+          onChange={handleFile}
           className="bg-gray-300 w-full py-2 rounded pl-2" type='file' />
            {errors.picture && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.picture}</div>)}
         </div>
