@@ -16,7 +16,8 @@ import {
   SIGN_UP,
   EDIT_USER,
   PERSONAL_USER_DATA,
-  REFRESH_USER
+  REFRESH_USER,
+  GET_SERVICES_BY_USER
 } from './actions-types';
 import axios from 'axios';
 
@@ -241,4 +242,16 @@ export const editUser = (payload) => {
 
 export const refreshUser = (user) => {
   return  { type: REFRESH_USER, payload: user }
-}
+};
+
+
+export const getServicesByUser = () => {
+  return async(dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = {headers : {Authorization : ` Bearer ${token}`}};
+
+    const response = await axios('http://localhost:3001/getServiceByUser/', config);
+
+    return dispatch({type: GET_SERVICES_BY_USER, payload: response.data});
+  };
+};
