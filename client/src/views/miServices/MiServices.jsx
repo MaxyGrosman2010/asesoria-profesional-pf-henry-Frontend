@@ -1,8 +1,12 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {getServicesByUser} from '../../Redux/actions'
 
 const MiServices = () => {
 
-    const services = useSelector((state) => state.copyState)
+    const services = useSelector((state) => state.copyState);
+    const dispatch = useDispatch();
+
     console.log(services);
 
     const handleEdit = () => {
@@ -12,6 +16,10 @@ const MiServices = () => {
     const handleDelete = () => {
         console.log('delete');
     }
+
+    useEffect(() => {
+      dispatch(getServicesByUser());
+    }, []);
 
 
   return (
@@ -32,7 +40,7 @@ const MiServices = () => {
         {services.map((user) => (
         <>
           <tr>
-            <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{'user.typeServices'}</td>
+            <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{user.typeServices}</td>
             <td className='border border-gray-400 px-4 py-2 h-auto w-auto cursor-pointer text-center hover:bg-slate-600 hover:text-white'>
               {user.name}
             </td>

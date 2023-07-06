@@ -12,14 +12,14 @@ const EditProfile = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    picture: null
+    profilePict: null
   })
 
   const [errors, setErrors] = useState({
     name: '',
     password: '',
     repeatPassword: '',
-    picture: null,
+    profilePict: null,
   });
 
   useEffect(() => {
@@ -42,9 +42,10 @@ const EditProfile = () => {
   }
 
   const handleFile = (event) => {
+    const file = event.target.files[0]
     setEdit({
       ...edit,
-      picture: event.target.files[0]
+      profilePict: file
     })
   }
 
@@ -52,6 +53,8 @@ const EditProfile = () => {
     event.preventDefault();
     const formErrors = validationsEdit(edit);
 
+    console.log(edit, 'edit');
+    console.log(errors, 'errors');
     if(Object.keys(formErrors).length > 0){
       Swal.fire({
         title: 'empty fields',
@@ -62,6 +65,13 @@ const EditProfile = () => {
     };
 
     dispatch(editUser(edit));
+    
+    setEdit({
+      ...edit,
+      password: '',
+      repeatPassword: '',
+      profilePict: null
+    });
 
     Swal.fire({
       title: 'Success',
@@ -69,59 +79,79 @@ const EditProfile = () => {
       icon: 'success',
       confirmButtonText: 'OK',
     });
-
-    setEdit({
-      ...edit,
-      password: '',
-      repeatPassword: ''
-    })
-
   };
 
 
 
   return (
     <div className="w-full bg-white h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-1/2">
+      <form 
+        onSubmit={handleSubmit} 
+        className="flex flex-col items-center justify-center w-1/2"
+      >
+
+        <span className='font-bold text-slate-950 w-[200px] pl-3 py-2 uppercase'>
+          Edit User
+        </span>
         
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>name</label>
           <input
           name='name'
-          onChange={handleChange}
           value={edit.name}
+          onChange={handleChange}
           className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="name..." type='text' />
-           {errors.name && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.name}</div>)}
+           {errors.name && (<div 
+              className="flex ml-1 gap-1 text-red-600 mt-1">
+              <span class="material-symbols-outlined">error</span>
+              {errors.name}
+            </div>)}
         </div>
 
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>password</label>
           <input
           name='password'
-          onChange={handleChange}
           value={edit.password}
-          className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="password..." type='password' />
-           {errors.password && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.password}</div>)}
+          onChange={handleChange}
+          className="bg-gray-300 w-full py-2 rounded pl-2" 
+          placeholder="password..." 
+          type='password' />
+           {errors.password && (<div 
+              className="flex ml-1 gap-1 text-red-600 mt-1">
+              <span class="material-symbols-outlined">error</span>
+              {errors.password}
+            </div>)}
         </div>
 
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>repeat password</label>
           <input
           name='repeatPassword'
-          onChange={handleChange}
           value={edit.repeatPassword}
-          className="bg-gray-300 w-full py-2 rounded pl-2" placeholder="repeat password..." type='password' />
-           {errors.repeatPassword && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.repeatPassword}</div>)}
+          onChange={handleChange}
+          className="bg-gray-300 w-full py-2 rounded pl-2" 
+          placeholder="repeat password..." 
+          type='password' />
+          {errors.repeatPassword && (<div 
+              className="flex ml-1 gap-1 text-red-600 mt-1">
+              <span class="material-symbols-outlined">error</span>
+              {errors.repeatPassword}
+            </div>)}
         </div>
 
         <div className="flex flex-col items-left w-1/2 h-[110px]">
           <label>picture</label>
           <input
           name='picture'
-          value={edit.picture}
           onChange={handleFile}
-          className="bg-gray-300 w-full py-2 rounded pl-2" type='file' />
-           {errors.picture && (<div className="flex ml-1 gap-1 text-red-600 mt-1"><span class="material-symbols-outlined">error</span>{errors.picture}</div>)}
+          className="bg-gray-300 w-full py-2 rounded pl-2" 
+          type='file' />
+           {errors.picture && (<div 
+              className="flex ml-1 gap-1 text-red-600 mt-1">
+              <span class="material-symbols-outlined">error</span>
+              {errors.picture}
+            </div>)}
         </div>
 
         <button type="submit" className="shadow-lg bg-gray-500 w-[200px] py-2 rounded uppercase text-white font-bold mx-auto mt-10 hover:bg-gray-800">edit profile</button>

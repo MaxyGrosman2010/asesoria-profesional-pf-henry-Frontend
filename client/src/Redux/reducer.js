@@ -14,7 +14,8 @@ import {
   CLEAN_USER,
   PERSONAL_USER_DATA,
   EDIT_USER,
-  REFRESH_USER
+  REFRESH_USER,
+  GET_SERVICES_BY_USER
 } from './actions-types';
 
 const initialState = {
@@ -120,21 +121,27 @@ const rootReducer = (state = initialState, action) => {
         userData: action.payload
       };
 
-      case EDIT_USER:
-        return {
-          ...state,
-          userData: action.payload
-        };
+    case EDIT_USER:
+      return {
+        ...state,
+        userData: action.payload
+      };
 
-        case REFRESH_USER:
-          return {
-            ...state,
-            userData: action.payload
-          }
+    case REFRESH_USER:
+      return {
+        ...state,
+        userData: action.payload
+      };
+    
+    case GET_SERVICES_BY_USER:
+      return {
+        ...state,
+        copyState: action.payload
+      };
 
     default:
       return state;
-  }
+  };
 };
 
 export default rootReducer;
