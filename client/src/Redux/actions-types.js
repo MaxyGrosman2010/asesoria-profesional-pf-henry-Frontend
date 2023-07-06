@@ -19,3 +19,4 @@ export const SIGN_UP = 'SIGN_UP';
 export const EDIT_USER = 'EDIT_USER';
 export const PERSONAL_USER_DATA = 'PERSONAL_USER_DATA';
 export const REFRESH_USER = 'REFRESH_USER';
+export const GET_SERVICES_BY_USER = 'GET_SERVICES_BY_USER';

@@ -1,9 +1,9 @@
 const validationsEdit = (edit) => {
     const errors = {};
     
-    if (!data.name) {
+    if (!edit.name) {
         errors.name = 'Name is required';
-      } else if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]*$/.test(data.name)) {
+      } else if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]*$/.test(edit.name)) {
         errors.name = 'Invalid name';
       }
 

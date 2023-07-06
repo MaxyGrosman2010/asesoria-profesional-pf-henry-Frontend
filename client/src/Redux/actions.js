@@ -16,7 +16,8 @@ import {
   SIGN_UP,
   EDIT_USER,
   PERSONAL_USER_DATA,
-  REFRESH_USER
+  REFRESH_USER,
+  GET_SERVICES_BY_USER
 } from './actions-types';
 import axios from 'axios';
 
@@ -219,20 +220,17 @@ export const personalUserData = () => {
 export const editUser = (payload) => {
   return async(dispatch) => {
     try{
-      let formData = new FormData();
+      const formData = new FormData();
 
       formData.append('method', 'put');
-      formData.append('id', );
       formData.append('name', payload.name);
-      formData.append('email', payload.email);
       formData.append('password', payload.password);
-      formData.append('cellPhone', payload.cellphone);
-      formData.append('profilePict', payload.picture);
+      formData.append('profilePict', payload.profilePict);
 
       const token = localStorage.getItem('token');
       const config = {headers : {Authorization : ` Bearer ${token}`}};
 
-      const response = await axios.put('http://localhost:3001/editUser/', formData, config);
+      const response = await axios.put('http://localhost:3001/editUser', formData, config);
 
       return dispatch({type: EDIT_USER, payload: response.data});
     }catch(error){
@@ -244,4 +242,16 @@ export const editUser = (payload) => {
 
 export const refreshUser = (user) => {
   return  { type: REFRESH_USER, payload: user }
-}
+};
+
+
+export const getServicesByUser = () => {
+  return async(dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = {headers : {Authorization : ` Bearer ${token}`}};
+
+    const response = await axios('http://localhost:3001/getServiceByUser/', config);
+
+    return dispatch({type: GET_SERVICES_BY_USER, payload: response.data});
+  };
+};
