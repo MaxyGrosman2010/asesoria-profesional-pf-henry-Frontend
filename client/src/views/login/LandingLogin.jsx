@@ -78,7 +78,7 @@ const LandingLogin = () => {
               value={data.email}
               onChange={handleChange}
               className="bg-gray-200 der-gray-300 w-[350px] h-[35px] p-3 py-5 rounded text-black"
-              placeholder="imail..."
+              placeholder="email..."
               type="email" />
             {errors.email && (
               <div className="text-red-600 absolute ml-80 mt-[8px]">
