@@ -42,6 +42,8 @@ const Navbar = () => {
 
   const close = () => {
     dispatch(cleanUser())
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   }
 
   return (
@@ -62,7 +64,7 @@ const Navbar = () => {
   
             <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
               <button onClick={toggleMenu} className="ml-2">{userData.name}</button>
-              <img src={userData.profilePict} className="w-[30px] rounded-full" />
+              <img src={userData.profilePict} alt="" className="w-[30px] rounded-full" />
             </div>
 
               {menuOpen && (

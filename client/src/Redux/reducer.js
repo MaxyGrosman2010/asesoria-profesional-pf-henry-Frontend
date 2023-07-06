@@ -13,7 +13,8 @@ import {
   LOGIN_FAILURE,
   CLEAN_USER,
   PERSONAL_USER_DATA,
-  EDIT_USER
+  EDIT_USER,
+  REFRESH_USER
 } from './actions-types';
 
 const initialState = {
@@ -124,6 +125,12 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           userData: action.payload
         };
+
+        case REFRESH_USER:
+          return {
+            ...state,
+            userData: action.payload
+          }
 
     default:
       return state;
