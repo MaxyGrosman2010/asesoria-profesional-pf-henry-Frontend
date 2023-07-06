@@ -15,7 +15,8 @@ import {
   SIGN_IN, 
   SIGN_UP,
   EDIT_USER,
-  PERSONAL_USER_DATA
+  PERSONAL_USER_DATA,
+  REFRESH_USER
 } from './actions-types';
 import axios from 'axios';
 
@@ -173,9 +174,16 @@ export const signIn = (payload) => {
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
-      localStorage.setItem('token', token);
-      const data = {name : name, profilePict: profilePict};
-      return dispatch({type: LOGIN_SUCCESS, payload: data});
+      const user = {
+        name: name,
+        profilePict : profilePict
+      }
+
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token)
+
+      // const data = {name : name, profilePict: profilePict};
+      return dispatch({type: LOGIN_SUCCESS, payload: user});
     } catch (error) {
       console.error('Error al iniciar sesión', error);
     };
@@ -229,3 +237,8 @@ export const editUser = (payload) => {
     };
   };
 };
+
+
+export const refreshUser = (user) => {
+  return  { type: REFRESH_USER, payload: user }
+}

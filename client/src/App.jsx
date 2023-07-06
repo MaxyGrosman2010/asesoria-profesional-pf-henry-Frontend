@@ -17,7 +17,7 @@ import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signIn } from "./Redux/actions"
+import { refreshUser } from "./Redux/actions"
 
 
 function App() {
@@ -26,13 +26,14 @@ function App() {
   const isAdminRoute = location.pathname.startsWith('/admin')
   const isLoginAdmin = location.pathname === '/adminLogin'
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
 
-  //     dispatch(signIn({ token }));
-  //   }
-  // }, [dispatch]);
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    const userData = JSON.parse(user)
+    if (userData) {
+      dispatch(refreshUser( userData ));
+    }
+  }, [dispatch]);
 
 
 
