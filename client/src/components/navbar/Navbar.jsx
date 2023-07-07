@@ -24,7 +24,7 @@ const Navbar = () => {
         title: 'empty cart'
       })
     } else {
-      setCartOpen(true);
+      setCartOpen(true)
     }
   }
 
