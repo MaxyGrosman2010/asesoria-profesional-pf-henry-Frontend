@@ -71,7 +71,7 @@ const Navbar = () => {
                 <div className="absolute mt-10 w-48  bg-white rounded-md shadow-lg" ref={pageWrapper}>
                       <NavLink to="/createServices" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Create Service</NavLink>
                       <NavLink to="/editProfile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Edit Profile</NavLink>
-                      <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Mi Services</NavLink>
+                      <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My Services</NavLink>
                       <div className="flex items-center justify-between px-8 py-2 text-sm text-gray-700 gap-4 hover:bg-gray-300">
                         <span className="material-symbols-outlined">logout</span>
                       <NavLink onClick={close} to='/'>Logout</NavLink>

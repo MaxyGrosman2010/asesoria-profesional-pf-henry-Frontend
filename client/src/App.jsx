@@ -15,6 +15,7 @@ import AdminHome from "./views/admin/AdminHome"
 import AdminNav from "./views/admin/login/AdminNav"
 import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
+import EditService from "./views/edit service/editService"
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from "./Redux/actions"
@@ -54,6 +55,7 @@ function App() {
           <Route path='/createServices' element={<CreateServices />} />
           <Route path='/register' element={<Register />} />
           <Route path='/miServices' element={<MiServices />} />
+          <Route path='/editService' element={<EditService/>}/>
         </Routes>
         <Routes>
           <Route path='/adminLogin' index element={<AdminLogin />} />
