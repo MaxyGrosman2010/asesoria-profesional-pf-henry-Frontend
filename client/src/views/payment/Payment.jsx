@@ -1,20 +1,19 @@
-import mercadoLogo from '../../assets/Logo-MercadoPago.png';
-import bgi from '../../assets/background.jpg';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { initMercadoPago } from '@mercadopago/sdk-react';
+import { removeAll } from '../../Redux/actions';
 
 initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
 
 const Payment = () => {
-  const items = useSelector((state) => state.items);
-  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0);
-
-  // const [preferenceId, setPreferenceId] = useState(null)
-  const [initPoint, setInitPoint] = useState(null);
+  
+  const items = useSelector((state) => state.items)
+  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
+  
+  const navigate = useNavigate('/allServices')
+  const dispatch = useDispatch()
 
   const itemsMapped = items.map((item) => ({
     item_id: item.id,
@@ -25,29 +24,23 @@ const Payment = () => {
     totalAmount: totalPrice,
   }));
 
-  //onsole.log(itemsMapped, 'MAPEO DATA');
 
   const handleClick = () => {
     console.log('apretando boton de pago', itemsMapped);
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const config = { headers: { Authorization: ` Bearer ${token}` } }
     axios
       .post('http://localhost:3001/orderMP', itemsMapped, config)
       .then((response) => {
-        //console.log(response);
-        return response.data.id;
+        return response.data.id
       })
       .then((preference) => {
-        // setInitPoint(preference)
-        // setPreferenceId(preference.id);
-        window.open(preference);
+        window.open(preference)
       })
       .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  // console.log(preferenceId, 'PREFERNCE_ID');
+        console.error(error)
+      })
+  }
 
   const handleChange = () => {
     Swal.fire({
@@ -57,25 +50,23 @@ const Payment = () => {
       confirmButtonText: 'Yes',
       cancelButtonColor: 'No',
       showCancelButton: true,
-      showCloseButton: true,
-    });
-  };
+      showCloseButton: true
+    }).then((result) => {
+      if(result.isConfirmed){
+        navigate('/allServices')
+        dispatch(removeAll())
+      }
+    })
+  }
 
   return (
-    <div
-      className='h-screen w-full flex flex-col items-center justify-center'
-      style={{ backgroundImage: `url(${bgi})` }}
-    >
+    <div className='h-screen w-full flex flex-col items-center justify-center'>
       <div className='bg-white mx-auto w-full p-10 flex flex-col h-[800px] mt-40'>
-        <div className='b'>
+
+        <div className=''>
           <h1 className='text-2xl font-bold font-montserrat'>Proceed to pay</h1>
-          <p className='font-bold font-montserrat text-gray-500'>Payment by</p>
-          <img
-            src={mercadoLogo}
-            alt='MercadoLogo'
-            className='w-20 h-auto pt-2'
-          />
         </div>
+
         <div>
           {items.map((item) => (
             <div key={item.id} className='flex items-center justify-center'>
@@ -84,51 +75,28 @@ const Payment = () => {
                 <span className='font-medium'>{item.name}</span>
                 <span className='italic'>{item.description}</span>
               </div>
+
               <div className='flex'>
                 <span>$ {item.price}</span>
               </div>
             </div>
+
           ))}
         </div>
-        <div className='flex w-1/2 mx-auto items-center justify-center py-2 my-10'>
-          <p className='font-medium mr-80'>Total to pay:</p>
-          <div className='flex gap-4'>
-            <span class='material-symbols-outlined'>paid</span>
-            <p>{totalPrice}</p>
-          </div>
-        </div>
-        <div className='flex items-center justify-center w-1/2 mx-auto gap-4'>
-          <button
-            className='bg-red-600 w-[120px] rounded py-2 text-white'
-            onClick={handleClick}
-          >
-            button
-          </button>
-        </div>
-        <NavLink
-          onClick={handleChange}
-          className='bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center'
-        >
-          Cancel
-        </NavLink>
-      </div>
 
-      <div className='flex items-start mb-20 ml-40'>
-        <span className='material-symbols-outlined text-6xl'>
-          deployed_code
-        </span>
+          <div className='flex flex-col shadow-lg h-[700px] w-1/2 mx-auto items-center justify-center py-2 my-10'>
+            <div className='flex gap-4 items-center my-10 h-[300px] w-3/4 justify-center'>
+              <p className='font-medium mr-80'>Total to pay:</p>
+              <span class='material-symbols-outlined'>paid</span>
+              <p>{totalPrice}</p>
+            </div>
+            <div className='flex items-center justify-center w-1/2 mx-auto gap-4'>
+              <button className='bg-green-600 w-[120px] rounded py-2 text-white' onClick={handleClick}>pay</button>
+              <button onClick={handleChange} className='bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center'>Cancel</button>
+            </div>
+          </div>
+
       </div>
-      {initPoint && (
-        <div className='absolute'>
-          <iframe
-            id='inlineFrameExample'
-            title='Inline Frame Example'
-            width='700px'
-            height='700px'
-            src={initPoint}
-          ></iframe>
-        </div>
-      )}
     </div>
   );
 };
