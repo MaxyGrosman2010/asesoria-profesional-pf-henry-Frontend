@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Cart from "./cart/Cart";
-import { cleanUser } from "../Redux/actions";
+import Cart from "../cart/Cart";
+import { cleanUser } from "../../Redux/actions";
 import { register } from "react-scroll/modules/mixins/scroller";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
@@ -17,11 +18,18 @@ const Navbar = () => {
   const token = localStorage.getItem('token');
 
   const handleOpenCart = () => {
-    setCartOpen(true);
+    if(item.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'empty cart'
+      })
+    } else {
+      setCartOpen(true)
+    }
   }
 
   const handleCloseCart = () => {
-    setCartOpen(false)
+      setCartOpen(false)
   }
 
   useEffect(() => {
