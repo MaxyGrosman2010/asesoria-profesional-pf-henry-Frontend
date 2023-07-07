@@ -1,4 +1,7 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Form, Route, Routes, useLocation } from "react-router-dom"
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from "./Redux/actions"
 import Home from "./components/Home"
 import Services from "./components/Services"
 import OneService from "./views/service/OneService"
@@ -16,9 +19,7 @@ import AdminNav from "./views/admin/login/AdminNav"
 import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
 import EditService from "./views/edit service/editService"
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { refreshUser } from "./Redux/actions"
+import FormReview from "./views/service/FormReview";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/miServices' element={<MiServices />} />
           <Route path='/editService' element={<EditService/>}/>
+          <Route path='/review' element={<FormReview />} />
         </Routes>
         <Routes>
           <Route path='/adminLogin' index element={<AdminLogin />} />
