@@ -18,6 +18,7 @@ import {
   PERSONAL_USER_DATA,
   REFRESH_USER,
   GET_SERVICES_BY_USER,
+  UPDATE_SERVICE
 } from './actions-types';
 import axios from 'axios';
 
@@ -239,6 +240,25 @@ export const getServicesByUser = () => {
       config
     );
 
+    console.log(response.data);
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
 };
+
+
+
+//EN PROCESO!!!
+export const updateService = () =>{
+  return async (dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+
+    const response = await axios(
+      'http://localhost:3001/editService/',
+      config
+    );
+
+    console.log(response.data);
+    return dispatch({ type: UPDATE_SERVICE, payload: response.data });
+  }
+}
