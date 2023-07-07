@@ -3,8 +3,6 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { addToCart, getService } from '../../Redux/actions';
 import Swal from 'sweetalert2';
-import doc from '../../assets/doc.jpg';
-import Comment from '../comments/comment/Comment';
 
 const OneService = () => {
   const { id } = useParams();
@@ -69,8 +67,7 @@ const OneService = () => {
                   </button>
                 </div>
                 <div className='flex flex-row px-4 '>
-                  <Comment></Comment>
-                  <Comment></Comment>
+                  
                 </div>
                 <div className='flex gap-10 mx-auto mt-4'></div>
                 <div className='mx-auto mt-4'>
