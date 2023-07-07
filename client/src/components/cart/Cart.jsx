@@ -3,10 +3,12 @@ import Data from "./Data"
 import { NavLink } from "react-router-dom"
 import { removeFromCart, removeAll } from "../../Redux/actions"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Cart = ({handleCloseCart}) => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const items = useSelector((state) => state.items)
 
   const [dataCart, setDataCart] = useState([])
@@ -23,13 +25,20 @@ const Cart = ({handleCloseCart}) => {
     }
   }, [])
 
-
   const handleDeleteItem = (itemId) => {
     dispatch(removeFromCart(itemId))
+    navigate('/allServices')
+    if(items.length === 1){
+      handleCloseCart()
+    } else {
+      return;
+    }
   }
 
   const handleDeleteAll = () => {
     dispatch(removeAll())
+    navigate('/allServices')
+    handleCloseCart()
   }
 
   return (
@@ -55,9 +64,7 @@ const Cart = ({handleCloseCart}) => {
         <div className="flex items-center justify-around w-full mt-10">
           <div className="flex bg-green-600 items-center justify-center gap-2 text-white rounded w-[140px] px-2">
             <span class="material-symbols-outlined">payments</span>
-            <NavLink to='/payment'>
-              <button className="py-2">go to pay</button>
-            </NavLink>
+            <NavLink to='/payment'><button onClick={handleCloseCart} className="py-2">go to pay</button></NavLink>
           </div>
           <div className="flex bg-red-600 items-center justify-center gap-2 text-white rounded w-[140px] px-2">
             <span className="material-symbols-outlined">delete</span>

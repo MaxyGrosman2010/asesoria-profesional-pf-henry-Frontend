@@ -12,7 +12,7 @@ const Payment = () => {
   const items = useSelector((state) => state.items)
   const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
   
-  const navigate = useNavigate('/allServices')
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const itemsMapped = items.map((item) => ({
@@ -26,7 +26,6 @@ const Payment = () => {
 
 
   const handleClick = () => {
-    console.log('apretando boton de pago', itemsMapped);
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } }
     axios
@@ -36,6 +35,10 @@ const Payment = () => {
       })
       .then((preference) => {
         window.open(preference)
+      })
+      .then(() => {
+        dispatch(removeAll())
+        navigate('/allServices')
       })
       .catch((error) => {
         console.error(error)
