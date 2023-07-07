@@ -20,12 +20,10 @@ const AllServices = () => {
   const max = Math.ceil(copyState.length / perPage);
 
   useEffect(() => {
-    dispatch(getData());
+    dispatch(getData())
+    setPage(1)
   }, []);
 
-  useEffect(() => {
-    setPage(1);
-  }, []);
 
   const updateFilter = (filteredData) => {
     setFilteredCopy(filteredData);

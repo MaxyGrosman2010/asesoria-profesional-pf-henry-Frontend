@@ -68,15 +68,14 @@ const Navbar = () => {
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
-            
-  
+
             <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
               <button onClick={toggleMenu} className="ml-2">{userData.name}</button>
-              <img src={userData.profilePict} alt="" className="w-[30px] rounded-full" />
+              <img src={userData?.profilePict} alt="avatar" className="w-[30px] rounded-full" />
             </div>
 
               {menuOpen && (
-                <div className="absolute mt-10 w-48  bg-white rounded-md shadow-lg" ref={pageWrapper}>
+                <div className="absolute mt-10 w-[300px] bg-white flex rounded-md shadow-lg flex-col" ref={pageWrapper}>
                       <NavLink to="/createServices" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Create Service</NavLink>
                       <NavLink to="/editProfile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Edit Profile</NavLink>
                       <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My Services</NavLink>

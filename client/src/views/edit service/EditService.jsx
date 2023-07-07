@@ -1,17 +1,9 @@
 import { useEffect, useState } from 'react';
 // import validationsService from './validations';
-
-
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { updateService, getTypeServices, getService } from '../../Redux/actions';
-
-
-
-
-
 
 const EditService = () => {
   const dispatch = useDispatch();
