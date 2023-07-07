@@ -18,7 +18,7 @@ import AdminHome from "./views/admin/AdminHome"
 import AdminNav from "./views/admin/login/AdminNav"
 import AdminUsers from "./views/admin/login/AdminUsers"
 import MiServices from "./views/miServices/MiServices"
-import EditService from "./views/edit service/editService"
+import EditService from "./views/edit service/EditService";
 import FormReview from "./views/service/FormReview";
 
 
