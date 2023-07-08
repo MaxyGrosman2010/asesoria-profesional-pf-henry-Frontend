@@ -20,11 +20,12 @@ import {
   GET_SERVICES_BY_USER,
 } from './actions-types';
 import axios from 'axios';
+const URL_BACK = 'http://localhost:3001';
 
 export const getData = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('http://localhost:3001/allService');
+      const response = await axios.get('allService');
       return dispatch({ type: GET_SERVICES, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -47,11 +48,7 @@ export const postData = (payload) => {
           Authorization: ` Bearer ${token}`, //aqui agrego el token al encabezado "Authorization"
         },
       };
-      const response = await axios.post(
-        'http://localhost:3001/service',
-        formData,
-        config
-      );
+      const response = await axios.post('service', formData, config);
       return dispatch({ type: CREATE_SERVICE, payload: response.data });
     } catch (error) {
       console.error('Error posting data:', error);
@@ -62,9 +59,7 @@ export const postData = (payload) => {
 export const getService = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/serviceById/${id}`
-      );
+      const response = await axios.get(`serviceById/${id}`);
       return dispatch({ type: GET_SERVICE, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -75,9 +70,7 @@ export const getService = (id) => {
 export const getServiceName = (name) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/nameService/?name=${name}`
-      );
+      const response = await axios.get(`nameService/?name=${name}`);
       return dispatch({ type: GET_SERVICE_NAME, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -88,7 +81,7 @@ export const getServiceName = (name) => {
 export const getTypeServices = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('http://localhost:3001/allTypeService/');
+      const response = await axios.get('allTypeService/');
       return dispatch({ type: GET_TYPE_SERVICES, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -120,13 +113,9 @@ export const removeAll = (payload) => {
 export const handleLogIn = () => {
   return (dispatch) => {
     // Abrir una nueva ventana para el inicio de sesión de Google
-    const popup = window.open(
-      'http://localhost:3001/auth',
-      'Login',
-      'width=500,height=500'
-    );
+    const popup = window.open('auth', 'Login', 'width=500,height=500');
     window.addEventListener('message', (event) => {
-      if (event.origin === 'http://localhost:3001') {
+      if (event.origin === URL_BACK) {
         const { name, email, profilePict } = event.data;
         dispatch(loginSuccess({ name, email, profilePict }));
         popup.close();
@@ -152,10 +141,7 @@ export const cleanUser = (payload) => {
 export const signIn = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        'http://localhost:3001/singIn',
-        payload
-      );
+      const response = await axios.post('singIn', payload);
       console.log(response.data);
       const token = response.data.token;
       const name = response.data.name;
@@ -178,7 +164,7 @@ export const signIn = (payload) => {
 
 export const signUp = (payload) => {
   return async (dispatch) => {
-    const response = await axios.post('http://localhost:3001/singUp', payload);
+    const response = await axios.post('singUp', payload);
     return dispatch({ type: SIGN_UP, payload: response.data });
   };
 };
@@ -188,10 +174,7 @@ export const personalUserData = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
-      const response = await axios(
-        'http://localhost:3001/getUserById/',
-        config
-      );
+      const response = await axios('getUserById/', config);
       return dispatch({ type: PERSONAL_USER_DATA, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -212,11 +195,7 @@ export const editUser = (payload) => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
 
-      const response = await axios.put(
-        'http://localhost:3001/editUser',
-        formData,
-        config
-      );
+      const response = await axios.put('editUser', formData, config);
 
       return dispatch({ type: EDIT_USER, payload: response.data });
     } catch (error) {
@@ -234,10 +213,7 @@ export const getServicesByUser = () => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
 
-    const response = await axios(
-      'http://localhost:3001/getServiceByUser/',
-      config
-    );
+    const response = await axios('getServiceByUser/', config);
 
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
