@@ -29,7 +29,6 @@ const AllServices = () => {
           setIsLoading(false)
         }, 1500)
       } catch (err) {
-        console.error('error to get the data', err);   
         setIsLoading(false)
       }
     }
