@@ -64,13 +64,13 @@ const Navbar = () => {
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
-              {!userData && <NavLink to="/login">Login</NavLink>}
+              <NavLink to="/login">Login</NavLink>
           </ul>
-          {location.pathname !== '/login' && (
+          {location.pathname !== '/login' || (token) && (
           <div className="flex shadow-md rounded">
 
-            <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
-              <button onClick={toggleMenu} className="ml-2">{userData.name}</button>
+            <div onClick={toggleMenu} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
+              <button className="ml-2">{userData.name}</button>
               <img src={userData?.profilePict} alt="avatar" className="w-[30px] rounded-full" />
             </div>
 
