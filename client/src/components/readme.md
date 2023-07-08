@@ -1,1 +1,0 @@
-aca componentes fijos

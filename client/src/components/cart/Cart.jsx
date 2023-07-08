@@ -2,19 +2,43 @@ import { useSelector, useDispatch } from "react-redux"
 import Data from "./Data"
 import { NavLink } from "react-router-dom"
 import { removeFromCart, removeAll } from "../../Redux/actions"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Cart = ({handleCloseCart}) => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const items = useSelector((state) => state.items)
-  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
+
+  const [dataCart, setDataCart] = useState([])
+ 
+  let data = items
+
+  useEffect(() => {
+    for(let values in data){
+      if(data.hasOwnProperty(values)){
+        let val = data[values]
+        setDataCart(val)
+      }
+      break;
+    }
+  }, [])
 
   const handleDeleteItem = (itemId) => {
     dispatch(removeFromCart(itemId))
+    navigate('/allServices')
+    if(items.length === 1){
+      handleCloseCart()
+    } else {
+      return;
+    }
   }
 
   const handleDeleteAll = () => {
     dispatch(removeAll())
+    navigate('/allServices')
+    handleCloseCart()
   }
 
   return (
@@ -30,19 +54,17 @@ const Cart = ({handleCloseCart}) => {
         </div>
 
             <div className="h-[600px] overflow-y-auto mt-8 px-4">
-            <Data handleDeleteItem={handleDeleteItem} items={items} />           
+            <Data dataCart={dataCart} handleDeleteItem={handleDeleteItem} items={items} />           
             </div>
 
           <div className="flex w-full">
-            <p className="mx-auto mt-10">Total: {totalPrice}</p>
+            <p className="mx-auto mt-10">Total: {'total'}</p>
           </div>
 
         <div className="flex items-center justify-around w-full mt-10">
           <div className="flex bg-green-600 items-center justify-center gap-2 text-white rounded w-[140px] px-2">
             <span class="material-symbols-outlined">payments</span>
-            <NavLink to='/payment'>
-              <button className="py-2">go to pay</button>
-            </NavLink>
+            <NavLink to='/payment'><button onClick={handleCloseCart} className="py-2">go to pay</button></NavLink>
           </div>
           <div className="flex bg-red-600 items-center justify-center gap-2 text-white rounded w-[140px] px-2">
             <span className="material-symbols-outlined">delete</span>

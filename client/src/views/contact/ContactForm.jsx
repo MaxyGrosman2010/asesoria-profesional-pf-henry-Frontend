@@ -57,7 +57,7 @@ const ContactForm = () => {
 
   return (
     <>
-    <div id='contact' className='flex flex-col items-center justify-center h-screen p-10'>
+    <div id='contact' className='flex flex-col items-center justify-center h-screen p-10 mt-20'>
       <div className="flex flex-col items-center justify-center mt-10">
             <p className="font-medium">Contact us for more information</p>
       </div>

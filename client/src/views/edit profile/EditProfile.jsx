@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import validationsEdit from "./validations"
 import { useDispatch, useSelector } from "react-redux"
 import { personalUserData, editUser } from "../../Redux/actions"
+import { useNavigate } from "react-router-dom"
 
 const EditProfile = () => {
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userData);
-
+  
   const [edit, setEdit] = useState({
     name: '',
     password: '',
@@ -21,7 +23,16 @@ const EditProfile = () => {
     repeatPassword: '',
     profilePict: null,
   });
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token === null) {
+      navigate('/home')
+    }
+  }, [])
+  
 
+  
   useEffect(() => {
     dispatch(personalUserData());
     setEdit({

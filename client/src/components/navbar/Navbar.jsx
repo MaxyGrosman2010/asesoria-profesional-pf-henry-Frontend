@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-scroll";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Cart from "./cart/Cart";
-import { cleanUser } from "../Redux/actions";
+import Cart from "../cart/Cart";
+import { cleanUser } from "../../Redux/actions";
 import { register } from "react-scroll/modules/mixins/scroller";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
@@ -17,11 +18,18 @@ const Navbar = () => {
   const token = localStorage.getItem('token');
 
   const handleOpenCart = () => {
-    setCartOpen(true);
+    if(item.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'empty cart'
+      })
+    } else {
+      setCartOpen(true)
+    }
   }
 
   const handleCloseCart = () => {
-    setCartOpen(false)
+      setCartOpen(false)
   }
 
   useEffect(() => {
@@ -56,22 +64,21 @@ const Navbar = () => {
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
-              {!userData && <NavLink to="/login">Login</NavLink>}
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
-            
-  
-            <div className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
-              <button onClick={toggleMenu} className="ml-2">{userData.name}</button>
-              <img src={userData.profilePict} alt="" className="w-[30px] rounded-full" />
+
+            <div onClick={toggleMenu} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
+              <button className="ml-2">{userData.name}</button>
+              <img src={userData?.profilePict} alt="avatar" className="w-[30px] rounded-full" />
             </div>
 
               {menuOpen && (
-                <div className="absolute mt-10 w-48  bg-white rounded-md shadow-lg" ref={pageWrapper}>
+                <div className="absolute mt-10 w-[300px] bg-white flex rounded-md shadow-lg flex-col" ref={pageWrapper}>
                       <NavLink to="/createServices" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Create Service</NavLink>
                       <NavLink to="/editProfile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Edit Profile</NavLink>
-                      <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Mi Services</NavLink>
+                      <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My Services</NavLink>
+                      <NavLink to='/myShopping' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My shopping</NavLink>
                       <div className="flex items-center justify-between px-8 py-2 text-sm text-gray-700 gap-4 hover:bg-gray-300">
                         <span className="material-symbols-outlined">logout</span>
                       <NavLink onClick={close} to='/'>Logout</NavLink>

@@ -15,7 +15,8 @@ import {
   PERSONAL_USER_DATA,
   EDIT_USER,
   REFRESH_USER,
-  GET_SERVICES_BY_USER
+  GET_SERVICES_BY_USER,
+  UPDATE_SERVICE
 } from './actions-types';
 
 const initialState = {
@@ -138,6 +139,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         copyState: action.payload
       };
+
+      //EN PROCESO!!!!!
+    case UPDATE_SERVICE:
+      return{
+        ...state,
+        allActivities: action.payload,
+        copyState: action.payload,
+      } 
 
     default:
       return state;
