@@ -15,7 +15,7 @@ const AdminLogin = () => {
 
   const [errors, setErrors] = useState({
     email: '',
-    password: ','
+    password: '',
   })
 
   const handleData = (event) => {

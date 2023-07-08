@@ -8,10 +8,7 @@ const MiServices = () => {
     const services = useSelector((state) => state.copyState);
     const dispatch = useDispatch();
 
-    console.log(services);
-
     const handleEdit = (event) => {
-        console.log(Number(event.target.value) + 1);
         dispatch(getService(Number(event.target.value)))
     }
 
