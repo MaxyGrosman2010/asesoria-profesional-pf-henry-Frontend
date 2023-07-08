@@ -5,6 +5,7 @@ import Filters from '../filters/Filters';
 import Pagination from '../../components/pagination/Pagination';
 import Card from '../card/Card';
 import { getData } from '../../Redux/actions';
+import Loader from '../../components/loader/Loader';
 
 const AllServices = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const AllServices = () => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
   const [filteredCopy, setFilteredCopy] = useState(copyState);
+  const [isLoading, setIsLoading] = useState(true)
 
   const idxLast = page * perPage;
   const idxFirst = idxLast - perPage;
@@ -20,7 +22,17 @@ const AllServices = () => {
   const max = Math.ceil(copyState.length / perPage);
 
   useEffect(() => {
-    dispatch(getData())
+    const fetchData = () => {
+      try {
+        dispatch(getData())
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 1500)
+      } catch (err) {
+        setIsLoading(false)
+      }
+    }
+    fetchData()
     setPage(1)
   }, []);
 
@@ -40,12 +52,20 @@ const AllServices = () => {
         <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
       </div>
       <div className='flex flex-wrap justify-center gap-4 w-full min-h-screen max-w-screen-lg mx-auto'>
-        {currentData &&
+        {isLoading ? (
+          <Loader />
+        ) : (
           currentData?.map((serv, idx) => (
             <div key={idx} className='rounded text-gray-900 w-[300px]'>
               <Card serv={serv} />
             </div>
-          ))}
+          ))
+        )}
+
+        
+
+
+
       </div>
       <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
     </div>
