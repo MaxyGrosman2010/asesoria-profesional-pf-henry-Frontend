@@ -21,6 +21,7 @@ import MiServices from "./views/miServices/MiServices"
 import EditService from "./views/edit service/EditService";
 import FormReview from "./views/service/FormReview";
 import Loader from "./components/loader/Loader";
+import MyShopping from "./views/myShopping/MyShopping";
 
 function App() {
   const location = useLocation();
@@ -59,6 +60,7 @@ function App() {
           <Route path='/editService' element={<EditService/>}/>
           <Route path='/review' element={<FormReview />} />
           <Route path='/loader' element={<Loader />} />
+          <Route path='/myShopping' element={<MyShopping />} />
         </Routes>
         <Routes>
           <Route path='/adminLogin' index element={<AdminLogin />} />
