@@ -64,7 +64,6 @@ const Navbar = () => {
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
-              <NavLink to="/login">Login</NavLink>
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">

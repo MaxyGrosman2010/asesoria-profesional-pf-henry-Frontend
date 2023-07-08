@@ -8,11 +8,8 @@ const MiServices = () => {
     const services = useSelector((state) => state.copyState);
     const dispatch = useDispatch();
 
-    console.log(services);
-
-    const handleEdit = (event) => {
-        console.log(Number(event.target.value) + 1);
-        dispatch(getService(Number(event.target.value)))
+    const handleEdit = () => {
+        dispatch(getService())
     }
 
     const handleDelete = () => {
@@ -23,7 +20,6 @@ const MiServices = () => {
       dispatch(getServicesByUser());
     }, []);
 
-    console.log(services);
 
   return (
     <div className="bg-slate-300 w-full h-screen p-20 flex flex-col items-center justify-center gap-5">
@@ -52,9 +48,9 @@ const MiServices = () => {
             </td>
             <td className="flex items-center gap-2 justify-center w-full py-2">
               <NavLink to='/editService'> 
-                <button onClick={handleEdit} className="bg-blue-500 w-[100px] rounded py-1 text-white" value={index + 1}>edit</button>
+                <button onClick={handleEdit} className="bg-blue-500 w-[100px] rounded py-1 text-white">edit</button>
               </NavLink>
-                <button onClick={handleDelete} className="bg-red-500 w-[100px] rounded py-1 text-white" value={index + 1}>delete</button>
+                <button onClick={handleDelete} className="bg-red-500 w-[100px] rounded py-1 text-white">delete</button>
             </td>
           </tr>
         </>
