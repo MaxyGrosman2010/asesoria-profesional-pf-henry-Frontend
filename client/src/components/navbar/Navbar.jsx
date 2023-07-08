@@ -66,7 +66,7 @@ const Navbar = () => {
               <NavLink to='/contact'>Contact</NavLink>
               <NavLink to="/login">Login</NavLink>
           </ul>
-          {location.pathname !== '/login' || (token) && (
+          {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
 
             <div onClick={toggleMenu} className="flex gap-4 items-center w-[300px] justify-around py-2 bg-white text-gray-950 rounded cursor-pointer">
