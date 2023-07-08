@@ -59,7 +59,6 @@ function App() {
           <Route path='/miServices' element={<MiServices />} />
           <Route path='/editService' element={<EditService/>}/>
           <Route path='/review' element={<FormReview />} />
-          <Route path='/loader' element={<Loader />} />
           <Route path='/myShopping' element={<MyShopping />} />
         </Routes>
         <Routes>
