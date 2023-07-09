@@ -5,8 +5,9 @@ import { NavLink } from 'react-router-dom';
 
 const MiServices = () => {
 
-    const services = useSelector((state) => state.copyState);
+    
     const dispatch = useDispatch();
+    
 
     const handleEdit = () => {
         dispatch(getService())
@@ -36,15 +37,15 @@ const MiServices = () => {
 
 
         <tbody className='w-full'>
-        {services.map((user, index) => (
+     
         <>
           <tr>
-            <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{user.typeServices}</td>
+            <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{'user.typeServices'}</td>
             <td className='border border-gray-400 px-4 py-2 h-auto w-auto cursor-pointer text-center hover:bg-slate-600 hover:text-white' >
-              {user.name}
+              {'user.name'}
             </td>
             <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>
-                <p>${user.price}</p>
+                <p>${'user.price'}</p>
             </td>
             <td className="flex items-center gap-2 justify-center w-full py-2">
               <NavLink to='/editService'> 
@@ -54,7 +55,7 @@ const MiServices = () => {
             </td>
           </tr>
         </>
-        ))}
+     
         </tbody>
     </table>
   </div>
