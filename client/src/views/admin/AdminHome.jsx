@@ -1,11 +1,28 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const AdminHome = () => {
 
-  const users = useSelector((state) => state.users)
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const endpoint = 'http://localhost:3001/allUsers/';
+    
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+
+    const fetchData = async() => {
+      const response = await axios.get(endpoint, config);
+      setData(response.data)
+    };
+
+    fetchData();
+  }, []);
 
 
+ 
   return (
     <div className="bg-slate-300 w-full h-screen p-20">
      <div className='container w-full mx-auto flex items-center justify-center shadow-lg'>
