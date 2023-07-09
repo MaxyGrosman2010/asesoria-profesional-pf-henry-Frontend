@@ -4,16 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { removeAll } from '../../Redux/actions';
-
+const URL_BASE = 'http://localhost:3001';
 initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
 
 const Payment = () => {
-  
-  const items = useSelector((state) => state.items)
-  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
-  
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const items = useSelector((state) => state.items);
+  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const itemsMapped = items.map((item) => ({
     item_id: item.id,
@@ -24,26 +23,25 @@ const Payment = () => {
     totalAmount: totalPrice,
   }));
 
-
   const handleClick = () => {
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: ` Bearer ${token}` } }
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
     axios
-      .post('http://localhost:3001/orderMP', itemsMapped, config)
+      .post(`${URL_BASE}/orderMP`, itemsMapped, config)
       .then((response) => {
-        return response.data.id
+        return response.data.id;
       })
       .then((preference) => {
-        window.open(preference)
+        window.open(preference);
       })
       .then(() => {
-        dispatch(removeAll())
-        navigate('/allServices')
+        dispatch(removeAll());
+        navigate('/allServices');
       })
       .catch((error) => {
-        console.error(error)
-      })
-  }
+        console.error(error);
+      });
+  };
 
   const handleChange = () => {
     Swal.fire({
@@ -53,19 +51,18 @@ const Payment = () => {
       confirmButtonText: 'Yes',
       cancelButtonColor: 'No',
       showCancelButton: true,
-      showCloseButton: true
+      showCloseButton: true,
     }).then((result) => {
-      if(result.isConfirmed){
-        navigate('/allServices')
-        dispatch(removeAll())
+      if (result.isConfirmed) {
+        navigate('/allServices');
+        dispatch(removeAll());
       }
-    })
-  }
+    });
+  };
 
   return (
     <div className='h-screen w-full flex flex-col items-center justify-center'>
       <div className='bg-white mx-auto w-full p-10 flex flex-col h-[800px] mt-40'>
-
         <div className=''>
           <h1 className='text-2xl font-bold font-montserrat'>Proceed to pay</h1>
         </div>
@@ -83,22 +80,30 @@ const Payment = () => {
                 <span>$ {item.price}</span>
               </div>
             </div>
-
           ))}
         </div>
 
-          <div className='flex flex-col shadow-lg h-[700px] w-1/2 mx-auto items-center justify-center py-2 my-10'>
-            <div className='flex gap-4 items-center my-10 h-[300px] w-3/4 justify-center'>
-              <p className='font-medium mr-80'>Total to pay:</p>
-              <span class='material-symbols-outlined'>paid</span>
-              <p>{totalPrice}</p>
-            </div>
-            <div className='flex items-center justify-center w-1/2 mx-auto gap-4'>
-              <button className='bg-green-600 w-[120px] rounded py-2 text-white' onClick={handleClick}>pay</button>
-              <button onClick={handleChange} className='bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center'>Cancel</button>
-            </div>
+        <div className='flex flex-col shadow-lg h-[700px] w-1/2 mx-auto items-center justify-center py-2 my-10'>
+          <div className='flex gap-4 items-center my-10 h-[300px] w-3/4 justify-center'>
+            <p className='font-medium mr-80'>Total to pay:</p>
+            <span class='material-symbols-outlined'>paid</span>
+            <p>{totalPrice}</p>
           </div>
-
+          <div className='flex items-center justify-center w-1/2 mx-auto gap-4'>
+            <button
+              className='bg-green-600 w-[120px] rounded py-2 text-white'
+              onClick={handleClick}
+            >
+              pay
+            </button>
+            <button
+              onClick={handleChange}
+              className='bg-red-700 px-4 py-2 rounded text-white w-[120px] text-center'
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
