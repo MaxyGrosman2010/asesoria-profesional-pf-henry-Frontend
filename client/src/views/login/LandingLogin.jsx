@@ -114,7 +114,7 @@ const LandingLogin = () => {
             <span className="ml-1 font-bold cursor-pointer underline">Register</span>
           </Link>
         </div>
-        <NavLink to='/adminLogin' className="bg-red-600 w-[120px]">logAdmin</NavLink>
+        <NavLink to='/adminLogin' className="bg-red-900 w-[120px] py-2 text-center text-white rounded">logAdmin</NavLink>
         <div className='flex flex-col items-center justify-center mx-auto mt-2'>
           <p className='py-4'>or Login with</p>
           <img className="w-[40px]" src={goog} />

@@ -27,12 +27,13 @@ const AdminUsers = () => {
           <tbody className='w-full'>
           {users.map((user) => (
             <tr>
-              <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'><span class="material-symbols-outlined">account_circle</span></td>
+              <div className='flex items-center justify-center'>
+                <img className='my-2 w-[50px] h-[50px] mx-auto text-center rounded-full' src={user.profilePict} />
+              </div>
               <td className='border border-gray-400 px-4 py-2 h-auto w-auto cursor-pointer text-center hover:bg-slate-600 hover:text-white'>
                 <NavLink to='/adminUsers'>{user.name}</NavLink>
               </td>
               <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>
-
                 <select className='flex items-center justify-center py-2 mx-auto bg-slate-200 rounded w-full text-center'>
                   <option>no</option>
                   <option>yes</option>
