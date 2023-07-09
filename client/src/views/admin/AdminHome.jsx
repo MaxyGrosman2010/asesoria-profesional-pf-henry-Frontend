@@ -1,11 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsers } from '../../Redux/actions'
+import { getAllUsers, updateUser } from '../../Redux/actions'
 import { useEffect, useState } from 'react'
 
 const AdminHome = () => {
-
-  const [selectedUser, setSelectedUser] = useState([])
-
 
   const dispatch = useDispatch()
   const users = useSelector((state) => state.allUsers)
@@ -22,8 +19,15 @@ const AdminHome = () => {
 
 
   const handleLogicalDelete = (userId, value) => {
-    setSelectedUser(prevState => ({...prevState,[userId]: value}))
+    const updateAdmin = {
+      ...users.find((user) => user.id === userId),
+      isDeleted: value === 'true'
+    }
+    console.log(updateAdmin, 'asdasdas');
+    dispatch(updateUser(updateAdmin))
   }
+
+
 
   return (
     <div className="bg-slate-300 w-full h-screen p-20">
@@ -43,17 +47,20 @@ const AdminHome = () => {
 
           <tbody className='w-full'>
             {users.map((user) => (
-              <tr className='hover:bg-slate-300'>
+              <tr key={user.id} className='hover:bg-slate-300'>
               <div className='flex items-center justify-center'>
                   <img className='my-2 w-[50px] h-[50px] mx-auto text-center rounded-full' src={user.profilePict} />
               </div>
                   <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{user.name}</td>
                   <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{user.email}</td>
                   <td className='border border-gray-400 px-4 py-2 h-auto w-auto text-center'>{user.cantService}</td>
-                  <td className='flex items-center justify-center h-[80px]' style={{color: user.isDeleted === true ? colors.green : colors.red}}>
-                    <select value={selectedUser[user.id] || user.isDeleted} onChange={(e) => handleLogicalDelete(user.id, e.target.value)}>
-                      <option value={true}>True</option>
-                      <option value={false}>False</option>
+                  <td className='flex items-center justify-center h-[80px]'>
+                    <select className='w-full h-full text-center px-2'
+                    value={user.isDeleted}
+                    onChange={(e) => handleLogicalDelete(user.id, e.target.value)}
+                    >
+                      <option value={true} selected={user.isDeleted}>true</option>
+                      <option value={false} selected={user.isDeleted}>false</option>
                     </select>
                   </td>
               </tr>

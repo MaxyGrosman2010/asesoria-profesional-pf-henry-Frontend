@@ -18,6 +18,7 @@ import {
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
   ALL_USERS,
+  UPDATE_USER,
   POST_COMENTARIO
 } from './actions-types';
 
@@ -156,6 +157,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload
+      }
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        allUsers: state.allUsers.map((user) => user.id === action.payload.id
+          ? {...user, ...action.payload}
+          : user
+        ),
       }
 
     case POST_COMENTARIO:

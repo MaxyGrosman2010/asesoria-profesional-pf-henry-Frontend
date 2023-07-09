@@ -25,3 +25,4 @@ export const POST_COMENTARIO = 'POST_COMENTARIO';
 
 //all users
 export const ALL_USERS = 'ALL_USERS'
+export const UPDATE_USER = 'UPDATE_USER'
