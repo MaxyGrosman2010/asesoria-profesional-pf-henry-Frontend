@@ -16,7 +16,8 @@ import {
   EDIT_USER,
   REFRESH_USER,
   GET_SERVICES_BY_USER,
-  UPDATE_SERVICE
+  UPDATE_SERVICE,
+  ALL_USERS
 } from './actions-types';
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   isPaymentInitiated: false,
   paymentResult: null,
   isAdmin: false,
+  allUsers : []
 };
 
 
@@ -147,6 +149,12 @@ const rootReducer = (state = initialState, action) => {
         allActivities: action.payload,
         copyState: action.payload,
       } 
+
+    case ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload
+      }
 
     default:
       return state;
