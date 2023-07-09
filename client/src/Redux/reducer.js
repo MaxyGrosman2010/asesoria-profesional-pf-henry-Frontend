@@ -17,7 +17,8 @@ import {
   REFRESH_USER,
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
-  ALL_USERS
+  ALL_USERS,
+  POST_COMENTARIO
 } from './actions-types';
 
 const initialState = {
@@ -30,7 +31,8 @@ const initialState = {
   isPaymentInitiated: false,
   paymentResult: null,
   isAdmin: false,
-  allUsers : []
+  allUsers : [],
+  comentario: [],
 };
 
 
@@ -154,6 +156,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload
+      }
+
+    case POST_COMENTARIO:
+      return {
+        ...state,
+        comentario: [...state.comentario ,action.payload]
       }
 
     default:

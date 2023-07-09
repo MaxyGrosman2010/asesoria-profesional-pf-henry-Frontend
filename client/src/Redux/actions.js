@@ -19,7 +19,8 @@ import {
   REFRESH_USER,
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
-  ALL_USERS
+  ALL_USERS,
+  POST_COMENTARIO
 } from './actions-types';
 import axios from 'axios';
 
@@ -270,5 +271,18 @@ export const getAllUsers = () => {
     const config = { headers: { Authorization: ` Bearer ${token}` } };
     const response = await axios.get('http://localhost:3001/allUsers/', config)
     return dispatch({ type: ALL_USERS, payload: response.data });
+  }
+}
+
+export const postComentario = (comentario) => {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: ` Bearer ${token}` } };
+      const response = await axios.post("http://localhost:3001/review/", comentario, config)
+      return dispatch({ type: POST_COMENTARIO, payload: response.data})
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
