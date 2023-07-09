@@ -29,8 +29,9 @@ const Payment = () => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } }
     axios
-      .post('http://localhost:3001/orderMP', itemsMapped, config)
+      .post('http://localhost:3001/orderMP/', itemsMapped, config)
       .then((response) => {
+        console.log('copraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', response.data);
         return response.data.id
       })
       .then((preference) => {
@@ -41,7 +42,7 @@ const Payment = () => {
         navigate('/allServices')
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error, 'ACA ERROR')
       })
   }
 

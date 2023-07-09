@@ -3,7 +3,7 @@ import bgd from '../../assets/background.jpg'
 import goog from '../../assets/iconGoogle.png'
 import validations from "./validations"
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { NavLink, Link,  useNavigate } from "react-router-dom"
 import { handleLogIn } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from "../../Redux/actions"
@@ -114,6 +114,7 @@ const LandingLogin = () => {
             <span className="ml-1 font-bold cursor-pointer underline">Register</span>
           </Link>
         </div>
+        <NavLink to='/adminLogin' className="bg-red-600 w-[120px]">logAdmin</NavLink>
         <div className='flex flex-col items-center justify-center mx-auto mt-2'>
           <p className='py-4'>or Login with</p>
           <img className="w-[40px]" src={goog} />
