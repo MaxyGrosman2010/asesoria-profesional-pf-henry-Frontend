@@ -19,7 +19,8 @@ import {
   REFRESH_USER,
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
-  ALL_USERS
+  ALL_USERS,
+  UPDATE_USER
 } from './actions-types';
 import axios from 'axios';
 
@@ -271,4 +272,8 @@ export const getAllUsers = () => {
     const response = await axios.get('http://localhost:3001/allUsers/', config)
     return dispatch({ type: ALL_USERS, payload: response.data });
   }
+}
+
+export const updateUser = (user) => {
+  return {type: UPDATE_USER, payload: user}
 }

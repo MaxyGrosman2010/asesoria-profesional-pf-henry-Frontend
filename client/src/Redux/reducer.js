@@ -17,7 +17,8 @@ import {
   REFRESH_USER,
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
-  ALL_USERS
+  ALL_USERS,
+  UPDATE_USER
 } from './actions-types';
 
 const initialState = {
@@ -154,6 +155,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload
+      }
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        allUsers: state.allUsers.map((user) => user.id === action.payload.id
+          ? {...user, ...action.payload}
+          : user
+        ),
       }
 
     default:
