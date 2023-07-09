@@ -21,3 +21,6 @@ export const PERSONAL_USER_DATA = 'PERSONAL_USER_DATA';
 export const REFRESH_USER = 'REFRESH_USER';
 export const GET_SERVICES_BY_USER = 'GET_SERVICES_BY_USER';
 export const UPDATE_SERVICE = 'UPDATE_SERVICE';
+
+//all users
+export const ALL_USERS = 'ALL_USERS'

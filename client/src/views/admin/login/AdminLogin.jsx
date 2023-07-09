@@ -57,7 +57,7 @@ const AdminLogin = () => {
   return (
     <div className="bg-slate-400 w-full h-screen flex items-center justify-center px-40">
       <div className="w-1/3 flex items-center justify-center h-screen flex-col gap-2 text-slate-950">
-        <span class="material-symbols-outlined">deployed_code</span>
+        <span className="material-symbols-outlined">deployed_code</span>
         <p className="font-medium italic text-slate-950">Panel admin</p>
       </div>
         <form onSubmit={handleSubmit} className="shadow-lg bg-slate-500 flex flex-col justify-center items-center w-1/2 mx-auto h-[800px]">

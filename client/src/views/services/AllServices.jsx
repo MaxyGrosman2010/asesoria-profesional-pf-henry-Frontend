@@ -27,7 +27,7 @@ const AllServices = () => {
         dispatch(getData())
         setTimeout(() => {
           setIsLoading(false)
-        }, 1500)
+        }, 2500)
       } catch (err) {
         setIsLoading(false)
       }
