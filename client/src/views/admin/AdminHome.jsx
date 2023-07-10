@@ -23,7 +23,7 @@ const AdminHome = () => {
       ...users.find((user) => user.id === userId),
       isDeleted: value === 'true'
     }
-    console.log(updateAdmin, 'asdasdas');
+    console.log(updateAdmin, 'adsasdasd');
     dispatch(updateUser(updateAdmin))
   }
 

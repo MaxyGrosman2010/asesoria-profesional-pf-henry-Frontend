@@ -18,7 +18,8 @@ import {
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
   ALL_USERS,
-  UPDATE_USER
+  UPDATE_USER,
+  IS_ADMIN
 } from './actions-types';
 
 const initialState = {
@@ -165,6 +166,16 @@ const rootReducer = (state = initialState, action) => {
           : user
         ),
       }
+
+      case IS_ADMIN:
+        return {
+          ...state,
+          allUsers: state.allUsers.map((user) => user.id === action.payload.id
+          ? {...user, ...action.payload}
+          : user
+        ),
+        }
+
 
     default:
       return state;

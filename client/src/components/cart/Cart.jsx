@@ -14,7 +14,7 @@ const Cart = ({handleCloseCart}) => {
   const [dataCart, setDataCart] = useState([])
  
   let data = items
-
+ 
   useEffect(() => {
     for(let values in data){
       if(data.hasOwnProperty(values)){
@@ -40,6 +40,9 @@ const Cart = ({handleCloseCart}) => {
     navigate('/allServices')
     handleCloseCart()
   }
+
+
+  console.log(dataCart);
 
   return (
     <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[50%]">
