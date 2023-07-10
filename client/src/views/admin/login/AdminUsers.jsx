@@ -17,7 +17,6 @@ const AdminUsers = () => {
       ...users.find((user) => user.id === userId),
       isAdmin: value === 'true'
     }
-    console.log(updateUser);
     dispatch(isAdminChange(updateUser))
   }
 

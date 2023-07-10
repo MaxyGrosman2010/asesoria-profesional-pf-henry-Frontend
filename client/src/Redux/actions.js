@@ -276,11 +276,6 @@ export const getAllUsers = () => {
   }
 }
 
-
-
-
-
-
 export const updateUser = (id) => {
   return async (dispatch) => {
       const token = localStorage.getItem('token')
@@ -290,20 +285,11 @@ export const updateUser = (id) => {
   }
 }
 
-
-
-
-
-
-
-
-
-
-// export const isAdminChange = () => {
-//   return async (dispatch) => {
-//     const token = localStorage.getItem('token')
-//       const config = { headers: { Authorization: ` Bearer ${token}`}};
-//       const response = await axios.put(`http://localhost:3001/changeAdmin/`, config)
-//       return dispatch({type: IS_ADMIN, payload: response.data})
-//   }
-// }
+export const isAdminChange = (id) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token')
+      const config = { headers: { Authorization: ` Bearer ${token}`}};
+      const response = await axios.put(`http://localhost:3001/changeAdmin/`, id, config)
+      return dispatch({type: IS_ADMIN, payload: response.data})
+  }
+}
