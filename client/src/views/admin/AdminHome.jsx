@@ -23,11 +23,8 @@ const AdminHome = () => {
       ...users.find((user) => user.id === userId),
       isDeleted: value === 'true'
     }
-    console.log(updateAdmin, 'adsasdasd');
     dispatch(updateUser(updateAdmin))
   }
-
-
 
   return (
     <div className="bg-slate-300 w-full h-screen p-20">
