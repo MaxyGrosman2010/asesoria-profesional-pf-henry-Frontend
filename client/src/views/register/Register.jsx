@@ -19,7 +19,7 @@ const Register = () => {
     email: '',
     password: '',
     repeatPassword: '',
-    profilePict: "https://lh3.googleusercontent.com/a/AAcHTtevDhsQJxe8dzwJxXMS8shoiseWHfaIt1nQk9Xa6ck=s96-c"
+    profilePict: "https://w7.pngwing.com/pngs/802/786/png-transparent-google-account-google-search-customer-service-google-logo-login-button-blue-sphere-car-rental-thumbnail.png"
   })
 
   const [errors, setErrors] = useState({
@@ -72,6 +72,7 @@ const Register = () => {
         });
       })
       .catch((error) => {
+        console.log("aqui esta el error de catch",error);
         Swal.fire({
           title: 'Error',
           text: error.response?.data?.error || 'An error occurred during registration.',
@@ -80,9 +81,6 @@ const Register = () => {
         });
       });
   };
-
-  
-
 
   return (
     

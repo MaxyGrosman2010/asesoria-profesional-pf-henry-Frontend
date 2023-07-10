@@ -11,20 +11,13 @@ import { signIn } from "../../Redux/actions"
 
 const LandingLogin = () => {
 
-
-  const users = useSelector((state) => state.userData)
-
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
 
   const [data, setData] = useState({
     email: '',
     password: '',
   })
-
 
   const [errors, setErrors] = useState({
     email: '',
@@ -42,7 +35,6 @@ const LandingLogin = () => {
       [event.target.name]: event.target.value,
     }))
   }
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -97,16 +89,10 @@ const LandingLogin = () => {
               placeholder="password..."
               type="password" />
           </div>
-
-
-
-
           <div className='flex flex-col ml-10 mt-4'>
             <button type="submit" className="drop-shadow-md uppercase bg-gray-700 w-[200px] py-3 text-white rounded mt-2">login</button>
             <p className="font-light mt-3">Forgot password?</p>
           </div>
-
-
         </div>
         <div className="flex items-center justify-center gap-3 mt-6 w-full py-2">
           <p className="font-light mt-1">You don´t have account?</p>
