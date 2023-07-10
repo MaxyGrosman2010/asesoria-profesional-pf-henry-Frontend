@@ -25,4 +25,7 @@ export const POST_COMENTARIO = 'POST_COMENTARIO';
 
 //all users
 export const ALL_USERS = 'ALL_USERS'
+//dashboard admin
 export const UPDATE_USER = 'UPDATE_USER'
+export const UPDATE_ADMIN = 'UPDATE_ADMIN'
+export const IS_ADMIN = 'IS_ADMIN'

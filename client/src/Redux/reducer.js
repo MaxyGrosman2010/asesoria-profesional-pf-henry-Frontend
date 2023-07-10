@@ -20,6 +20,7 @@ import {
   ALL_USERS,
   UPDATE_USER,
   POST_COMENTARIO
+  IS_ADMIN
 } from './actions-types';
 
 const initialState = {
@@ -172,6 +173,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         comentario: [...state.comentario ,action.payload]
+      }
+
+      case IS_ADMIN:
+        return {
+          ...state,
+          allUsers: state.allUsers.map((user) => user.id === action.payload.id
+          ? {...user, ...action.payload}
+          : user
+        ),
       }
 
     default:
