@@ -35,6 +35,7 @@ const initialState = {
   isAdmin: false,
   allUsers : [],
   comentario: [],
+  userServices: [],
 };
 
 
@@ -143,7 +144,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_SERVICES_BY_USER:
       return {
         ...state,
-        copyState: action.payload
+        userServices: [...state.userServices, action.payload]
       };
 
       //EN PROCESO!!!!!
