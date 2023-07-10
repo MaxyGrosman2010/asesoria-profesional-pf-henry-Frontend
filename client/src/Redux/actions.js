@@ -21,7 +21,7 @@ import {
   UPDATE_SERVICE,
   ALL_USERS,
   UPDATE_USER,
-  POST_COMENTARIO
+  POST_COMENTARIO,
   IS_ADMIN
 } from './actions-types';
 import axios from 'axios';
@@ -277,11 +277,6 @@ export const getAllUsers = () => {
   }
 }
 
-
-export const updateUser = (user) => {
-  return {type: UPDATE_USER, payload: user}
-}
-
 export const postComentario = (comentario) => {
   return async (dispatch) => {
     try {
@@ -292,6 +287,8 @@ export const postComentario = (comentario) => {
     } catch (error) {
       console.log(error);
     }
+  }
+};
 
 export const updateUser = (id) => {
   return async (dispatch) => {
