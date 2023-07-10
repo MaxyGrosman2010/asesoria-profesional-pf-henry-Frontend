@@ -160,7 +160,6 @@ export const signIn = (payload) => {
         'http://localhost:3001/singIn',
         payload
       );
-      console.log(response.data);
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
@@ -168,11 +167,8 @@ export const signIn = (payload) => {
         name: name,
         profilePict: profilePict,
       };
-
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
-
-      // const data = {name : name, profilePict: profilePict};
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
     } catch (error) {
       console.error('Error al iniciar sesión', error);
@@ -207,21 +203,17 @@ export const editUser = (payload) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-
       formData.append('method', 'put');
       formData.append('name', payload.name);
       formData.append('password', payload.password);
       formData.append('profilePict', payload.profilePict);
-
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
-
       const response = await axios.put(
         'http://localhost:3001/editUser',
         formData,
         config
       );
-
       return dispatch({ type: EDIT_USER, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -237,12 +229,10 @@ export const getServicesByUser = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-
     const response = await axios(
       'http://localhost:3001/getServiceByUser/',
       config
     );
-
     console.log(response.data);
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
@@ -255,12 +245,10 @@ export const updateService = () =>{
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-
     const response = await axios(
       'http://localhost:3001/editService/',
       config
     );
-
     console.log(response.data);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
   }
