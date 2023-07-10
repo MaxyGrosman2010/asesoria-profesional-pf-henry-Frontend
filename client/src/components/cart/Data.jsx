@@ -5,7 +5,6 @@ import { useSelector } from "react-redux"
 const Data = ({handleDeleteItem}) => {
 
     const items = useSelector((state) => state.items)
-    console.log(items);
 
   return (
     <div>

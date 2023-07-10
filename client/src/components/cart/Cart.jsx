@@ -42,9 +42,6 @@ const Cart = ({handleCloseCart}) => {
     handleCloseCart()
   }
 
-
-  console.log(dataCart);
-
   return (
     <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[50%]">
       <div className="p-4 rounded h-full">
