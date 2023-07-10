@@ -20,7 +20,8 @@ import {
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
   ALL_USERS,
-  UPDATE_USER
+  UPDATE_USER,
+  IS_ADMIN
 } from './actions-types';
 import axios from 'axios';
 
@@ -274,6 +275,34 @@ export const getAllUsers = () => {
   }
 }
 
-export const updateUser = (user) => {
-  return {type: UPDATE_USER, payload: user}
+
+
+
+
+
+export const updateUser = (id) => {
+  return async (dispatch) => {
+      const token = localStorage.getItem('token')
+      const config = { headers: { Authorization: ` Bearer ${token}` } };
+      const response = await axios.put(`http://localhost:3001/deleteUser/`, id, config)
+      return dispatch({type: UPDATE_USER, payload: response.data})
+  }
 }
+
+
+
+
+
+
+
+
+
+
+// export const isAdminChange = () => {
+//   return async (dispatch) => {
+//     const token = localStorage.getItem('token')
+//       const config = { headers: { Authorization: ` Bearer ${token}`}};
+//       const response = await axios.put(`http://localhost:3001/changeAdmin/`, config)
+//       return dispatch({type: IS_ADMIN, payload: response.data})
+//   }
+// }
