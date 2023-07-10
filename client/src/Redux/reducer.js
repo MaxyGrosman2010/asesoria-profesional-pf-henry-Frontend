@@ -19,6 +19,7 @@ import {
   UPDATE_SERVICE,
   ALL_USERS,
   UPDATE_USER,
+  POST_COMENTARIO
   IS_ADMIN
 } from './actions-types';
 
@@ -32,7 +33,8 @@ const initialState = {
   isPaymentInitiated: false,
   paymentResult: null,
   isAdmin: false,
-  allUsers : []
+  allUsers : [],
+  comentario: [],
 };
 
 
@@ -167,6 +169,12 @@ const rootReducer = (state = initialState, action) => {
         ),
       }
 
+    case POST_COMENTARIO:
+      return {
+        ...state,
+        comentario: [...state.comentario ,action.payload]
+      }
+
       case IS_ADMIN:
         return {
           ...state,
@@ -175,7 +183,6 @@ const rootReducer = (state = initialState, action) => {
           : user
         ),
       }
-
 
     default:
       return state;
