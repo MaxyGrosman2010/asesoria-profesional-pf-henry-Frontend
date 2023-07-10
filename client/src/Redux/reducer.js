@@ -19,7 +19,7 @@ import {
   UPDATE_SERVICE,
   ALL_USERS,
   UPDATE_USER,
-  POST_COMENTARIO
+  POST_COMENTARIO,
   IS_ADMIN
 } from './actions-types';
 
