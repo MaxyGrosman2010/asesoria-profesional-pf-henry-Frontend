@@ -116,9 +116,8 @@ const LandingLogin = () => {
         </div>
         <div className='flex flex-col items-center justify-center mx-auto mt-2'>
           <p className='py-4'>or Login with</p>
-          <img className="w-[40px]" src={goog} />
-          <button onClick={handleClickLogin}>
-            <span className="font-bold uppercase mt-4">logo</span>
+          <button  onClick={handleClickLogin} className="bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 inline-flex items-center">
+               <img className="w-[40px]" src={goog} />
           </button>
         </div>
       </form>
