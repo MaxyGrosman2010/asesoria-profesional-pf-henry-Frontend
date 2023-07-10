@@ -174,7 +174,7 @@ const rootReducer = (state = initialState, action) => {
           ? {...user, ...action.payload}
           : user
         ),
-        }
+      }
 
 
     default:
