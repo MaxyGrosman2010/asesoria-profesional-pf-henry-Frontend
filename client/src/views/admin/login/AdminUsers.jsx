@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import { getAllUsers } from "../../../Redux/actions"
+import { getAllUsers, isAdminChange } from "../../../Redux/actions"
 
 const AdminUsers = () => {
 
@@ -52,12 +52,6 @@ const AdminUsers = () => {
               </td>
             </tr>
           ))}
-   
-      
-       
-         
-      
-          
           </tbody>
       </table>
     </div>
