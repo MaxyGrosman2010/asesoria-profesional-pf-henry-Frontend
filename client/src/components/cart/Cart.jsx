@@ -13,8 +13,9 @@ const Cart = ({handleCloseCart}) => {
 
   const [dataCart, setDataCart] = useState([])
  
+  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
+
   let data = items
- 
   useEffect(() => {
     for(let values in data){
       if(data.hasOwnProperty(values)){
@@ -41,9 +42,6 @@ const Cart = ({handleCloseCart}) => {
     handleCloseCart()
   }
 
-
-  console.log(dataCart);
-
   return (
     <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[50%]">
       <div className="p-4 rounded h-full">
@@ -61,7 +59,7 @@ const Cart = ({handleCloseCart}) => {
             </div>
 
           <div className="flex w-full">
-            <p className="mx-auto mt-10">Total: {'total'}</p>
+            <p className="mx-auto mt-10">Total: {totalPrice}</p>
           </div>
 
         <div className="flex items-center justify-around w-full mt-10">

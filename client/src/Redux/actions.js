@@ -22,7 +22,7 @@ import {
   ALL_USERS,
   UPDATE_USER,
   POST_COMENTARIO,
-  IS_ADMIN
+  IS_ADMIN,
 } from './actions-types';
 import axios from 'axios';
 
@@ -229,28 +229,18 @@ export const refreshUser = (user) => {
 export const getServicesByUser = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios(
-      'http://localhost:3001/getServiceByUser/',
-      config
-    );
-    console.log(response.data);
+    const config = { headers: { Authorization: ` Bearer ${token}`}};
+    const response = await axios('http://localhost:3001/getServiceByUser/', config);
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
 };
-
-
 
 //EN PROCESO!!!
 export const updateService = () =>{
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios(
-      'http://localhost:3001/editService/',
-      config
-    );
-    console.log(response.data);
+    const response = await axios('http://localhost:3001/editService/', config);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
   }
 }

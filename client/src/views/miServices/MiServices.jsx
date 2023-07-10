@@ -7,7 +7,7 @@ const MiServices = () => {
 
     
     const dispatch = useDispatch();
-    
+    const data = useSelector((state) => state.userServices)
 
     const handleEdit = () => {
         dispatch(getService())
@@ -19,7 +19,9 @@ const MiServices = () => {
 
     useEffect(() => {
       dispatch(getServicesByUser());
-    }, []);
+    }, [])
+
+    console.log(data, 'asdasdasda');
 
 
   return (
