@@ -9,7 +9,8 @@ const AdminNav = () => {
               <span class="material-symbols-outlined">badge</span>
               <span>admins</span>
             </NavLink>
-            <NavLink to='/allServices' className="cursor-pointer bg-slate-700 w-[180px] text-center py-2 rounded hover:bg-slate-800">Go to Services</NavLink>
+            <NavLink to='/adminServices' className="cursor-pointer bg-slate-700 w-[180px] text-center py-2 rounded hover:bg-slate-800 flex items-center justify-center gap-2">All Servicies</NavLink>
+            <NavLink to='/allServices' className="cursor-pointer bg-slate-700 w-[180px] text-center py-2 rounded hover:bg-slate-800 flex items-center justify-center gap-2">Go to Services</NavLink>
             <NavLink to='/adminLogin' className="cursor-pointer bg-slate-700 w-[180px] text-center py-2 rounded hover:bg-slate-800 flex items-center justify-center gap-2">
               <span class="material-symbols-outlined">face</span>
               <span>Logout</span>

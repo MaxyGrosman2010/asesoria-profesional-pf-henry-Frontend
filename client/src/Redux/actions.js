@@ -24,6 +24,7 @@ import {
   POST_COMENTARIO,
   IS_ADMIN,
   DELETE_SERVICE_BY_USER,
+  ALL_SERVICES_ADMIN
 } from './actions-types';
 import axios from 'axios';
 
@@ -154,10 +155,10 @@ export const signIn = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${URL_BASE}/singIn`, payload);
-      console.log(response.data);
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
+<<<<<<< HEAD
       const isAdmin = response.data.isAdmin;
       console.log('la imagen que debería devolverme', profilePict);
       const user = {
@@ -165,11 +166,14 @@ export const signIn = (payload) => {
         profilePict: profilePict,
         isAdmin: isAdmin
       };
+=======
+      const user = {name: name, profilePict: profilePict};
+>>>>>>> develop
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
     } catch (error) {
-      // Manejar el error aquí si es necesario
+      console.log(error)
     }
   };
 };
@@ -297,3 +301,13 @@ export const deleteService = (id) => {
     return dispatch({ type: DELETE_SERVICE_BY_USER, payload: response.data });
   };
 };
+
+
+export const allServicesAdmin = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const response = await axios.get(`${URL_BASE}/allServiceAdmin/`, config);
+    return dispatch({ type: ALL_SERVICES_ADMIN, payload: response.data });
+  }
+}
