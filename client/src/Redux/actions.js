@@ -236,11 +236,11 @@ export const getServicesByUser = () => {
 
 
 //EN PROCESO!!!
-export const updateService = () =>{
+export const updateService = (update) =>{
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios('http://localhost:3001/editService/', config);
+    const response = await axios.put('http://localhost:3001/editService', update, config);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
   }
 }
