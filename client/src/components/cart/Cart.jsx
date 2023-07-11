@@ -14,7 +14,6 @@ const Cart = ({handleCloseCart}) => {
   const [dataCart, setDataCart] = useState([])
  
   let data = items
- 
   useEffect(() => {
     for(let values in data){
       if(data.hasOwnProperty(values)){
@@ -41,11 +40,11 @@ const Cart = ({handleCloseCart}) => {
     handleCloseCart()
   }
 
-
-  console.log(dataCart);
+  const totalPrice = items.reduce((acc, curr) => acc + curr.price, 0)
+  
 
   return (
-    <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[50%]">
+    <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[60%]">
       <div className="p-4 rounded h-full">
 
         <div className="flex gap-4 w-full items-center justify-between ">
@@ -60,8 +59,9 @@ const Cart = ({handleCloseCart}) => {
             <Data dataCart={dataCart} handleDeleteItem={handleDeleteItem} items={items} />           
             </div>
 
-          <div className="flex w-full">
-            <p className="mx-auto mt-10">Total: {'total'}</p>
+          <div className="flex w-full justify-center gap-4 items-center">
+            <p className="font-bold">Total:</p>
+            <span>$ {totalPrice}</span>
           </div>
 
         <div className="flex items-center justify-around w-full mt-10">
