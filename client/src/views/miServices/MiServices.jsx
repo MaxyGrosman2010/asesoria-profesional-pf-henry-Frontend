@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getServicesByUser } from '../../Redux/actions'
+import { getServicesByUser, getService } from '../../Redux/actions'
 import { NavLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -46,7 +46,10 @@ const MiServices = () => {
     }, [])
 
   
-      
+    
+    const handleEdit = (id) => {
+      dispatch(getService(id))
+  }  
 
 
 
@@ -77,7 +80,7 @@ const MiServices = () => {
             </td>
             <td className="flex items-center gap-2 justify-center w-full py-2">
               <NavLink to='/editService'> 
-                <button onClick={'edit'} className="bg-blue-500 w-[100px] rounded py-1 text-white">edit</button>
+                <button onClick={() => handleEdit(Number(serv.id))} className="bg-blue-500 w-[100px] rounded py-1 text-white">edit</button>
               </NavLink>
                 <button onClick={() => handleDelete(serv.id)} className="bg-red-500 w-[100px] rounded py-1 text-white">delete</button>
             </td>
