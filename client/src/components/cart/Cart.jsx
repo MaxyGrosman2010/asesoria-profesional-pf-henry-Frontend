@@ -43,7 +43,7 @@ const Cart = ({handleCloseCart}) => {
   }
 
   return (
-    <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[50%]">
+    <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[60%]">
       <div className="p-4 rounded h-full">
 
         <div className="flex gap-4 w-full items-center justify-between ">

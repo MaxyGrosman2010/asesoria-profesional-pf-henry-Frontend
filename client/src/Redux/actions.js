@@ -27,9 +27,9 @@ import {
 } from './actions-types';
 import axios from 'axios';
 
-const URL_BASE =
-  'https://backend-production-cda4.up.railway.app'; /* 'http://localhost:3001';*/
+const URL_BASE = 'http://localhost:3001';
 
+  // 'https://backend-production-cda4.up.railway.app'; 
 export const getData = () => {
   return async (dispatch) => {
     try {
@@ -287,15 +287,11 @@ export const isAdminChange = (id) => {
   };
 };
 
-export const deleteService = () => {
+export const deleteService = (id) => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios.delete(`${URL_BASE}/deleteService/`, config);
-    return dispatch({ type: DEL_ONE_SERVICE, payload: response.data });
+    const response = await axios.put(`${URL_BASE}/deleteService/`, {id}, config);
+    return dispatch({ type: DELETE_SERVICE_BY_USER, payload: response.data });
   };
-};
-
-export const deleteServiceByUser = (payload) => {
-  return { type: DELETE_SERVICE_BY_USER, payload };
 };
