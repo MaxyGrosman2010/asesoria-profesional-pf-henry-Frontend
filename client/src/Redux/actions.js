@@ -23,6 +23,7 @@ import {
   UPDATE_USER,
   POST_COMENTARIO,
   IS_ADMIN,
+  DELETE_SERVICE_BY_USER,
 } from './actions-types';
 import axios from 'axios';
 
@@ -230,10 +231,12 @@ export const getServicesByUser = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}`}};
-    const response = await axios('http://localhost:3001/getServiceByUser/', config);
+    const response = await axios.get('http://localhost:3001/getServiceByUser/', config);
+    console.log(response);
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
 };
+
 
 //EN PROCESO!!!
 export const updateService = () =>{
@@ -282,4 +285,17 @@ export const isAdminChange = (id) => {
       const response = await axios.put(`http://localhost:3001/changeAdmin/`, id, config)
       return dispatch({type: IS_ADMIN, payload: response.data})
   }
+}
+
+export const deleteService = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token')
+    const config = { headers: {Authorization: ` Bearer ${token}`}}
+    const response = await axios.delete('http://localhost:3001/deleteService/', config)
+    return dispatch({type: DEL_ONE_SERVICE, payload: response.data })
+  }
+}
+
+export const deleteServiceByUser = (payload) => {
+  return {type: DELETE_SERVICE_BY_USER, payload}
 }
