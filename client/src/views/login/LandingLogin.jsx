@@ -11,20 +11,13 @@ import { signIn } from "../../Redux/actions"
 
 const LandingLogin = () => {
 
-
-  const users = useSelector((state) => state.userData)
-
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
 
   const [data, setData] = useState({
     email: '',
     password: '',
   })
-
 
   const [errors, setErrors] = useState({
     email: '',
@@ -43,7 +36,6 @@ const LandingLogin = () => {
     }))
   }
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validations(data);
@@ -56,10 +48,28 @@ const LandingLogin = () => {
       })
       return;
     }
-    dispatch(signIn(data));
-    navigate('/home');
+    dispatch(signIn(data)).
+      then(()=> {
+         Swal.fire({
+           title : 'Welcome!',
+           icon : 'success',
+           confirmButtonText : 'Accept',
+           customClass : {
+            confirmButton : 'bg-red-500 text-white',
+           },
+         }).then(() => {
+           navigate('/home');
+         });
+      })
+    .catch( (error) => {
+      Swal.fire({
+        title : 'Error',
+        text : error.response?.data?.error || 'invalid credentials',
+        icon : "error",
+        confirmButtonText : 'Accept',
+      })
+    })
   }
-
 
   const handleClickLogin = () => {
     dispatch(handleLogIn());
@@ -97,16 +107,10 @@ const LandingLogin = () => {
               placeholder="password..."
               type="password" />
           </div>
-
-
-
-
           <div className='flex flex-col ml-10 mt-4'>
             <button type="submit" className="drop-shadow-md uppercase bg-gray-700 w-[200px] py-3 text-white rounded mt-2">login</button>
             <p className="font-light mt-3">Forgot password?</p>
           </div>
-
-
         </div>
         <div className="flex items-center justify-center gap-3 mt-6 w-full py-2">
           <p className="font-light mt-1">You don´t have account?</p>

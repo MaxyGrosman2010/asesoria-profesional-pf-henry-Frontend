@@ -22,7 +22,8 @@ import {
   ALL_USERS,
   UPDATE_USER,
   POST_COMENTARIO,
-  IS_ADMIN
+  IS_ADMIN,
+  DELETE_SERVICE_BY_USER,
 } from './actions-types';
 import axios from 'axios';
 
@@ -156,14 +157,13 @@ export const cleanUser = (payload) => {
 
 export const signIn = (payload) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3001/singIn',
-        payload
-      );
+  
+      const response = await axios.post('http://localhost:3001/singIn',payload);
+      console.log('mi respuesta ', response);
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
+      console.log( "la imagen que deveria devolverme",profilePict);
       const user = {
         name: name,
         profilePict: profilePict,
@@ -171,9 +171,7 @@ export const signIn = (payload) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
-    } catch (error) {
-      console.error('Error al iniciar sesión', error);
-    }
+
   };
 };
 
@@ -229,16 +227,12 @@ export const refreshUser = (user) => {
 export const getServicesByUser = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios(
-      'http://localhost:3001/getServiceByUser/',
-      config
-    );
-    console.log(response.data);
+    const config = { headers: { Authorization: ` Bearer ${token}`}};
+    const response = await axios.get('http://localhost:3001/getServiceByUser/', config);
+    console.log(response);
     return dispatch({ type: GET_SERVICES_BY_USER, payload: response.data });
   };
 };
-
 
 
 //EN PROCESO!!!
@@ -246,11 +240,7 @@ export const updateService = () =>{
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios(
-      'http://localhost:3001/editService/',
-      config
-    );
-    console.log(response.data);
+    const response = await axios('http://localhost:3001/editService/', config);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
   }
 }
@@ -294,4 +284,17 @@ export const isAdminChange = (id) => {
       const response = await axios.put(`http://localhost:3001/changeAdmin/`, id, config)
       return dispatch({type: IS_ADMIN, payload: response.data})
   }
+}
+
+export const deleteService = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token')
+    const config = { headers: {Authorization: ` Bearer ${token}`}}
+    const response = await axios.delete('http://localhost:3001/deleteService/', config)
+    return dispatch({type: DEL_ONE_SERVICE, payload: response.data })
+  }
+}
+
+export const deleteServiceByUser = (payload) => {
+  return {type: DELETE_SERVICE_BY_USER, payload}
 }
