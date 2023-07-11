@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { removeAll } from '../../Redux/actions';
 const URL_BASE = 'http://localhost:3001';
+const URL_DEPLOY = 'https://backend-production-cda4.up.railway.app';
 initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
 
 const Payment = () => {
@@ -27,7 +28,7 @@ const Payment = () => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
     axios
-      .post('http://localhost:3001/orderMP/', itemsMapped, config)
+      .post(`${URL_DEPLOY}/orderMP/`, itemsMapped, config)
       .then((response) => {
         return response.data.id;
       })

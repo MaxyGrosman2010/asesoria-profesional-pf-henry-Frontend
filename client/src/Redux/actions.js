@@ -27,7 +27,8 @@ import {
 } from './actions-types';
 import axios from 'axios';
 
-const URL_BASE = 'http://localhost:3001';
+const URL_BASE =
+  'https://backend-production-cda4.up.railway.app'; /* 'http://localhost:3001';*/
 
 export const getData = () => {
   return async (dispatch) => {
@@ -157,7 +158,7 @@ export const signIn = (payload) => {
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
-      console.log( "la imagen que deveria devolverme",profilePict);
+      console.log('la imagen que debería devolverme', profilePict);
       const user = {
         name: name,
         profilePict: profilePict,
@@ -165,7 +166,9 @@ export const signIn = (payload) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
-
+    } catch (error) {
+      // Manejar el error aquí si es necesario
+    }
   };
 };
 
@@ -244,7 +247,7 @@ export const getAllUsers = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios.get('http://localhost:3001/allUsers/', config);
+    const response = await axios.get(`${URL_BASE}/allUsers/`, config);
     return dispatch({ type: ALL_USERS, payload: response.data });
   };
 };
@@ -254,40 +257,45 @@ export const postComentario = (comentario) => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
-      const response = await axios.post("http://localhost:3001/review/", comentario, config)
-      return dispatch({ type: POST_COMENTARIO, payload: response.data})
+      const response = await axios.post(
+        `${URL_BASE}/review/`,
+        comentario,
+        config
+      );
+      return dispatch({ type: POST_COMENTARIO, payload: response.data });
     } catch (error) {
       console.log(error);
     }
-  }}
+  };
+};
 
 export const updateUser = (id) => {
   return async (dispatch) => {
-      const token = localStorage.getItem('token')
-      const config = { headers: { Authorization: ` Bearer ${token}` } };
-      const response = await axios.put(`http://localhost:3001/deleteUser/`, id, config)
-      return dispatch({type: UPDATE_USER, payload: response.data})
-  }
-}
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const response = await axios.put(`${URL_BASE}/deleteUser/`, id, config);
+    return dispatch({ type: UPDATE_USER, payload: response.data });
+  };
+};
 
 export const isAdminChange = (id) => {
   return async (dispatch) => {
-    const token = localStorage.getItem('token')
-      const config = { headers: { Authorization: ` Bearer ${token}`}};
-      const response = await axios.put(`http://localhost:3001/changeAdmin/`, id, config)
-      return dispatch({type: IS_ADMIN, payload: response.data})
-  }
-}
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const response = await axios.put(`${URL_BASE}/changeAdmin/`, id, config);
+    return dispatch({ type: IS_ADMIN, payload: response.data });
+  };
+};
 
 export const deleteService = () => {
   return async (dispatch) => {
-    const token = localStorage.getItem('token')
-    const config = { headers: {Authorization: ` Bearer ${token}`}}
-    const response = await axios.delete('http://localhost:3001/deleteService/', config)
-    return dispatch({type: DEL_ONE_SERVICE, payload: response.data })
-  }
-}
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const response = await axios.delete(`${URL_BASE}/deleteService/`, config);
+    return dispatch({ type: DEL_ONE_SERVICE, payload: response.data });
+  };
+};
 
 export const deleteServiceByUser = (payload) => {
-  return {type: DELETE_SERVICE_BY_USER, payload}
-}
+  return { type: DELETE_SERVICE_BY_USER, payload };
+};
