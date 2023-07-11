@@ -22,6 +22,7 @@ import EditService from './views/edit service/EditService';
 import FormReview from './views/service/FormReview';
 import Loader from './components/loader/Loader';
 import MyShopping from './views/myShopping/MyShopping';
+import AdminAllServices from './views/admin/AdminAllServices';
 
 function App() {
   const location = useLocation();
@@ -69,6 +70,7 @@ function App() {
             <Route path='/adminLogin' index element={<AdminLogin />} />
             <Route path='/adminHome' element={<AdminHome />} />
             <Route path='/adminUsers' element={<AdminUsers />} />
+            <Route path='/adminServices' element={<AdminAllServices />} />
           </Routes>
         </>
       )}

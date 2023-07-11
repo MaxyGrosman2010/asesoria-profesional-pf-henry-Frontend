@@ -39,7 +39,6 @@ const LandingLogin = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formErrors = validations(data);
-    console.log(formErrors);
     if (Object.keys(formErrors).length > 0) {
       Swal.fire({
         title: 'empty fields',
