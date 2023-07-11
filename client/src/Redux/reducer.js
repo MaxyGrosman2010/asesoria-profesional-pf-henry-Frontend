@@ -21,7 +21,8 @@ import {
   UPDATE_USER,
   POST_COMENTARIO,
   IS_ADMIN,
-  DELETE_SERVICE_BY_USER
+  DELETE_SERVICE_BY_USER,
+  ALL_SERVICES_ADMIN
 } from './actions-types';
 
 const initialState = {
@@ -37,6 +38,7 @@ const initialState = {
   allUsers : [],
   comentario: [],
   userServices: [],
+  allServicesAdmin : []
 };
 
 
@@ -189,6 +191,12 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           userServices: updateServices
+        }
+
+      case ALL_SERVICES_ADMIN:
+        return {
+          ...state,
+          allServicesAdmin: action.payload
         }
 
     default:
