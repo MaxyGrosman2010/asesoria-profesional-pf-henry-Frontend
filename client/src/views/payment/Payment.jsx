@@ -33,7 +33,7 @@ const Payment = () => {
         return response.data.id;
       })
       .then((preference) => {
-        window.open(preference);
+        window.open(preference, '_blank', 'width=1300,height=830');
       })
       .then(() => {
         dispatch(removeAll());
