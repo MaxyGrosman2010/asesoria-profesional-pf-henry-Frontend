@@ -48,10 +48,28 @@ const LandingLogin = () => {
       })
       return;
     }
-    dispatch(signIn(data));
-    navigate('/home');
+    dispatch(signIn(data)).
+      then(()=> {
+         Swal.fire({
+           title : 'Welcome!',
+           icon : 'success',
+           confirmButtonText : 'Accept',
+           customClass : {
+            confirmButton : 'bg-red-500 text-white',
+           },
+         }).then(() => {
+           navigate('/home');
+         });
+      })
+    .catch( (error) => {
+      Swal.fire({
+        title : 'Error',
+        text : error.response?.data?.error || 'invalid credentials',
+        icon : "error",
+        confirmButtonText : 'Accept',
+      })
+    })
   }
-
 
   const handleClickLogin = () => {
     dispatch(handleLogIn());
