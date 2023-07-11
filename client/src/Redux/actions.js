@@ -21,6 +21,9 @@ import {
   UPDATE_SERVICE,
   ALL_USERS,
   UPDATE_USER,
+  POST_COMENTARIO,
+  IS_ADMIN,
+  DELETE_SERVICE_BY_USER,
 } from './actions-types';
 import axios from 'axios';
 
@@ -154,19 +157,15 @@ export const signIn = (payload) => {
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
+      console.log( "la imagen que deveria devolverme",profilePict);
       const user = {
         name: name,
         profilePict: profilePict,
       };
-
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
-
-      // const data = {name : name, profilePict: profilePict};
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
-    } catch (error) {
-      console.error('Error al iniciar sesión', error);
-    }
+
   };
 };
 
@@ -194,21 +193,17 @@ export const editUser = (payload) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-
       formData.append('method', 'put');
       formData.append('name', payload.name);
       formData.append('password', payload.password);
       formData.append('profilePict', payload.profilePict);
-
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
-
       const response = await axios.put(
         `${URL_BASE}/editUser`,
         formData,
         config
       );
-
       return dispatch({ type: EDIT_USER, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -254,6 +249,45 @@ export const getAllUsers = () => {
   };
 };
 
-export const updateUser = (user) => {
-  return { type: UPDATE_USER, payload: user };
-};
+export const postComentario = (comentario) => {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: ` Bearer ${token}` } };
+      const response = await axios.post("http://localhost:3001/review/", comentario, config)
+      return dispatch({ type: POST_COMENTARIO, payload: response.data})
+    } catch (error) {
+      console.log(error);
+    }
+  }}
+
+export const updateUser = (id) => {
+  return async (dispatch) => {
+      const token = localStorage.getItem('token')
+      const config = { headers: { Authorization: ` Bearer ${token}` } };
+      const response = await axios.put(`http://localhost:3001/deleteUser/`, id, config)
+      return dispatch({type: UPDATE_USER, payload: response.data})
+  }
+}
+
+export const isAdminChange = (id) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token')
+      const config = { headers: { Authorization: ` Bearer ${token}`}};
+      const response = await axios.put(`http://localhost:3001/changeAdmin/`, id, config)
+      return dispatch({type: IS_ADMIN, payload: response.data})
+  }
+}
+
+export const deleteService = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token')
+    const config = { headers: {Authorization: ` Bearer ${token}`}}
+    const response = await axios.delete('http://localhost:3001/deleteService/', config)
+    return dispatch({type: DEL_ONE_SERVICE, payload: response.data })
+  }
+}
+
+export const deleteServiceByUser = (payload) => {
+  return {type: DELETE_SERVICE_BY_USER, payload}
+}

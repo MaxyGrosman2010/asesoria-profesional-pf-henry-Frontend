@@ -28,6 +28,9 @@ function App() {
   const dispatch = useDispatch();
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isLoginAdmin = location.pathname === '/adminLogin';
+  const hideNavbar =
+    location.pathname === '/login' || location.pathname === '/register';
+  console.log('  .....   ', !hideNavbar);
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -43,7 +46,9 @@ function App() {
         <Home />
       ) : (
         <>
-          {!isLoginAdmin && (isAdminRoute ? <AdminNav /> : <Navbar />)}
+          {!isLoginAdmin &&
+            !hideNavbar &&
+            (isAdminRoute ? <AdminNav /> : <Navbar />)}
           <Routes>
             <Route path='/login' element={<LandingLogin />} />
             <Route path='/home' element={<Home />} />

@@ -18,7 +18,10 @@ import {
   GET_SERVICES_BY_USER,
   UPDATE_SERVICE,
   ALL_USERS,
-  UPDATE_USER
+  UPDATE_USER,
+  POST_COMENTARIO,
+  IS_ADMIN,
+  DELETE_SERVICE_BY_USER
 } from './actions-types';
 
 const initialState = {
@@ -31,7 +34,9 @@ const initialState = {
   isPaymentInitiated: false,
   paymentResult: null,
   isAdmin: false,
-  allUsers : []
+  allUsers : [],
+  comentario: [],
+  userServices: [],
 };
 
 
@@ -88,9 +93,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case DEL_ONE_SERVICE:
-      const updateItems = state.items.filter(
-        (item) => item.id !== action.payload
-      );
+      const updateItems = state.items.filter((item) => item.id !== action.payload)
       return {
         ...state,
         items: updateItems,
@@ -140,7 +143,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_SERVICES_BY_USER:
       return {
         ...state,
-        copyState: action.payload
+        userServices: action.payload
       };
 
       //EN PROCESO!!!!!
@@ -165,6 +168,28 @@ const rootReducer = (state = initialState, action) => {
           : user
         ),
       }
+
+    case POST_COMENTARIO:
+      return {
+        ...state,
+        comentario: [...state.comentario ,action.payload]
+      }
+
+      case IS_ADMIN:
+        return {
+          ...state,
+          allUsers: state.allUsers.map((user) => user.id === action.payload.id
+          ? {...user, ...action.payload}
+          : user
+        ),
+      }
+
+      case DELETE_SERVICE_BY_USER:
+        const updateServices = state.userServices.filter((serv) => serv.id !== action.payload.id)
+        return {
+          ...state,
+          userServices: updateServices
+        }
 
     default:
       return state;
