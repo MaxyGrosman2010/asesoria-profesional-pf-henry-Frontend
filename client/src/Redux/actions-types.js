@@ -25,6 +25,7 @@ export const POST_COMENTARIO = 'POST_COMENTARIO';
 
 //all users
 export const ALL_USERS = 'ALL_USERS'
+export const DELETE_SERVICE_BY_USER = 'DELETE_SERVICE_BY_USER'
 //dashboard admin
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_ADMIN = 'UPDATE_ADMIN'
