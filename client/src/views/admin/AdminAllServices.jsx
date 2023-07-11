@@ -12,7 +12,6 @@ const AdminAllServices = () => {
     
     const data = useSelector((state) => state.allServicesAdmin)
 
-    console.log(data, 'SERVICIOS');
 
 
   return (
@@ -32,9 +31,9 @@ const AdminAllServices = () => {
           <tr key={user.id}>
             <td className='flex items-center justify-center'>{user.name}</td>
             <td className='border border-gray-400 px-4 py-2 h-auto w-auto cursor-pointer text-center hover:bg-slate-600 hover:text-white'>{user.typeService}</td>
-            <td>{user.isDeleted}</td>
-            <td>{user.userIsDeleted}</td>
-          </tr>
+            <td className={user.isDeleted ? 'text-green-500 text-center' : 'text-red-500 text-center'}>{user.isDeleted ? 'True' : 'False'}</td>
+            <td className={user.userIsDeleted ? 'text-green-500 text-center' : 'text-red-500 text-center'}>{user.userIsDeleted ? 'True' : 'False'}</td>
+         </tr>
         ))}
         </tbody>
     </table>
