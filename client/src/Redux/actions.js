@@ -156,14 +156,13 @@ export const cleanUser = (payload) => {
 
 export const signIn = (payload) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3001/singIn',
-        payload
-      );
+  
+      const response = await axios.post('http://localhost:3001/singIn',payload);
+      console.log('mi respuesta ', response);
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
+      console.log( "la imagen que deveria devolverme",profilePict);
       const user = {
         name: name,
         profilePict: profilePict,
@@ -171,9 +170,7 @@ export const signIn = (payload) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
-    } catch (error) {
-      console.error('Error al iniciar sesión', error);
-    }
+
   };
 };
 
