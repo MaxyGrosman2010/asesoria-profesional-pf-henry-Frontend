@@ -158,7 +158,17 @@ export const signIn = (payload) => {
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
+<<<<<<< HEAD
+      const isAdmin = response.data.isAdmin;
+      console.log('la imagen que debería devolverme', profilePict);
+      const user = {
+        name: name,
+        profilePict: profilePict,
+        isAdmin: isAdmin
+      };
+=======
       const user = {name: name, profilePict: profilePict};
+>>>>>>> develop
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });

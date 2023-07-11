@@ -53,6 +53,8 @@ const Navbar = () => {
     localStorage.removeItem("user");
   }
 
+  console.log(userData);
+
   return (
     <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
         <div className="flex items-center ml-[300px]">
@@ -63,6 +65,7 @@ const Navbar = () => {
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
               <NavLink to='/contact'>Contact</NavLink>
+              
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
@@ -78,7 +81,8 @@ const Navbar = () => {
                       <NavLink to="/editProfile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Edit Profile</NavLink>
                       <NavLink to='/miServices' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My Services</NavLink>
                       <NavLink to='/myShopping' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">My shopping</NavLink>
-                      <div className="flex items-center justify-between px-8 py-2 text-sm text-gray-700 gap-4 hover:bg-gray-300">
+                      {userData.isAdmin && <NavLink to='/adminHome' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" >Admin Dashboard</NavLink>}
+                    <div className="flex items-center justify-between px-8 py-2 text-sm text-gray-700 gap-4 hover:bg-gray-300">
                         <span className="material-symbols-outlined">logout</span>
                       <NavLink onClick={close} to='/'>Logout</NavLink>
                     </div>
