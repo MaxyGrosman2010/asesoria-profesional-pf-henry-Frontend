@@ -73,7 +73,6 @@ const LandingLogin = () => {
 
   const handleClickLogin = () => {
     dispatch(handleLogIn());
-    navigate('/home');
   }
 
 
