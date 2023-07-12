@@ -25,7 +25,7 @@ import {
   IS_ADMIN,
   DELETE_SERVICE_BY_USER,
   ALL_SERVICES_ADMIN,
-  CONTACT_US
+  CONTACT_US,
 } from './actions-types';
 import axios from 'axios';
 
@@ -126,12 +126,16 @@ export const removeAll = (payload) => {
 export const handleLogIn = () => {
   return (dispatch) => {
     // Abrir una nueva ventana para el inicio de sesión de Google
-    const popup = window.open('auth', 'Login', 'width=500,height=500');
+    const popup = window.open(
+      `${URL_BASE}/auth`,
+      'Login',
+      'width=500,height=500'
+    );
     window.addEventListener('message', (event) => {
       if (event.origin === URL_BASE) {
         const { name, email, profilePict } = event.data;
         dispatch(loginSuccess({ name, email, profilePict }));
-        popup.close();
+        //popup.close();
       }
     });
   };
@@ -153,18 +157,21 @@ export const cleanUser = (payload) => {
 
 export const signIn = (payload) => {
   return async (dispatch) => {
-
-      const response = await axios.post(`${URL_BASE}/singIn`, payload);
-      const token = response.data.token;
-      const name = response.data.name;
-      const profilePict = response.data.profilePict;
-      const isAdmin = response.data.isAdmin;
-      const isSuperAdmin = response.data.isSuperAdmin;
-      const user = {name: name, profilePict: profilePict, isAdmin: isAdmin, isSuperAdmin: isSuperAdmin}
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
-      return dispatch({ type: LOGIN_SUCCESS, payload: user });
-   
+    const response = await axios.post(`${URL_BASE}/singIn`, payload);
+    const token = response.data.token;
+    const name = response.data.name;
+    const profilePict = response.data.profilePict;
+    const isAdmin = response.data.isAdmin;
+    const isSuperAdmin = response.data.isSuperAdmin;
+    const user = {
+      name: name,
+      profilePict: profilePict,
+      isAdmin: isAdmin,
+      isSuperAdmin: isSuperAdmin,
+    };
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+    return dispatch({ type: LOGIN_SUCCESS, payload: user });
   };
 };
 
@@ -174,7 +181,6 @@ export const signUp = (payload) => {
     return dispatch({ type: SIGN_UP, payload: response.data });
   };
 };
-
 
 export const personalUserData = () => {
   return async (dispatch) => {
@@ -230,16 +236,20 @@ export const getServicesByUser = () => {
 //EN PROCESO!!!
 export const updateService = (payload) => {
   return async (dispatch) => {
-    const formData = new FormData()
-    formData.append('id', payload.id)
-    formData.append('name', payload.name)
-    formData.append('price', payload.price)
-    formData.append('description', payload.description)
-    formData.append('files', payload.files)
+    const formData = new FormData();
+    formData.append('id', payload.id);
+    formData.append('name', payload.name);
+    formData.append('price', payload.price);
+    formData.append('description', payload.description);
+    formData.append('files', payload.files);
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
 
-    const response = await axios.put(`${URL_BASE}/editService`, formData, config);
+    const response = await axios.put(
+      `${URL_BASE}/editService`,
+      formData,
+      config
+    );
 
     console.log(response.data);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
@@ -265,6 +275,7 @@ export const postComentario = (comentario) => {
         comentario,
         config
       );
+      console.log(comentario);
       return dispatch({ type: POST_COMENTARIO, payload: response.data });
     } catch (error) {
       console.log(error);
@@ -294,11 +305,14 @@ export const deleteService = (id) => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios.put(`${URL_BASE}/deleteService/`, {id}, config);
+    const response = await axios.put(
+      `${URL_BASE}/deleteService/`,
+      { id },
+      config
+    );
     return dispatch({ type: DELETE_SERVICE_BY_USER, payload: response.data });
   };
 };
-
 
 export const allServicesAdmin = () => {
   return async (dispatch) => {
@@ -306,13 +320,13 @@ export const allServicesAdmin = () => {
     const config = { headers: { Authorization: ` Bearer ${token}` } };
     const response = await axios.get(`${URL_BASE}/allServiceAdmin/`, config);
     return dispatch({ type: ALL_SERVICES_ADMIN, payload: response.data });
-  }
-}
+  };
+};
 
-export const sendContact = (contact)  =>  {
-  return async(dispatch) => {
-     const response = await axios.post(`${URL_BASE}/contactUs`,contact);
-     return dispatch({type : CONTACT_US, payload : response.data})
-  }
-}
+export const sendContact = (contact) => {
+  return async (dispatch) => {
+    const response = await axios.post(`${URL_BASE}/contactUs`, contact);
+    return dispatch({ type: CONTACT_US, payload: response.data });
+  };
+};
 //Para borrar el env borrar a futuro

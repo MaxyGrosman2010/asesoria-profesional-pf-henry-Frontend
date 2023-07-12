@@ -65,7 +65,10 @@ const Payment = () => {
       <div className='bg-white mx-auto w-full p-10 flex flex-col h-[800px] mt-40'>
         <div className='w-3/4 h-[600px] rounded bg-slate-400 mx-auto shadow-md flex items-center justify-center flex-col py-2'>
           {items.map((item) => (
-            <div key={item.id} className='flex items-center justify-around w-3/4 border rounded bg-gray-200 py-2 my-1'>
+            <div
+              key={item.id}
+              className='flex items-center justify-around w-3/4 border rounded bg-gray-200 py-2 my-1'
+            >
               <div className='flex'>
                 <div className='flex gap-2 items-center'>
                   <span className='font-medium'>{item.name}</span>
@@ -82,8 +85,18 @@ const Payment = () => {
         </div>
         <div className='flex flex-col h-[700px] w-1/2 mx-auto items-center justify-center py-2 my-10'>
           <div className='flex items-center justify-around w-full mx-auto gap-4'>
-            <button className='bg-green-600 w-[120px] rounded py-2 text-white shadow-md hover:bg-green-500' onClick={handleClick}>Pay</button>
-            <button onClick={handleChange} className='bg-red-600 px-4 py-2 rounded shadow-md hover:bg-red-500 text-white w-[120px] text-center'>Cancel</button>
+            <button
+              className='bg-green-600 w-[120px] rounded py-2 text-white shadow-md hover:bg-green-500'
+              onClick={handleClick}
+            >
+              Pay
+            </button>
+            <button
+              onClick={handleChange}
+              className='bg-red-600 px-4 py-2 rounded shadow-md hover:bg-red-500 text-white w-[120px] text-center'
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
