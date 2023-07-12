@@ -29,7 +29,7 @@ import {
 import axios from 'axios';
 
 const URL_BASE =
-  'https://backend-production-cda4.up.railway.app'; /*'http://localhost:3001';*/
+  /*'https://backend-production-cda4.up.railway.app';*/ 'http://localhost:3001';
 
 export const getData = () => {
   return async (dispatch) => {
@@ -126,12 +126,16 @@ export const removeAll = (payload) => {
 export const handleLogIn = () => {
   return (dispatch) => {
     // Abrir una nueva ventana para el inicio de sesión de Google
-    const popup = window.open('auth', 'Login', 'width=500,height=500');
+    const popup = window.open(
+      `${URL_BASE}/auth`,
+      'Login',
+      'width=500,height=500'
+    );
     window.addEventListener('message', (event) => {
       if (event.origin === URL_BASE) {
         const { name, email, profilePict } = event.data;
         dispatch(loginSuccess({ name, email, profilePict }));
-        popup.close();
+        //popup.close();
       }
     });
   };
