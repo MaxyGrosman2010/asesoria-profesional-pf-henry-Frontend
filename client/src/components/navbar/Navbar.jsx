@@ -15,6 +15,8 @@ const Navbar = () => {
   const pageWrapper = useRef(null);
   const [cartOpen, setCartOpen] = useState(false)
   const token = localStorage.getItem('token');
+
+
   
   const handleOpenCart = () => {
     if(item.length === 0) {
