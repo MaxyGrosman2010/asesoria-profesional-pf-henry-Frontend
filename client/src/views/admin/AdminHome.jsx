@@ -12,12 +12,7 @@ const AdminHome = () => {
     dispatch(getAllUsers())
   }, [])
 
-  const colors = {
-    green: 'green',
-    red: 'red'
-  }
-
-
+  
   const handleLogicalDelete = (userId, value) => {
     const updateAdmin = {
       ...users.find((user) => user.id === userId),

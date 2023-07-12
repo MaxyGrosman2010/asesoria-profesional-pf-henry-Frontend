@@ -24,6 +24,7 @@ import {
   POST_COMENTARIO,
   IS_ADMIN,
   DELETE_SERVICE_BY_USER,
+  ALL_SERVICES_ADMIN,
 } from './actions-types';
 import axios from 'axios';
 
@@ -152,23 +153,15 @@ export const cleanUser = (payload) => {
 
 export const signIn = (payload) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.post(`${URL_BASE}/singIn`, payload);
-      console.log(response.data);
-      const token = response.data.token;
-      const name = response.data.name;
-      const profilePict = response.data.profilePict;
-      console.log('la imagen que debería devolverme', profilePict);
-      const user = {
-        name: name,
-        profilePict: profilePict,
-      };
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
-      return dispatch({ type: LOGIN_SUCCESS, payload: user });
-    } catch (error) {
-      // Manejar el error aquí si es necesario
-    }
+    const response = await axios.post(`${URL_BASE}/singIn`, payload);
+    const token = response.data.token;
+    const name = response.data.name;
+    const profilePict = response.data.profilePict;
+    const isAdmin = response.data.isAdmin;
+    const user = { name: name, profilePict: profilePict, isAdmin: isAdmin };
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+    return dispatch({ type: LOGIN_SUCCESS, payload: user });
   };
 };
 
@@ -231,12 +224,22 @@ export const getServicesByUser = () => {
 };
 
 //EN PROCESO!!!
-export const updateService = () => {
+export const updateService = (payload) => {
   return async (dispatch) => {
+    const formData = new FormData();
+    formData.append('id', payload.id);
+    formData.append('name', payload.name);
+    formData.append('price', payload.price);
+    formData.append('description', payload.description);
+    formData.append('files', payload.files);
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
 
-    const response = await axios(`${URL_BASE}/editService/`, config);
+    const response = await axios.put(
+      `${URL_BASE}/editService`,
+      formData,
+      config
+    );
 
     console.log(response.data);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });
@@ -288,15 +291,24 @@ export const isAdminChange = (id) => {
   };
 };
 
-export const deleteService = () => {
+export const deleteService = (id) => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
-    const response = await axios.delete(`${URL_BASE}/deleteService/`, config);
-    return dispatch({ type: DEL_ONE_SERVICE, payload: response.data });
+    const response = await axios.put(
+      `${URL_BASE}/deleteService/`,
+      { id },
+      config
+    );
+    return dispatch({ type: DELETE_SERVICE_BY_USER, payload: response.data });
   };
 };
 
-export const deleteServiceByUser = (payload) => {
-  return { type: DELETE_SERVICE_BY_USER, payload };
+export const allServicesAdmin = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: ` Bearer ${token}` } };
+    const response = await axios.get(`${URL_BASE}/allServiceAdmin/`, config);
+    return dispatch({ type: ALL_SERVICES_ADMIN, payload: response.data });
+  };
 };

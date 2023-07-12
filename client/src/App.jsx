@@ -22,6 +22,7 @@ import EditService from './views/edit service/EditService';
 import FormReview from './views/service/FormReview';
 import Loader from './components/loader/Loader';
 import MyShopping from './views/myShopping/MyShopping';
+import AdminAllServices from './views/admin/AdminAllServices';
 
 function App() {
   const location = useLocation();
@@ -30,8 +31,10 @@ function App() {
   const isLoginAdmin = location.pathname === '/adminLogin';
   const hideNavbar =
     location.pathname === '/login' || location.pathname === '/register';
-  console.log('  .....   ', !hideNavbar);
-
+    console.log('  .....   ', !hideNavbar);
+  const myToken = localStorage.getItem('token');
+  
+  console.log("pepito",myToken);   
   useEffect(() => {
     const user = localStorage.getItem('user');
     const userData = JSON.parse(user);
@@ -46,9 +49,10 @@ function App() {
         <Home />
       ) : (
         <>
-          {!isLoginAdmin &&
-            !hideNavbar &&
-            (isAdminRoute ? <AdminNav /> : <Navbar />)}
+          {!isLoginAdmin 
+           && myToken
+           && !hideNavbar
+           && (isAdminRoute ? <AdminNav /> : <Navbar />)}
           <Routes>
             <Route path='/login' element={<LandingLogin />} />
             <Route path='/home' element={<Home />} />
@@ -61,7 +65,7 @@ function App() {
             <Route path='/createServices' element={<CreateServices />} />
             <Route path='/register' element={<Register />} />
             <Route path='/miServices' element={<MiServices />} />
-            <Route path='/editService' element={<EditService />} />
+            <Route path='/editService/:id' element={<EditService />} />
             <Route path='/review' element={<FormReview />} />
             <Route path='/myShopping' element={<MyShopping />} />
           </Routes>
@@ -69,6 +73,7 @@ function App() {
             <Route path='/adminLogin' index element={<AdminLogin />} />
             <Route path='/adminHome' element={<AdminHome />} />
             <Route path='/adminUsers' element={<AdminUsers />} />
+            <Route path='/adminServices' element={<AdminAllServices />} />
           </Routes>
         </>
       )}
