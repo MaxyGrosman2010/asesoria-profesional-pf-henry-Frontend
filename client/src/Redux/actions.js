@@ -24,7 +24,8 @@ import {
   POST_COMENTARIO,
   IS_ADMIN,
   DELETE_SERVICE_BY_USER,
-  ALL_SERVICES_ADMIN
+  ALL_SERVICES_ADMIN,
+  CONTACT_US
 } from './actions-types';
 import axios from 'axios';
 
@@ -305,5 +306,12 @@ export const allServicesAdmin = () => {
     const config = { headers: { Authorization: ` Bearer ${token}` } };
     const response = await axios.get(`${URL_BASE}/allServiceAdmin/`, config);
     return dispatch({ type: ALL_SERVICES_ADMIN, payload: response.data });
+  }
+}
+
+export const sendContact = (contact)  =>  {
+  return async(dispatch) => {
+     const response = await axios.post(`${URL_BASE}/contactUs`,contact);
+     return dispatch({type : CONTACT_US, payload : response.data})
   }
 }
