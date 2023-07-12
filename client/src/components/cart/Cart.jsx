@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import { removeFromCart, removeAll } from "../../Redux/actions"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
 
 const Cart = ({handleCloseCart}) => {
 
@@ -37,10 +38,23 @@ const Cart = ({handleCloseCart}) => {
   }
 
   const handleDeleteAll = () => {
-    dispatch(removeAll())
-    navigate('/allServices')
-    handleCloseCart()
-  }
+    Swal.fire({
+      title: 'Are you sure to cancel the payment?',
+      icon: 'question',
+      iconHtml: '?',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No', 
+      showCancelButton: true,
+      showCloseButton: true,
+      cancelButtonColor: 'red',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeAll());
+        navigate('/allServices');
+        handleCloseCart();
+      }
+    });
+  };
 
   return (
     <div className="p-10 fixed right-0 top-0 h-[900px] bg-white shadow-lg w-[60%]">

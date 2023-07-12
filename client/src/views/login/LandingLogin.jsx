@@ -84,7 +84,6 @@ const LandingLogin = () => {
 
        })
     })
-    // dispatch(handleLogIn());
   }
 
 
@@ -120,7 +119,6 @@ const LandingLogin = () => {
           </div>
           <div className='flex flex-col ml-10 mt-4'>
             <button type="submit" className="drop-shadow-md uppercase bg-gray-700 w-[200px] py-3 text-white rounded mt-2">login</button>
-            <p className="font-light mt-3">Forgot password?</p>
           </div>
         </div>
         <div className="flex items-center justify-center gap-3 mt-6 w-full py-2">
