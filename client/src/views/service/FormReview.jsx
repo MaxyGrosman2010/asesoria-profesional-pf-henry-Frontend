@@ -14,15 +14,13 @@ const FormReview = () => {
     const [hover, setHover] = useState(null);
     const [review, setReview] = useState({
         reviewDescription: "",
-        rating: null,
+        score: null,
     });
     const [errors, setErrors] = useState({
         reviewDescription: "",
-        rating: null,
+        score: null,
     });
-    useEffect(() => {
-        console.log(review);
-    }, [review])
+    
     const handleChange = (event) => {
         
         setReview({
@@ -42,12 +40,12 @@ const FormReview = () => {
     const handleScore = (score) => {
         setReview({
             ...review,
-            rating: score,
+            score: score,
         })
         setErrors(
             validationReview({
                 ...review,
-                rating: score,
+                score: score,
             })
         )
     }
@@ -69,7 +67,7 @@ const FormReview = () => {
 
         setReview({
             reviewDescription: '',
-            rating: null
+            score: null
         })
         Swal.fire({
             title: 'Success',
@@ -116,7 +114,7 @@ const FormReview = () => {
                 <input
                     className="hidden"
                     type="radio"
-                    name="rating"
+                    name="score"
                     value={currentRating}
                     onClick={() => handleScore(currentRating)}
 
@@ -125,7 +123,7 @@ const FormReview = () => {
                     className="cursor-pointer"
                     size={30}
                     color={
-                    currentRating <= (hover || review.rating) ? "#ffc107" : "e4e5e9"
+                    currentRating <= (hover || review.score) ? "#ffc107" : "e4e5e9"
                     }
                     onMouseEnter={() => setHover(currentRating)}
                     onMouseLeave={() => setHover(null)}

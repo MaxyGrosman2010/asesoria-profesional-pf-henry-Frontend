@@ -5,7 +5,7 @@ const validationReview = (review) => {
     if(!review.reviewDescription){
         errors.message = 'field cant be empty'
     }
-    if(!review.rating){
+    if(!review.score){
         errors.message = 'seleccione cuantas star'
     }
 
