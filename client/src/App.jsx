@@ -29,12 +29,9 @@ function App() {
   const dispatch = useDispatch();
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isLoginAdmin = location.pathname === '/adminLogin';
-  const hideNavbar =
-    location.pathname === '/login' || location.pathname === '/register';
-    console.log('  .....   ', !hideNavbar);
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
   const myToken = localStorage.getItem('token');
-  
-  console.log("pepito",myToken);   
+
   useEffect(() => {
     const user = localStorage.getItem('user');
     const userData = JSON.parse(user);

@@ -13,12 +13,11 @@ const AdminUsers = () => {
   }, [])
   
   const handleAdminChange = (userId, value) => {
-    const updateUser = {
-      ...users.find((user) => user.id === userId),
-      isAdmin: value === 'true'
-    }
+    const updateUser = {...users.find((user) => user.id === userId), isAdmin: value === 'true'}
     dispatch(isAdminChange(updateUser))
   }
+  
+  
 
 
   return (
