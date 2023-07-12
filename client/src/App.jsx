@@ -31,8 +31,10 @@ function App() {
   const isLoginAdmin = location.pathname === '/adminLogin';
   const hideNavbar =
     location.pathname === '/login' || location.pathname === '/register';
-  console.log('  .....   ', !hideNavbar);
-
+    console.log('  .....   ', !hideNavbar);
+  const myToken = localStorage.getItem('token');
+  
+  console.log("pepito",myToken);   
   useEffect(() => {
     const user = localStorage.getItem('user');
     const userData = JSON.parse(user);
@@ -47,9 +49,10 @@ function App() {
         <Home />
       ) : (
         <>
-          {!isLoginAdmin &&
-            !hideNavbar &&
-            (isAdminRoute ? <AdminNav /> : <Navbar />)}
+          {!isLoginAdmin 
+           && myToken
+           && !hideNavbar
+           && (isAdminRoute ? <AdminNav /> : <Navbar />)}
           <Routes>
             <Route path='/login' element={<LandingLogin />} />
             <Route path='/home' element={<Home />} />
