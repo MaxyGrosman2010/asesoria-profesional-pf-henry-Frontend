@@ -71,8 +71,19 @@ const LandingLogin = () => {
   }
 
   const handleClickLogin = () => {
-    dispatch(handleLogIn());
-    navigate('/home');
+    dispatch(handleLogIn())
+    .then(() => { 
+      navigate('/home');    
+    }).
+    catch((error) => {
+       Swal.fire({
+        title : 'Error',
+        text : 'Martin arregla el login porfavor',
+        icon : 'error',
+        confirmButtonText : 'Accept'
+
+       })
+    })
   }
 
 
