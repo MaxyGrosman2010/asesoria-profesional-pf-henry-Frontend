@@ -227,12 +227,18 @@ export const getServicesByUser = () => {
 };
 
 //EN PROCESO!!!
-export const updateService = () => {
+export const updateService = (payload) => {
   return async (dispatch) => {
+    const formData = new FormData()
+    formData.append('id', payload.id)
+    formData.append('name', payload.name)
+    formData.append('price', payload.price)
+    formData.append('description', payload.description)
+    formData.append('files', payload.files)
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
 
-    const response = await axios(`${URL_BASE}/editService/`, config);
+    const response = await axios.put(`${URL_BASE}/editService`, formData, config);
 
     console.log(response.data);
     return dispatch({ type: UPDATE_SERVICE, payload: response.data });

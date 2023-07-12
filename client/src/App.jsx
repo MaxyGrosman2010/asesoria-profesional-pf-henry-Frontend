@@ -62,7 +62,7 @@ function App() {
             <Route path='/createServices' element={<CreateServices />} />
             <Route path='/register' element={<Register />} />
             <Route path='/miServices' element={<MiServices />} />
-            <Route path='/editService' element={<EditService />} />
+            <Route path='/editService/:id' element={<EditService />} />
             <Route path='/review' element={<FormReview />} />
             <Route path='/myShopping' element={<MyShopping />} />
           </Routes>
