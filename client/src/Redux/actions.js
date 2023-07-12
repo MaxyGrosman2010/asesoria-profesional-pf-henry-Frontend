@@ -158,8 +158,9 @@ export const signIn = (payload) => {
       const token = response.data.token;
       const name = response.data.name;
       const profilePict = response.data.profilePict;
-      const isAdmin = response.data.isAdmin
-      const user = {name: name, profilePict: profilePict, isAdmin: isAdmin}
+      const isAdmin = response.data.isAdmin;
+      const isSuperAdmin = response.data.isSuperAdmin;
+      const user = {name: name, profilePict: profilePict, isAdmin: isAdmin, isSuperAdmin: isSuperAdmin}
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
