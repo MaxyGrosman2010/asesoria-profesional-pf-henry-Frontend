@@ -19,9 +19,7 @@ const FormReview = () => {
     reviewDescription: '',
     score: null,
   });
-  useEffect(() => {
-    console.log(review);
-  }, [review]);
+
   const handleChange = (event) => {
     setReview({
       ...review,

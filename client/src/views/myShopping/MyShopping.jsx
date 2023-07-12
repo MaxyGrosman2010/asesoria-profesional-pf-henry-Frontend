@@ -21,8 +21,8 @@ const MyShopping = () => {
                 </tbody>
             </tbody>
         </table>
-    </div>
-  )
+    </div> 
+    )
 }
 
 export default MyShopping
