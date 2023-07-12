@@ -28,7 +28,7 @@ import {
 } from './actions-types';
 import axios from 'axios';
 
-const URL_BASE = import.meta.env.VITE_URL_BASE
+const URL_BASE = import.meta.env.VITE_URL_BASE;
 
 export const getData = () => {
   return async (dispatch) => {
