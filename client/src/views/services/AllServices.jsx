@@ -61,11 +61,6 @@ const AllServices = () => {
             </div>
           ))
         )}
-
-        
-
-
-
       </div>
       <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
     </div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getServicesByUser, getService, deleteService, getData } from '../../Redux/actions'
 import { NavLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import NotFound from './NotFound';
 
 const MiServices = () => {
 
@@ -16,8 +17,6 @@ const MiServices = () => {
     
     const services = useSelector((state) => state.userServices)
 
-    //falta funcion de editar - freddy desde aca debes llamar al form de edicion
-
     const handleDelete = (id) => {
       Swal.fire({
         icon: 'warning',
@@ -29,31 +28,13 @@ const MiServices = () => {
       }).then((result) => {
         if (result.isConfirmed) {
             dispatch(deleteService(id))
-            if (updatedData.length === 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Services not found',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/allServices');
-                    }
-                });
-            }
         }
-    });
-};
-
-    
-
-  
+      })
+    }
     
     const handleEdit = (id) => {
       dispatch(getService(id))
   }  
-
-
-
 
   return (
     
@@ -91,11 +72,8 @@ const MiServices = () => {
     </table>
 
     ) : (
-      <p>no services found</p>
+      <NotFound />
     )}
-
-
-
 
   </div>
   </div>

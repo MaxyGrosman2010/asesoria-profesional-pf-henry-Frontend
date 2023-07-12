@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 
 
 const Navbar = () => {
+
   const userData =  useSelector((state) => state.userData);
   const dispatch = useDispatch()
   const item = useSelector((state) => state.items)
@@ -16,8 +17,6 @@ const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false)
   const token = localStorage.getItem('token');
 
-
-  
   const handleOpenCart = () => {
     if(item.length === 0) {
       Swal.fire({
@@ -55,8 +54,6 @@ const Navbar = () => {
     localStorage.removeItem("user");
   }
 
-  console.log(userData);
-
   return (
     <div className="mx-auto flex items-center justify-between p-4 min-h-40 w-full fixed bg-white">
         <div className="flex items-center ml-[300px]">
@@ -66,8 +63,7 @@ const Navbar = () => {
           <ul className="flex gap-[100px] mr-4">
               <NavLink to='/home'>Home</NavLink>
               <NavLink to='/allServices'>Services</NavLink>
-              <NavLink to='/contact'>Contact</NavLink>
-              
+              <NavLink to='/contact'>Contact</NavLink>            
           </ul>
           {location.pathname !== '/login' && (
           <div className="flex shadow-md rounded">
