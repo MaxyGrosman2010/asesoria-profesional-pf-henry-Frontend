@@ -28,7 +28,7 @@ import {
 import axios from 'axios';
 
 const URL_BASE =
-  'https://backend-production-cda4.up.railway.app'; /* 'http://localhost:3001';*/
+  'https://backend-production-cda4.up.railway.app'; /*'http://localhost:3001';*/
 
 export const getData = () => {
   return async (dispatch) => {
@@ -262,6 +262,7 @@ export const postComentario = (comentario) => {
         comentario,
         config
       );
+      console.log(comentario);
       return dispatch({ type: POST_COMENTARIO, payload: response.data });
     } catch (error) {
       console.log(error);

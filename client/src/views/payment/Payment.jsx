@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { removeAll } from '../../Redux/actions';
-const URL_BASE = 'http://localhost:3001';
-const URL_DEPLOY = 'https://backend-production-cda4.up.railway.app';
+
+const URL_DEPLOY =
+  /*
+  'https://backend-production-cda4.up.railway.app';*/ 'http://localhost:3001';
 initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
 
 const Payment = () => {
