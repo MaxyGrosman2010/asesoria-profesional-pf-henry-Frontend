@@ -153,7 +153,7 @@ export const cleanUser = (payload) => {
 
 export const signIn = (payload) => {
   return async (dispatch) => {
-    try {
+
       const response = await axios.post(`${URL_BASE}/singIn`, payload);
       const token = response.data.token;
       const name = response.data.name;
@@ -163,9 +163,7 @@ export const signIn = (payload) => {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       return dispatch({ type: LOGIN_SUCCESS, payload: user });
-    } catch (error) {
-      console.log(error)
-    }
+   
   };
 };
 
@@ -175,6 +173,7 @@ export const signUp = (payload) => {
     return dispatch({ type: SIGN_UP, payload: response.data });
   };
 };
+
 
 export const personalUserData = () => {
   return async (dispatch) => {
