@@ -31,3 +31,5 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_ADMIN = 'UPDATE_ADMIN'
 export const IS_ADMIN = 'IS_ADMIN'
 export const ALL_SERVICES_ADMIN = 'ALL_SERVICES_ADMIN'
+//contact 
+export const CONTACT_US = "CONTACT_US";

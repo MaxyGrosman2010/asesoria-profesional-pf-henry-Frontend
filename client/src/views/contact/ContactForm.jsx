@@ -1,9 +1,11 @@
 import { useState } from "react"
 import validationsContact from "./validationsContact"
-import Swal from "sweetalert2"
-
+import Swal from "sweetalert2";
+import {useDispatch} from 'react-redux';
+import  {sendContact} from '../../Redux/actions';
 const ContactForm = () => {
 
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: '',
@@ -44,16 +46,26 @@ const ContactForm = () => {
       email: '',
       message: '',
     })
-
-    Swal.fire({
-      title: 'Success',
-      text: 'Your message has been sent!',
-      icon: 'success',
-      confirmButtonText: 'OK',
+    console.log("mi formulario",form);
+    dispatch(sendContact(form))
+    .then(() => {
+          Swal.fire({
+              title: 'Success',
+              text: 'Your message has been sent!',
+              icon: 'success',
+              confirmButtonText: 'OK',
+     })
     })
-  }
-
-
+    .catch ( (error) => {
+       Swal.fire({
+         title : 'Error',
+         text : 'invalid!',
+         icon : 'error',
+         confirmButtonText : 'Accept',
+       })
+    })
+  
+ }
 
   return (
     <>
