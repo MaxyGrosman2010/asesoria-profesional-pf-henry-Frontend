@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getServicesByUser, getService, deleteService, getData } from '../../Redux/actions'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import NotFound from './NotFound';
 
 const MiServices = () => {
 
-    const navigate = useNavigate()
     const dispatch = useDispatch();
 
     useEffect(() => {

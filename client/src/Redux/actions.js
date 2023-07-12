@@ -29,9 +29,8 @@ import {
 } from './actions-types';
 import axios from 'axios';
 
-const URL_BASE = 'http://localhost:3001';
+const URL_BASE = import.meta.env.VITE_URL_BASE;
 
-  // 'https://backend-production-cda4.up.railway.app'; 
 export const getData = () => {
   return async (dispatch) => {
     try {
