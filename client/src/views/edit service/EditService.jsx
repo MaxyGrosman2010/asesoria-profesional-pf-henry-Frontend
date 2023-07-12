@@ -1,29 +1,35 @@
 import { useEffect, useState } from 'react';
-// import validationsService from './validations';
+import validationsService from './validations';
 import Swal from 'sweetalert2';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateService, getService } from '../../Redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const EditService = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const serv = useSelector((state) => state.oneActivity);
   console.log("hola soy oneActivity",serv);
-  console.log("asjkdhhjkasdhjklasjkhldhjkls", serv.id);
+  console.log("soy el id!!!!!!!!!", serv?.id);
 
  const [edit, setEdit] = useState({
-    id: +serv.id,
     name: '',
     description: '',
     price: '',
-    file: null,
-    typeService: serv.type,
+    files: null,
   })
 
+  const [errors, setErrors] = useState({
+    name: '',
+    description: '',
+    price: '',
+  });
 
   useEffect(() =>{
-    dispatch(getService())
+    dispatch(getService(id))
   }, [])
 
   const handleChange = (event) => {
@@ -34,21 +40,55 @@ const EditService = () => {
       ? +event.target.value
       : event.target.value,
     })
+    setErrors(
+      validationsService({
+        ...edit,
+        [event.target.name]: event.target.value,
+      })
+    )
   };
 
   const handleFile = (e) => {
     const filed = e.target.files[0];
     setEdit({
       ...edit,
-      file: filed,
+      files: filed,
     });
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    dispatch(updateService(edit))
-    console.log(edit);
+    event.preventDefault();
+    const formErrors = validationsService(edit);
+    if (Object.keys(formErrors).length > 0) {
+      Swal.fire({
+        title: 'empty fields',
+        icon: 'error',
+        confirm: 'acept',
+      });
+      return;
+    }
+  
+    dispatch(
+      updateService({
+        ...edit,
+        id: serv?.id,
+      })
+    );
+  
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Success',
+        text: 'updated service!',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        setTimeout(() => {
+          navigate('/allServices');
+        }, 2000); 
+      });
+    }, 1575); 
   };
+  
 
 
   return (
@@ -109,9 +149,14 @@ const EditService = () => {
           value={edit.name}
           onChange={handleChange}
           className='bg-gray-200 border border-gray-300 py-2 pl-2'
-          placeholder={serv.name}
+          placeholder='Name'
           type='text'
-        />
+        />{errors.name && (
+          <div className='flex ml-1 gap-1 text-red-600 mt-1'>
+            <span className='material-symbols-outlined'>error</span>
+            {errors.name}
+          </div>
+        )}
         <input
           name='type'
           value={serv.type}
@@ -125,15 +170,25 @@ const EditService = () => {
           onChange={handleChange}
           className='bg-gray-200 border border-gray-300 py-2 pl-2 '
           type='number'
-          placeholder={serv.price}
-        />
+          placeholder='Price'
+        />{errors.price && (
+          <div className='flex ml-1 gap-1 text-red-600 mt-1'>
+            <span className='material-symbols-outlined'>error</span>
+            {errors.price}
+          </div>
+        )}
         <textarea
           name='description'
           value={edit.description}
           onChange={handleChange}
           className='bg-gray-200 border border-gray-300 py-2 pl-2 h-[100px]'
-          placeholder={serv.description}
-        />
+          placeholder='Description...'
+        />{errors.description && (
+          <div className='flex ml-1 gap-1 text-red-600 mt-1'>
+            <span className='material-symbols-outlined'>error</span>
+            {errors.description}
+          </div>
+        )}
       </div>
       <div className='w-full flex flex-col h-[150px] mt-10'>
         <input

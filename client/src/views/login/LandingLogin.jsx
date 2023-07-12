@@ -84,7 +84,7 @@ const LandingLogin = () => {
 
        })
     })
-    dispatch(handleLogIn());
+    // dispatch(handleLogIn());
   }
 
 

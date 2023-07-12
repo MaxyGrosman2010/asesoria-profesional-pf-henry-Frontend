@@ -48,9 +48,9 @@ const MiServices = () => {
 
   
     
-  //   const handleEdit = (id) => {
-  //     dispatch(getService(id))
-  // }  
+    const handleEdit = (id) => {
+      dispatch(getService(id))
+  }  
 
 
 
@@ -80,8 +80,8 @@ const MiServices = () => {
                 <p>${serv.price}</p>
             </td>
             <td className="flex items-center gap-2 justify-center w-full py-2">
-              <NavLink to='/editService'> 
-                <button className="bg-blue-500 w-[100px] rounded py-1 text-white">edit</button>
+              <NavLink to={`/editService/${serv.id}`}> 
+                <button onClick={() => handleEdit(serv.id)} className="bg-blue-500 w-[100px] rounded py-1 text-white">edit</button>
               </NavLink>
                 <button onClick={() => handleDelete(serv.id)} className="bg-red-500 w-[100px] rounded py-1 text-white">delete</button>
             </td>
