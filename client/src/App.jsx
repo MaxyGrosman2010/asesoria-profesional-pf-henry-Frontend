@@ -29,9 +29,8 @@ function App() {
   const dispatch = useDispatch();
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isLoginAdmin = location.pathname === '/adminLogin';
-  const hideNavbar =
-    location.pathname === '/login' || location.pathname === '/register';
-  console.log('  .....   ', !hideNavbar);
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
+  const myToken = localStorage.getItem('token');
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -47,9 +46,10 @@ function App() {
         <Home />
       ) : (
         <>
-          {!isLoginAdmin &&
-            !hideNavbar &&
-            (isAdminRoute ? <AdminNav /> : <Navbar />)}
+          {!isLoginAdmin 
+           && myToken
+           && !hideNavbar
+           && (isAdminRoute ? <AdminNav /> : <Navbar />)}
           <Routes>
             <Route path='/login' element={<LandingLogin />} />
             <Route path='/home' element={<Home />} />
@@ -62,7 +62,7 @@ function App() {
             <Route path='/createServices' element={<CreateServices />} />
             <Route path='/register' element={<Register />} />
             <Route path='/miServices' element={<MiServices />} />
-            <Route path='/editService' element={<EditService />} />
+            <Route path='/editService/:id' element={<EditService />} />
             <Route path='/review' element={<FormReview />} />
             <Route path='/myShopping' element={<MyShopping />} />
           </Routes>

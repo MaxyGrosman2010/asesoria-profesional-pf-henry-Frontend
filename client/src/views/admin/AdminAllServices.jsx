@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
 import { allServicesAdmin } from "../../Redux/actions"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const AdminAllServices = () => {
 
     const dispatch = useDispatch()
+    const data = useSelector((state) => state.allServicesAdmin)
     
+
     useEffect(() => {
         dispatch(allServicesAdmin())
     }, [])
     
-    const data = useSelector((state) => state.allServicesAdmin)
-
+  
   return (
     <div className="bg-slate-300 w-full h-screen p-20 flex flex-col items-center justify-center gap-5">
     <div className='container w-full mx-auto flex items-center justify-center shadow-lg'>
@@ -34,8 +35,8 @@ const AdminAllServices = () => {
          </tr>
         ))}
         </tbody>
-    </table>
-  </div>
+      </table>
+    </div>
   </div>
   )
 }

@@ -148,12 +148,12 @@ const rootReducer = (state = initialState, action) => {
         userServices: action.payload
       };
 
-      //EN PROCESO!!!!!
+     
     case UPDATE_SERVICE:
       return{
         ...state,
-        allActivities: action.payload,
-        copyState: action.payload,
+        allActivities: [...state.allActivities, action.payload],
+        copyState: [...state.copyState, action.payload],
       } 
 
     case ALL_USERS:

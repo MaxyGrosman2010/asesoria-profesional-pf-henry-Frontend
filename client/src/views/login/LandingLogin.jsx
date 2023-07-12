@@ -84,7 +84,6 @@ const LandingLogin = () => {
 
        })
     })
-    dispatch(handleLogIn());
   }
 
 
@@ -120,7 +119,6 @@ const LandingLogin = () => {
           </div>
           <div className='flex flex-col ml-10 mt-4'>
             <button type="submit" className="drop-shadow-md uppercase bg-gray-700 w-[200px] py-3 text-white rounded mt-2">login</button>
-            <p className="font-light mt-3">Forgot password?</p>
           </div>
         </div>
         <div className="flex items-center justify-center gap-3 mt-6 w-full py-2">
@@ -129,7 +127,6 @@ const LandingLogin = () => {
             <span className="ml-1 font-bold cursor-pointer underline">Register</span>
           </Link>
         </div>
-        <NavLink to='/adminLogin' className="bg-red-900 w-[120px] py-2 text-center text-white rounded">logAdmin</NavLink>
         <div className='flex flex-col items-center justify-center mx-auto mt-2'>
           <p className='py-4'>or Login with</p>
           <button  onClick={handleClickLogin} className="bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 inline-flex items-center">
