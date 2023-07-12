@@ -12,8 +12,6 @@ const AdminAllServices = () => {
     
     const data = useSelector((state) => state.allServicesAdmin)
 
-
-
   return (
     <div className="bg-slate-300 w-full h-screen p-20 flex flex-col items-center justify-center gap-5">
     <div className='container w-full mx-auto flex items-center justify-center shadow-lg'>
