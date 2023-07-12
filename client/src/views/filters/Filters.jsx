@@ -18,9 +18,7 @@ const Filters = ({setPage}) => {
   
 
   const [order, setOrder] = useState('');
-  const [orderService, setOrderService] = useState('');
   const [filterByType, setFilterByType] = useState('');
-  const [originalServices, setOriginalServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
 
   const handleOrder = () => {

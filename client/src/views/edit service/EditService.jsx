@@ -12,8 +12,6 @@ const EditService = () => {
   const { id } = useParams();
 
   const serv = useSelector((state) => state.oneActivity);
-  console.log("hola soy oneActivity",serv);
-  console.log("soy el id!!!!!!!!!", serv?.id);
 
  const [edit, setEdit] = useState({
     name: '',
