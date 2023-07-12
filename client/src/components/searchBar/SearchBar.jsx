@@ -30,9 +30,7 @@ const SearchBar = ({ copyState, updateFilter }) => {
         icon: 'error',
       });
       navigate('/allServices');
-    } else {
-      updateFilter(filtered);
-    }
+    } 
     setSearchValue('');
   };
 
