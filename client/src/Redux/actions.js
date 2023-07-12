@@ -25,11 +25,11 @@ import {
   IS_ADMIN,
   DELETE_SERVICE_BY_USER,
   ALL_SERVICES_ADMIN,
+  CONTACT_US,
 } from './actions-types';
 import axios from 'axios';
 
-const URL_BASE =
-  /*'https://backend-production-cda4.up.railway.app';*/ 'http://localhost:3001';
+const URL_BASE = import.meta.env.VITE_URL_BASE;
 
 export const getData = () => {
   return async (dispatch) => {
@@ -162,7 +162,13 @@ export const signIn = (payload) => {
     const name = response.data.name;
     const profilePict = response.data.profilePict;
     const isAdmin = response.data.isAdmin;
-    const user = { name: name, profilePict: profilePict, isAdmin: isAdmin };
+    const isSuperAdmin = response.data.isSuperAdmin;
+    const user = {
+      name: name,
+      profilePict: profilePict,
+      isAdmin: isAdmin,
+      isSuperAdmin: isSuperAdmin,
+    };
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
     return dispatch({ type: LOGIN_SUCCESS, payload: user });
@@ -316,3 +322,11 @@ export const allServicesAdmin = () => {
     return dispatch({ type: ALL_SERVICES_ADMIN, payload: response.data });
   };
 };
+
+export const sendContact = (contact) => {
+  return async (dispatch) => {
+    const response = await axios.post(`${URL_BASE}/contactUs`, contact);
+    return dispatch({ type: CONTACT_US, payload: response.data });
+  };
+};
+//Para borrar el env borrar a futuro

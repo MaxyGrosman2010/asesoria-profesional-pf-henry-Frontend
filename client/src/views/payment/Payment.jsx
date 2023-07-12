@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 import { removeAll } from '../../Redux/actions';
-
-const URL_DEPLOY =
-  /* 'https://backend-production-cda4.up.railway.app'; */ 'http://localhost:3001';
-initMercadoPago('TEST-d494afdf-12b5-4b17-800f-9eaa2d0c21ce');
+const URL_BASE = import.meta.env.VITE_URL_BASE;
+initMercadoPago(import.meta.env.VITE_MP_SECRET);
 
 const Payment = () => {
   const items = useSelector((state) => state.items);
@@ -29,7 +27,7 @@ const Payment = () => {
     const token = localStorage.getItem('token');
     const config = { headers: { Authorization: ` Bearer ${token}` } };
     axios
-      .post(`${URL_DEPLOY}/orderMP/`, itemsMapped, config)
+      .post(`${URL_BASE}/orderMP/`, itemsMapped, config)
       .then((response) => {
         return response.data.id;
       })

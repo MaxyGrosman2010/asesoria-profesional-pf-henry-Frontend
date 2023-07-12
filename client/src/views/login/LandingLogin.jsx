@@ -132,7 +132,6 @@ const LandingLogin = () => {
             >
               login
             </button>
-            <p className='font-light mt-3'>Forgot password?</p>
           </div>
         </div>
         <div className='flex items-center justify-center gap-3 mt-6 w-full py-2'>
@@ -143,13 +142,6 @@ const LandingLogin = () => {
             </span>
           </Link>
         </div>
-        <NavLink
-          to='/adminLogin'
-          className='bg-red-900 w-[120px] py-2 text-center text-white rounded'
-        >
-          logAdmin
-        </NavLink>
-
         <div className='flex flex-col items-center justify-center mx-auto mt-2'>
           <p className='py-4'>or Login with</p>
         </div>

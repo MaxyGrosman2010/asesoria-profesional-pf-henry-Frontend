@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 const CreateServices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
   const typeServices = useSelector((state) => state.typeServices);
   const [service, setService] = useState({
     name: '',

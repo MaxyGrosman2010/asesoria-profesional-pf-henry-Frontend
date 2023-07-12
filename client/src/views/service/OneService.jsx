@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { addToCart, getService } from '../../Redux/actions';
 import Swal from 'sweetalert2';
 import Reviews from '../../components/reviews/Reviews';
 
 const OneService = () => {
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const copyState = useSelector((state) => state.oneActivity);
   const items = useSelector((state) => state.items);
-
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getService(id));
@@ -18,15 +19,26 @@ const OneService = () => {
 
   const addCart = () => {
     const isItemExist = items.find((item) => item.id === copyState.id);
+    const token = localStorage.getItem('token')
+    if(!token){
+      Swal.fire({
+        icon: 'warning',
+        title: 'you must login before to buy',
+        timer:'2500',
+        confirmButtonText: 'ok',
+      })
+      navigate('/login')
+      return;
+    }
     if (isItemExist) {
       Swal.fire({
-        title: 'El producto ya se encuentra en el carrito',
+        title: 'The product is already in the cart',
         icon: 'warning',
       });
     } else {
       dispatch(addToCart(copyState));
       Swal.fire({
-        title: 'Item agregado',
+        title: 'Item added',
         icon: 'success',
       });
     }

@@ -18,9 +18,7 @@ const Filters = ({setPage}) => {
   
 
   const [order, setOrder] = useState('');
-  const [orderService, setOrderService] = useState('');
   const [filterByType, setFilterByType] = useState('');
-  const [originalServices, setOriginalServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
 
   const handleOrder = () => {
@@ -77,27 +75,11 @@ const Filters = ({setPage}) => {
         className="bg-salte-300 rounded w-[200px] text-center py-2 mx-2"
         onChange={selectTypeService}>
         <option value="all">Select a Service type</option>
-        {
-          allTypeServices?.map(
-            (typeService) => <option 
-                              key={typeService.id} 
-                              value={typeService.type}>
-                                {typeService.type}
-                              </option>)}
-        {/* <option value="all">Select a Service type</option>
-        <option value="Gastronomia">Gastronomia</option>
-        <option value="Legal">Legal</option>
-        <option value="Medicina">Medicina</option>
-        <option value="Automotor">Automotor</option>
-        <option value="Construcción">Construcción</option>
-        <option value="Educación">Educación</option>
-        <option value="Tech">Tech</option>
-        <option value="Otros">Otros</option> */}
-      </select>
+        {allTypeServices?.map((typeService) => 
+          <option key={typeService.id}  value={typeService.type}>{typeService.type}</option>)}
+        </select>
 
-      <button 
-        className='bg-slate-900 text-white w-[60px] rounded' 
-        onClick={reset}>
+        <button className='bg-slate-900 text-white w-[60px] rounded' onClick={reset}>
           <div className='h-[30px] flex items-center justify-center'>
             <span >Reset</span>
           </div>
