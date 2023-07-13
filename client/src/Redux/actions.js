@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   GET_SERVICES,
   CREATE_SERVICE,
@@ -127,21 +128,23 @@ export const removeAll = (payload) => {
 //LOGIN GOOGLE
 export const handleLogIn = () => {
   return (dispatch) => {
+    
     // Abrir una nueva ventana para el inicio de sesión de Google
-    const popup = window.open(
-      `${URL_BASE}/auth`,
-      'Login',
-      'width=500,height=500'
-    );
-    window.addEventListener('message', (event) => {
-      if (event.origin === URL_BASE) {
-        const { name, email, profilePict, isAdmin, isSuperAdmin } = event.data;
-        dispatch(
-          loginSuccess({ name, email, profilePict, isAdmin, isSuperAdmin })
-        );
-        //popup.close();
-      }
-    });
+    const popup = window.open(`${URL_BASE}/auth`, 'Login', 'width=500,height=500');
+
+    const user = document.cookie.split('user=').pop().trim();
+    const decodedString = decodeURIComponent(user);
+    const trueDecoded = decodedString.split('token=').shift().trim();
+    console.log(trueDecoded);
+    const jsonObject = JSON.parse(trueDecoded);
+    console.log(jsonObject);
+    const name = jsonObject.name;
+    const profilePict = jsonObject.profilePict;
+    const isAdmin = jsonObject.isAdmin;
+    const isSuperAdmin = jsonObject.isSuperAdmin;
+    const response = {name: name, profilePict: profilePict, isAdmin: isAdmin, isSuperAdmin: isSuperAdmin};
+
+    dispatch(loginSuccess(response));
   };
 };
 
