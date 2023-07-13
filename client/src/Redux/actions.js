@@ -26,6 +26,8 @@ import {
   DELETE_SERVICE_BY_USER,
   ALL_SERVICES_ADMIN,
   CONTACT_US,
+  BOUGHT_PRODUCTS,
+  ID_REVIEW
 } from './actions-types';
 import axios from 'axios';
 
@@ -268,21 +270,13 @@ export const getAllUsers = () => {
   };
 };
 
-export const postComentario = (comentario) => {
+export const postComentario = (review) => {
   return async (dispatch) => {
-    try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: ` Bearer ${token}` } };
-      const response = await axios.post(
-        `${URL_BASE}/review/`,
-        comentario,
-        config
-      );
-      console.log(comentario);
+      const response = await axios.post( `${URL_BASE}/review/`, review, config);
+      console.log(response)
       return dispatch({ type: POST_COMENTARIO, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
   };
 };
 
@@ -332,4 +326,16 @@ export const sendContact = (contact) => {
     return dispatch({ type: CONTACT_US, payload: response.data });
   };
 };
-//Para borrar el env borrar a futuro
+
+export const boughtProducts = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem('token');
+    const config = { headers : { Authorization: ` Bearer ${token}`}};
+    const response = await axios.get(`${URL_BASE}/getSoldServiceByUser/`, config);
+    return dispatch({type: BOUGHT_PRODUCTS, payload: response.data});
+  };
+};
+
+export const idReview = (idService) => {
+  return {type: ID_REVIEW, payload: idService}
+};

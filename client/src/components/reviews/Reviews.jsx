@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Reviews = () => {
+
   return (
     <div className='shadow-lg w-[400px] h-[150px] rounded px-4 border hover:scale-105 bg-white hover:transition-all duration-500'>
       <div className='flex items-center justify-between w-full h-[40px]'>
