@@ -74,7 +74,7 @@ const LandingLogin = () => {
     dispatch(handleLogIn());
     navigate('/home');
   };
-
+//push
   return (
     <div
       className='flex flex-col w-full h-screen items-center justify-center bg-cover bg-center'
