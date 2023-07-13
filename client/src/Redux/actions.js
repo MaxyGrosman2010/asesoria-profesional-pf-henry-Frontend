@@ -135,8 +135,10 @@ export const handleLogIn = () => {
     );
     window.addEventListener('message', (event) => {
       if (event.origin === URL_BASE) {
-        const { name, email, profilePict } = event.data;
-        dispatch(loginSuccess({ name, email, profilePict }));
+        const { name, email, profilePict, isAdmin, isSuperAdmin } = event.data;
+        dispatch(
+          loginSuccess({ name, email, profilePict, isAdmin, isSuperAdmin })
+        );
         //popup.close();
       }
     });
@@ -144,6 +146,7 @@ export const handleLogIn = () => {
 };
 
 export const loginSuccess = (user) => {
+  console.log(user);
   localStorage.setItem('token', document.cookie.split('token=').pop().trim());
   return { type: LOGIN_SUCCESS, payload: user };
 };
