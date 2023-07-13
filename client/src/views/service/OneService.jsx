@@ -3,7 +3,7 @@ import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { addToCart, getService } from '../../Redux/actions';
 import Swal from 'sweetalert2';
-import Reviews from '../../components/reviews/Reviews';
+import Review from '../../components/reviews/Reviews'
 
 const OneService = () => {
 
@@ -80,7 +80,7 @@ const OneService = () => {
                   </button>
                 </div>
                 <div className='flex flex-row px-4 '>
-                  <Reviews />
+                  <Review />
                 </div>
                 <div className='flex gap-10 mx-auto mt-4'></div>
                 <div className='mx-auto mt-4'>

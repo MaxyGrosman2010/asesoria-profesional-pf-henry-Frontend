@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import validationReview from './validatationReview';
 import { FaStar } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postComentario } from '../../Redux/actions';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const FormReview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const idService = useSelector((state) => state.idReview);
 
   const [hover, setHover] = useState(null);
   const [review, setReview] = useState({
@@ -32,7 +33,7 @@ const FormReview = () => {
         [event.target.name]: event.target.value,
       })
     );
-    console.log(event.target.reviewDescription);
+    
   };
 
   const handleScore = (score) => {
@@ -61,7 +62,11 @@ const FormReview = () => {
       return;
     }
 
-    dispatch(postComentario(review));
+    const send = {...review, idService}
+
+    console.log(send, 'review');
+
+    dispatch(postComentario(send));
 
     setReview({
       reviewDescription: '',
@@ -76,7 +81,7 @@ const FormReview = () => {
       navigate('/allServices');
     });
   };
-  //console.log(review, "review");
+
   return (
     <div className='w-full bg-white h-screen flex flex-col items-center justify-center mt-20'>
       <form
