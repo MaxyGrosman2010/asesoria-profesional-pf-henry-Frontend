@@ -7,10 +7,6 @@ const MyShopping = () => {
 
     const dispatch = useDispatch();
     const shopping = useSelector((state) => state.myShopping);
-    const [review, setReview] = useState({
-        reviewDescription: 'aaaaa',
-        score: 4
-    })
 
     useEffect(() => {
         dispatch(boughtProducts());

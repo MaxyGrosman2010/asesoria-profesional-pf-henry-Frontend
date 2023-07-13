@@ -71,23 +71,10 @@ const LandingLogin = () => {
 
   const handleClickLogin = (event) => {
     event.preventDefault();
-    new Promise((resolve, reject) => {
-      dispatch(handleLogIn());
-      resolve();
-    })
-      .then(() => {
-        navigate('/home');
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: 'Error',
-          text: 'Martin, por favor, arregla el inicio de sesión.',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-        });
-      });
+    dispatch(handleLogIn());
+    navigate('/home');
   };
-
+//push
   return (
     <div
       className='flex flex-col w-full h-screen items-center justify-center bg-cover bg-center'
